@@ -13,5 +13,4 @@
 </body>
 </html>
 
-<script src="<?php $this->options->themeUrl('fec17825.js'); ?>" ></script>
-<script src="<?php $this->options->themeUrl('16ef58b2.js'); ?>" ></script>
+<script src="<?php $this->options->themeUrl('4982a280.js'); ?>" ></script>

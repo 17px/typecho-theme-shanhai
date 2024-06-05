@@ -13,7 +13,7 @@
     "kun"
   ],
   "scripts": {
-    "dev": "webpack serve --config webpack.dev.ts",
+    "dev": "node ./watch-and-rebuild.js",
     "build": "webpack build --config webpack.dev.ts"
   }
 }

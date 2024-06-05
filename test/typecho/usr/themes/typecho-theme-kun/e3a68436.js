@@ -75,14 +75,25 @@ eval("Object.defineProperty(exports, \"__esModule\", ({value:true}));exports.fro
 
 /***/ }),
 
-/***/ "./src/modules/footer/index.ts":
-/*!*************************************!*\
-  !*** ./src/modules/footer/index.ts ***!
-  \*************************************/
-/***/ (() => {
+/***/ "./src/modules/index/index.less":
+/*!**************************************!*\
+  !*** ./src/modules/index/index.less ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("\n\n\n//# sourceURL=webpack://@shanhai/kun/./src/modules/footer/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://@shanhai/kun/./src/modules/index/index.less?");
+
+/***/ }),
+
+/***/ "./src/modules/index/index.ts":
+/*!************************************!*\
+  !*** ./src/modules/index/index.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n__webpack_require__(/*! ./index.less */ \"./src/modules/index/index.less\");\nconsole.log(11);\n\n\n//# sourceURL=webpack://@shanhai/kun/./src/modules/index/index.ts?");
 
 /***/ }),
 
@@ -334,7 +345,7 @@ eval("/** @typedef {\"info\" | \"warning\" | \"error\"} LogLevel */\n\n/** @type
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("f5626e96183fedc8a08d")
+/******/ 		__webpack_require__.h = () => ("2a9aa49397bef0f305ba")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
@@ -359,7 +370,7 @@ eval("/** @typedef {\"info\" | \"warning\" | \"error\"} LogLevel */\n\n/** @type
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	__webpack_require__("../../node_modules/.pnpm/webpack-dev-server@4.15.1_webpack-cli@5.1.4_webpack-bundle-analyzer@4.9.1_webpack-dev-server@_ii4xhtxjw56vnup2bgg7eehbau/node_modules/webpack-dev-server/client/index.js?protocol=ws%3A&hostname=0.0.0.0&port=8080&pathname=%2Fws&logging=info&overlay=true&reconnect=10&hot=false&live-reload=true");
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/modules/footer/index.ts");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/modules/index/index.ts");
 /******/ 	
 /******/ })()
 ;

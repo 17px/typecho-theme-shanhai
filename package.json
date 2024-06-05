@@ -31,6 +31,7 @@
     "@babel/preset-env": "7.24.6",
     "css-loader": "7.1.2",
     "less-loader": "12.2.0",
-    "extra-watch-webpack-plugin": "1.0.3"
+    "extra-watch-webpack-plugin": "1.0.3",
+    "chokidar": "3.6.0"
   }
 }

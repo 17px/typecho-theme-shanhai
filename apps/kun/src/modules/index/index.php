@@ -24,13 +24,13 @@
   ], '', ' - '); ?><?php $this->options->title(); ?></title>
 
   <!-- inject:css -->
-  
+
   <!-- 通过自有函数输出HTML头部信息 -->
   <?php $this->header(); ?>
 </head>
 
 <body>
-  222
+  11
 </body>
 
 </html>

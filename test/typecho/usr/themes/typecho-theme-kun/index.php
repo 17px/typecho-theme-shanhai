@@ -23,17 +23,16 @@
     'author' => _t('%s 发布的文章')
   ], '', ' - '); ?><?php $this->options->title(); ?></title>
 
-  <link rel="stylesheet" href="<?php $this->options->themeUrl('d3f0bb51.css'); ?>"></link>
-  
+  <link rel="stylesheet" href="<?php $this->options->themeUrl('ae6c21cb.css'); ?>"></link>
+
   <!-- 通过自有函数输出HTML头部信息 -->
   <?php $this->header(); ?>
 </head>
 
 <body>
-  222
+  11
 </body>
 
 </html>
 
-<script src="<?php $this->options->themeUrl('fec17825.js'); ?>" ></script>
-<script src="<?php $this->options->themeUrl('16ef58b2.js'); ?>" ></script>
+<script src="<?php $this->options->themeUrl('e3a68436.js'); ?>" ></script>

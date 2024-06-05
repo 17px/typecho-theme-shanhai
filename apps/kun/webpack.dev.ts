@@ -50,6 +50,9 @@ export default {
     port: 8080,
     proxy: { "/": "http://localhost" },
     devMiddleware: { writeToDisk: true },
+    /**
+     * 监听 typecho主题目录，如果发生改变，刷新浏览器
+     */
     static: { directory: outputPath },
     hot: false /** 关闭热替换 */,
     open: true,
@@ -85,13 +88,15 @@ export default {
     ],
   },
   plugins: [
+    /**
+     * 监听额外的文件变动
+     */
     new ExtraWatchWebpackPlugin({
       files: ["src/**/*.php"],
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "[contenthash:8].css",
-    }),
+    new MiniCssExtractPlugin({ filename: "[contenthash:8].css" }),
+
     ...modules.map((name) => {
       return new PhpInjectPlugin({
         template: path.resolve(__dirname, `src/modules/${name}/index.php`),
