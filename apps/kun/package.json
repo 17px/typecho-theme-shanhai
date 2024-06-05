@@ -1,0 +1,19 @@
+{
+  "name": "@shanhai/kun",
+  "theme": {
+    "name": "typecho-theme-kun"
+  },
+  "version": "1.0.0",
+  "description": "typecho theme kun",
+  "author": "himozzie@foxmail.com",
+  "license": "Apache License",
+  "keywords": [
+    "typecho",
+    "theme",
+    "kun"
+  ],
+  "scripts": {
+    "dev": "webpack serve --config webpack.dev.ts",
+    "build": "webpack build --config webpack.dev.ts"
+  }
+}
