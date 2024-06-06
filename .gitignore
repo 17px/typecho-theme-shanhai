@@ -42,3 +42,7 @@ yarn-error.log*
 *~
 
 # Ignore any other unwanted files or directories here
+
+# typecho
+test/typecho/usr/themes/*
+!test/typecho/usr/themes/default/
