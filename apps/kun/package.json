@@ -1,7 +1,9 @@
 {
   "name": "@shanhai/kun",
   "theme": {
-    "name": "typecho-theme-kun"
+    "typechoThemeFolder": "test/typecho/usr/themes",
+    "name": "typecho-theme-kun",
+    "proxy": "http://localhost"
   },
   "version": "1.0.0",
   "description": "typecho theme kun",
@@ -13,7 +15,7 @@
     "kun"
   ],
   "scripts": {
-    "dev": "node ./watch-and-rebuild.js",
-    "build": "webpack build --config webpack.dev.ts"
+    "dev": "node scripts/watch-and-rebuild.js",
+    "build": "webpack build --config scripts/webpack.prod.ts"
   }
 }

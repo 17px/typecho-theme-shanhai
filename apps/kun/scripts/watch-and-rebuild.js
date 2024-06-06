@@ -1,10 +1,10 @@
 const chokidar = require('chokidar');
 const { spawn } = require('child_process');
 const path = require('path');
-const { theme } = require('./package.json')
+const { theme } = require('../package.json')
 
 const startWebpack = () => {
-  const process = spawn('npx', ['webpack', 'serve', '--config', 'webpack.dev.ts'], {
+  const process = spawn('npx', ['webpack', 'serve', '--config', 'scripts/webpack.dev.ts'], {
     stdio: 'inherit'
   });
 

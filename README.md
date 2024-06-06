@@ -1,15 +1,44 @@
 # 开发环境
 
-确保安装了docker环境，执行
-
-根目录的 `typecho` 为容器内部挂在的 `typecho1.21` 版本安装文件
+确保安装了docker环境
 
 ```sh
 # cd /
 docker compose -f ./docker-compose.dev.yml up -d
 ```
 
-在主题开发阶段，你可以试试的在 `typecho/usr/themes` 路径下创建主题文件夹，并更新主题，刷新即可在网页实现更新，非常的方便
+关于 `docker-compose.dev.yml` 的配置
+
+```yml
+environment:
+	- TYPECHO_SITE_URL=https://localhost
+ports:
+	- "80:80"
+```
+
+如果需要自定义的宿主机映射的端口(typecho服务端口)，对于的 `webpack-dev-server 代理`也要修改
+
+修改 `theme.proxy` 的值，和上面 `TYPECHO_SITE_URL` 要保持一致哦！
+
+```json
+// package.sjon
+"theme": {
+	"distPath": "test/typecho/usr/themes",
+	"name": "typecho-theme-kun",
+	"proxy": "http://localhost"
+},
+```
+
+其他的两个属性 `theme.name` 就是开发的主题的名称，`theme.distPath` 是webpack构建静态资源的存放目录
+
+# 工程化构建思路
+
+> 详情参看 `scripts` 下的配置文件
+
+1. 采用 `typecho1.21` 的包，解压后为`test/typecho` 文件夹，作为 `joyqi/typecho:nightly-php7.4-apache`的挂载目录
+2. 使用 `chokidar` 和 `webpack` 对主题 `src/modules`进行开发阶段监听、构建。`js`、`css` 会注入到 `.php` 中，注入点是 `<!--inject:js-->`和`<!--inject:css-->`
+3. 上一步中的全部静态资源会被 `webpack.output` 输出到 `test/typecho/usr/themes/{theme.name}/` 中
+4. 利用 `webpack-dev-server` 的 `proxy` 和 `static`，实现浏览器自动刷新
 
 
 # 主题名 参考
