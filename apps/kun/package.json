@@ -17,5 +17,8 @@
   "scripts": {
     "dev": "node scripts/watch-and-rebuild.js",
     "build": "webpack build --config scripts/webpack.prod.ts"
+  },
+  "dependencies": {
+    "@shanhai/util": "workspace:*"
   }
 }

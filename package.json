@@ -1,5 +1,5 @@
 {
-  "name": "typecho-shanhai",
+  "name": "@shanhai/typecho",
   "author": "himozzie@foxmail.com",
   "license": "Apache License",
   "keywords": [
@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev:kun": "pnpm run --filter @shanhai/kun dev",
-    "build:kun": "pnpm run --filter @shanhai/kun build"
+    "build:kun": "pnpm run --filter @shanhai/kun build",
+    "build": "pnpm -r --filter './packages/*' run build"
   },
   "devDependencies": {
     "typescript": "5.4.5",
@@ -33,6 +34,10 @@
     "extra-watch-webpack-plugin": "1.0.3",
     "chokidar": "3.6.0",
     "css-minimizer-webpack-plugin": "7.0.0",
-    "terser-webpack-plugin": "5.3.10"
+    "terser-webpack-plugin": "5.3.10",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "rollup": "^4.5.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-delete": "2.0.0"
   }
 }

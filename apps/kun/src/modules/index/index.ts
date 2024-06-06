@@ -1,3 +1,6 @@
+import { onMounted } from "@shanhai/util";
 import "./index.less";
 
-console.log(11);
+onMounted(() => {
+  console.log(1);
+});

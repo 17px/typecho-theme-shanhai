@@ -33,6 +33,13 @@ ports:
 
 其他的两个属性 `theme.name` 就是开发的主题的名称，`theme.distPath` 是webpack构建静态资源的存放目录
 
+## 构建依赖
+
+```bash
+# project in packages will be build by rollup
+pnpm run build
+```
+
 # 工程化构建思路
 
 > 详情参看 `scripts` 下的配置文件

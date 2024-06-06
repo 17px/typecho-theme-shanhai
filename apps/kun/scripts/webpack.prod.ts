@@ -1,6 +1,8 @@
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import common, { modules, rootPath } from "./webpack.common";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { theme, version } from "../package.json";
 import TerserPlugin from "terser-webpack-plugin";
 import PhpInjectPlugin from "./PhpInjectPlugin";
@@ -48,6 +50,7 @@ export default merge(common, {
     maxEntrypointSize: 5000000, // 整数类型（以字节为单位）
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: `[contenthash:8]_v${version}.css`, // 抽离css的输出目录和名称
     }),
@@ -57,5 +60,6 @@ export default merge(common, {
         filename: path.resolve(rootPath, `${outputPath}/${name}.php`),
       });
     }),
+    new BundleAnalyzerPlugin(),
   ],
 }) as Configuration;
