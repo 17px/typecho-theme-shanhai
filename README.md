@@ -1,6 +1,6 @@
 # 开发环境
 
-确保安装了docker环境
+确保安装了docker环境，解压根目录的 `typecho.zip` 到 `test` 文件夹下
 
 ```sh
 # cd /
