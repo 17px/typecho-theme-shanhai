@@ -45,4 +45,5 @@ yarn-error.log*
 
 # typecho
 test/typecho/usr/themes/*
+test/typecho/usr/*.db
 !test/typecho/usr/themes/default/
