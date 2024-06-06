@@ -1,0 +1,17 @@
+# 
+# 开发环境的yml
+# 
+
+version: '3.8'
+
+services:
+  typecho-dev-env:
+    image: joyqi/typecho:nightly-php7.4-apache
+    container_name: typecho-server
+    environment:
+      - TYPECHO_SITE_URL=https://localhost
+    ports:
+      - "80:80"
+    volumes:
+      - ./test/typecho:/app
+    restart: always

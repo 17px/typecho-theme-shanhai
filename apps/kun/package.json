@@ -1,0 +1,21 @@
+{
+  "name": "@shanhai/kun",
+  "theme": {
+    "typechoThemeFolder": "test/typecho/usr/themes",
+    "name": "typecho-theme-kun",
+    "proxy": "http://localhost"
+  },
+  "version": "1.0.0",
+  "description": "typecho theme kun",
+  "author": "himozzie@foxmail.com",
+  "license": "Apache License",
+  "keywords": [
+    "typecho",
+    "theme",
+    "kun"
+  ],
+  "scripts": {
+    "dev": "node scripts/watch-and-rebuild.js",
+    "build": "webpack build --config scripts/webpack.prod.ts"
+  }
+}
