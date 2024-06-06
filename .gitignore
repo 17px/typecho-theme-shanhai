@@ -44,4 +44,4 @@ yarn-error.log*
 # Ignore any other unwanted files or directories here
 
 # typecho
-test/typecho/*
+test/typecho
