@@ -19,6 +19,9 @@
     "build": "webpack build --config scripts/webpack.prod.ts"
   },
   "dependencies": {
-    "@shanhai/util": "workspace:*"
+    "@shanhai/util": "workspace:*",
+    "tailwindcss": "3.4.4",
+    "postcss-loader": "8.1.1",
+    "autoprefixer": "10.4.19"
   }
 }
