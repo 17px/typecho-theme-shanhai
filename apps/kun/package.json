@@ -22,6 +22,9 @@
     "@shanhai/util": "workspace:*",
     "tailwindcss": "3.4.4",
     "postcss-loader": "8.1.1",
-    "autoprefixer": "10.4.19"
+    "autoprefixer": "10.4.19",
+    "cash-dom": "8.1.5",
+    "hover.css": "2.3.2",
+    "flowbite": "2.3.0"
   }
 }

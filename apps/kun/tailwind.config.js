@@ -1,24 +1,40 @@
-// tailwind.config.js
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   darkMode: "class",
   content: [
     './src/**/*.{ts,php}', // 根据你的项目结构调整路径
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
+      fontSize: {
+        base: '14px', // 默认字体大小
+        lg: '16px',
+        xl: '28px',
+      },
+      fontFamily: {
+        sans: ['Helvetica', 'Arial', 'sans-serif'], // 默认字体
+        serif: ['Georgia', 'serif'],
+        mono: ['Courier New', 'monospace'],
+      },
+      fontWeight: {
+        normal: 500, // 默认字体粗细
+        bold: 700,
+      },
       colors: {
-        primary: {
-          light: '#6c63ff',
-          DEFAULT: '#5f3dc4',
-          dark: '#4a2c94',
-        },
-        secondary: {
-          light: '#ff99c8',
-          DEFAULT: '#ff66a5',
-          dark: '#ff3382',
-        },
+        line: 'rgba(0,0,0,1)'
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin'),
+    plugin(({ addBase, theme }) => {
+      addBase({
+        ':root': {
+          '--color-line': theme('colors.line'),
+        },
+      });
+    }),
+  ],
 };

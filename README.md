@@ -40,6 +40,11 @@ ports:
 pnpm run build
 ```
 
+## 推荐的库
+
+- cash-dom: 精简版类jquery的库，后端之友
+- tailwind: `scaffold 分支`集成，后端之友，css记不住的懒人福音
+
 # 工程化构建思路
 
 > 详情参看 `scripts` 下的配置文件
