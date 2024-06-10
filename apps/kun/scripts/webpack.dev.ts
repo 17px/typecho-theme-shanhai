@@ -2,6 +2,7 @@ const ExtraWatchWebpackPlugin = require("extra-watch-webpack-plugin");
 import common, { modules, rootPath } from "./webpack.common";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 import PhpInjectPlugin from "./PhpInjectPlugin";
 const { merge } = require("webpack-merge");
 import { Configuration } from "webpack";
@@ -28,7 +29,7 @@ export default merge(common, {
      * 监听 typecho主题目录，如果发生改变，刷新浏览器
      */
     static: { directory: outputPath },
-    hot: false /** 关闭热替换 */,
+    hot: true /** 关闭热替换 */,
   },
   plugins: [
     /**
@@ -36,6 +37,13 @@ export default merge(common, {
      */
     new ExtraWatchWebpackPlugin({ files: ["src/**/*.php"] }),
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: path.resolve(`${rootPath}/src/assets`), to: path.resolve(`${outputPath}/assets`) },
+        { from: path.resolve(`${rootPath}/src/functions.php`), to: path.resolve(`${outputPath}`) },
+        { from: path.resolve(`${rootPath}/src/screenshot.png`), to: path.resolve(`${outputPath}`) }
+      ]
+    }),
     new MiniCssExtractPlugin({ filename: `[contenthash:8].css` }),
     ...modules.map((name) => {
       return new PhpInjectPlugin({

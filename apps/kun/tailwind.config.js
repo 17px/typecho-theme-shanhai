@@ -19,11 +19,13 @@ module.exports = {
         mono: ['Courier New', 'monospace'],
       },
       fontWeight: {
-        normal: 500, // 默认字体粗细
-        bold: 700,
+        300: 300,
+        500: 500,
+        700: 700,
       },
       colors: {
-        line: 'rgba(0,0,0,1)'
+        line: 'rgba(0,0,0,1)',
+        line2: 'rgba(0,0,0,.3)'
       },
     },
   },
@@ -33,6 +35,7 @@ module.exports = {
       addBase({
         ':root': {
           '--color-line': theme('colors.line'),
+          '--color-line-2': theme('colors.line2'),
         },
       });
     }),

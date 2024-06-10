@@ -2,7 +2,7 @@
  * 默认主题色
  * @default dark
  */
-export const DEFAULT_THEME: "dark" | "light" = "dark";
+export const DEFAULT_THEME: "dark" | "light" = "light";
 /**
  * 主色localStorage存储的prop
  */

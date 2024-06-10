@@ -1,9 +1,8 @@
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { Configuration } from "webpack";
+import { getModules } from "./util";
 import "webpack-dev-server";
 import path from "path";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { theme } from "../package.json";
-import { getModules } from "./util";
 
 export const rootPath = process.cwd();
 export const modules = getModules(path.resolve(rootPath, "src/modules"));

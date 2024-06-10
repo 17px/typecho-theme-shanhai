@@ -1,4 +1,83 @@
-svg {
-  width: 20px;
-  height: 20px;
+@import '@/style/main.less';
+@import 'hover.css';
+
+.hvr-underline-from-center::before {
+  background: var(--color-line);
+  height: 1.5px;
+}
+
+.kun-box {
+  position: relative;
+  background-repeat: no-repeat;
+  width: 72px;
+  height: 72px;
+  background-position: center center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .eye {
+    position: absolute;
+    display: inline-block;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+
+    &::after {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: black;
+      content: '';
+    }
+
+    &.left {
+      top: 30px;
+      left: 25px;
+    }
+
+    &.right {
+
+      top: 31px;
+      left: 42px;
+    }
+  }
+}
+
+.category {
+  text-align: center;
+
+  >ul {
+    display: inline-flex;
+
+    >li:not(:first-child) {
+      display: flex;
+      align-items: center;
+
+      &::before {
+        padding: 0 12px;
+        color: var(--color-line-2);
+        content: '/'
+      }
+    }
+  }
+}
+
+.posts-in-category {
+  .post-title {
+    display: flex;
+    align-items: center;
+    .icon {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+    }
+  }
 }
