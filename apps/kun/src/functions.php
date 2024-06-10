@@ -14,7 +14,7 @@ function themeConfig($form)
     $blogName = new \Typecho\Widget\Helper\Form\Element\Text(
         'blogName',
         null,
-        null,
+        "iKun",
         _t('blogName'),
         _t('左上角博客名称')
     );
@@ -22,7 +22,7 @@ function themeConfig($form)
     $userName = new \Typecho\Widget\Helper\Form\Element\Text(
         'userName',
         null,
-        null,
+        "练习时长1坤年",
         _t('userName'),
         _t('博主名称')
     );
@@ -30,15 +30,33 @@ function themeConfig($form)
     $hero = new \Typecho\Widget\Helper\Form\Element\Text(
         'hero',
         null,
-        null,
+        "无与伦比的追求冰冷地敲打着我的灵魂",
         _t('hero'),
         _t('介绍/座右铭')
+    );
+
+    $fontCDN = new \Typecho\Widget\Helper\Form\Element\Text(
+        'fontCDN',
+        null,
+        "https://chinese-fonts-cdn.deno.dev/chinesefonts3/packages/lxgwwenkai/dist/LXGWWenKai-Bold/result.css",
+        _t('字体cdn'),
+        _t('可以在这里找到喜欢的字体：https://chinese-font.netlify.app/cdn/')
+    );
+
+    $fontName = new \Typecho\Widget\Helper\Form\Element\Text(
+        'fontName',
+        null,
+        "LXGW WenKai",
+        _t('字体名称'),
+        _t('font-family需要用到，推荐：LXGW WenKai，LXGW WenKai Light，Source Han Serif CN VF，Source Han Serif CN for Display')
     );
 
     $form->addInput($logoUrl);
     $form->addInput($blogName);
     $form->addInput($userName);
     $form->addInput($hero);
+    $form->addInput($fontCDN);
+    $form->addInput($fontName);
 
     $sidebarBlock = new \Typecho\Widget\Helper\Form\Element\Checkbox(
         'sidebarBlock',

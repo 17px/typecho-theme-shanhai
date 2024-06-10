@@ -14,14 +14,23 @@
           ], '', ' - '); ?><?php $this->options->title(); ?></title>
 
   <!-- inject:css -->
+
+  <link rel="stylesheet" href="<?php $this->options->fontCDN() ?>" />
+
+
+  <style>
+    * {
+      font-family: <?php $this->options->fontName() ?>
+    }
+  </style>
+
+
+
   <!-- 通过自有函数输出HTML头部信息 -->
   <?php $this->header(); ?>
 </head>
 
 <body class="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300">
-
-
-
 
 
   <nav class="bg-white border-gray-200 dark:bg-gray-900">

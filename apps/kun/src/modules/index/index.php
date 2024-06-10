@@ -49,16 +49,15 @@ $this->need('header.php');
     <div class="posts-in-category">
         <?php while ($this->next()) : ?>
             <article class="mb-8" itemscope itemtype="http://schema.org/BlogPosting">
-                <a itemprop="url" href="<?php $this->permalink() ?>">
+                <a class="block mb-8" itemprop="url" href="<?php $this->permalink() ?>">
                     <h2 class="pb-3 font-bold post-title" itemprop="name headline">
                         <img class="icon rounded mr-2" src="<?php echo getFirstImageSrc($this->content) ?>" />
-                        <span><?php $this->title() ?>
+                        <span><?php $this->title() ?></span>
+                    </h2>
+                    <div class="w-full post-content hvr-forward bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">
+                        <?php echo mb_strlen($this->content) > 200 ? mb_substr(strip_tags($this->content), 0, 200, 'UTF-8') . '...' : strip_tags($this->content); ?>
+                    </div>
                 </a>
-                </h2>
-                <div class="post-content hvr-forward bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">
-                    <?php echo mb_strlen($this->content) > 200 ? mb_substr(strip_tags($this->content), 0, 200, 'UTF-8') . '...' : strip_tags($this->content); ?>
-                </div>
-                </span>
             </article>
         <?php endwhile; ?>
 
