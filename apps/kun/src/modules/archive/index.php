@@ -13,9 +13,8 @@
             <article itemscope itemtype="http://schema.org/BlogPosting">
                 <a class="mb-8 block" itemprop="url" href="<?php $this->permalink() ?>">
                     <h2 class="pb-3 font-bold flex items-center" itemprop="name headline">
-                        <img class="inline-block w-[22px] h-[22px] rounded mr-2" src="<?php echo getFirstImageSrc($this->content) ?>" />
+                        <img class="inline-block w-[18px] h-[18px] rounded mr-2" src="<?php echo getFirstImageSrc($this->content) ?>" />
                         <span><?php $this->title() ?></span>
-
                     </h2>
                     <div class="w-full post-content hvr-forward bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">
                         <?php echo mb_strlen($this->content) > 200 ? mb_substr(strip_tags($this->content), 0, 200, 'UTF-8') . '...' : strip_tags($this->content); ?>
