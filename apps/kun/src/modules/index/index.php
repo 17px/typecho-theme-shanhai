@@ -25,7 +25,6 @@ $this->need('header.php');
         </div>
     </section>
 
-
     <h3 class="text-center text-black text-opacity-80 mt-6"><?php echo $this->getDescription(); ?></h3>
 
     <div class="category mt-6 mb-3">
@@ -45,13 +44,12 @@ $this->need('header.php');
         </ul>
     </div>
 
-
     <div class="posts-in-category">
         <?php while ($this->next()) : ?>
             <article class="mb-8" itemscope itemtype="http://schema.org/BlogPosting">
                 <a class="block mb-8" itemprop="url" href="<?php $this->permalink() ?>">
-                    <h2 class="pb-3 font-bold post-title" itemprop="name headline">
-                        <img class="icon rounded mr-2" src="<?php echo getFirstImageSrc($this->content) ?>" />
+                    <h2 class="flex pb-3 font-bold align-center" itemprop="name headline">
+                        <img class="flex-shrink-0 w-[22px] h-[22px] inline-block rounded mr-2" src="<?php echo getFirstImageSrc($this->content) ?>" />
                         <span><?php $this->title() ?></span>
                     </h2>
                     <div class="w-full post-content hvr-forward bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">

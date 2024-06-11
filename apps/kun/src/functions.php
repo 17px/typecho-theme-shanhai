@@ -130,3 +130,36 @@ function getParentCommentAuthor($parentId)
     $result = $db->fetchRow($query);
     return $result ? $result['author'] : '';
 }
+
+/**
+ * 获取前 n 篇内容的详细信息
+ *
+ * @access public
+ * @param Widget_Abstract_Contents $context 当前内容上下文
+ * @param int $num 数量
+ * @return array 返回包含上 n 篇文章的数组，数组中的每个元素包含链接、标题和内容
+ */
+function getPreviousArticles($context, $num = 1)
+{
+    $db = Typecho_Db::get();
+    $contents = $db->fetchAll($context->select()
+        ->from('table.contents')
+        ->where('table.contents.created < ?', $context->created)
+        ->where('table.contents.status = ?', 'publish')
+        ->where('table.contents.type = ?', $context->type)
+        ->where("table.contents.password IS NULL OR table.contents.password = ''")
+        ->order('table.contents.created', Typecho_Db::SORT_DESC)
+        ->limit($num));
+
+    $articles = [];
+    foreach ($contents as $content) {
+        $filteredContent = $context->filter($content);
+        $articles[] = [
+            'title' => $filteredContent['title'],
+            'link' => $filteredContent['permalink'],
+            'content' => $filteredContent['text']
+        ];
+    }
+
+    return $articles;
+}
