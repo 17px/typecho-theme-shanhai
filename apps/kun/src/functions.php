@@ -51,12 +51,24 @@ function themeConfig($form)
         _t('font-family需要用到，推荐：LXGW WenKai，LXGW WenKai Light，Source Han Serif CN VF，Source Han Serif CN for Display')
     );
 
+    $prismTheme = new \Typecho\Widget\Helper\Form\Element\Text(
+        'prismTheme',
+        null,
+        "atom-dark",
+        _t('prism代码高亮主题'),
+        _t('目前支持的有：1,2,3,4')
+    );
+
+
+
     $form->addInput($logoUrl);
     $form->addInput($blogName);
     $form->addInput($userName);
     $form->addInput($hero);
     $form->addInput($fontCDN);
     $form->addInput($fontName);
+    $form->addInput($prismTheme);
+
 
     $sidebarBlock = new \Typecho\Widget\Helper\Form\Element\Checkbox(
         'sidebarBlock',
@@ -74,18 +86,47 @@ function themeConfig($form)
     $form->addInput($sidebarBlock->multiMode());
 }
 
-
+/**
+ * 获取文章图片(第一张)
+ */
 function getFirstImageSrc($content)
 {
-    // 使用正则表达式查找图片
     preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
+    return isset($matches[1][0]) ? $matches[1][0] : 'data:image/svg+xml;base64,PHN2ZyBzdHJva2U9ImN1cnJlbnRDb2xvciIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgaGVpZ2h0PSIxZW0iIHdpZHRoPSIxZW0iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgM2g2YTQgNCAwIDAgMSA0IDR2MTRhMyAzIDAgMCAwLTMtM0gyeiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMiAzaC02YTQgNCAwIDAgMC00IDR2MTRhMyAzIDAgMCAxIDMtM2g3eiI+PC9wYXRoPjwvc3ZnPg==';
+}
 
-    // 检查是否有匹配的图片
-    if (isset($matches[1][0])) {
-        // 返回第一张图片的 src
-        return $matches[1][0];
-    } else {
-        // 如果没有图片，返回一个 span 标签
-        return 'data:image/svg+xml;base64,PHN2ZyBzdHJva2U9ImN1cnJlbnRDb2xvciIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgaGVpZ2h0PSIxZW0iIHdpZHRoPSIxZW0iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgM2g2YTQgNCAwIDAgMSA0IDR2MTRhMyAzIDAgMCAwLTMtM0gyeiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMiAzaC02YTQgNCAwIDAgMC00IDR2MTRhMyAzIDAgMCAxIDMtM2g3eiI+PC9wYXRoPjwvc3ZnPg==';
-    }
+/**
+ * 获取博主gravatar头像
+ */
+function getGravatar($email, $size = 80, $default = 'identicon', $rating = 'g')
+{
+    $url = 'https://www.gravatar.com/avatar/';
+    $url .= md5(strtolower(trim($email)));
+    $url .= "?s=$size&d=$default&r=$rating";
+    return $url;
+}
+
+
+function get_word_count($text)
+{
+    $text = strip_tags($text); // 去掉 HTML 标签
+    $word_count = str_word_count($text); // 计算单词数
+    return $word_count;
+}
+
+function get_reading_time($text)
+{
+    $word_count = get_word_count($text);
+    $words_per_minute = 200; // 平均每分钟阅读 200 个单词
+    $reading_time = ceil($word_count / $words_per_minute); // 计算阅读时间并向上取整
+    return $reading_time . ' min read';
+}
+
+// 辅助函数来获取父评论的作者名
+function getParentCommentAuthor($parentId)
+{
+    $db = Typecho_Db::get();
+    $query = $db->select('author')->from('table.comments')->where('coid = ?', $parentId);
+    $result = $db->fetchRow($query);
+    return $result ? $result['author'] : '';
 }

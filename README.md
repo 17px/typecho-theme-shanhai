@@ -54,6 +54,16 @@ pnpm run build
 3. 上一步中的全部静态资源会被 `webpack.output` 输出到 `test/typecho/usr/themes/{theme.name}/` 中
 4. 利用 `webpack-dev-server` 的 `proxy` 和 `static`，实现浏览器自动刷新
 
+# features
+
+## 语法高亮
+
+支持：
+
+- Markup：HTML, XML 等标记语言
+- CSS
+- Clike：C、C++ 等 C 类语言的基础语法
+- JavaScript
 
 # 主题名 参考
 

@@ -25,6 +25,10 @@
     "autoprefixer": "10.4.19",
     "cash-dom": "8.1.5",
     "hover.css": "2.3.2",
-    "flowbite": "2.3.0"
+    "flowbite": "2.3.0",
+    "prismjs": "1.29.0",
+    "@types/prismjs": "1.26.4",
+    "marked": "12.0.2",
+    "github-markdown-css": "5.5.1"
   }
 }
