@@ -4,6 +4,7 @@
     "outDir": "dist", // 指定输出目录
     "target": "es2015",
     "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "dom",
       "es2015",

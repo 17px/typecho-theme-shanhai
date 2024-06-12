@@ -6,5 +6,13 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c"
+  },
+  "dependencies": {
+    "identicon.js": "2.3.3",
+    "object-hash": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/object-hash": "3.0.6",
+    "@types/identicon.js": "2.3.4"
   }
 }

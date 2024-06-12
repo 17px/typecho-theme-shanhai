@@ -1,6 +1,7 @@
 import { onMounted } from "@shanhai/util";
+import "./index.less";
 import $ from "cash-dom";
-import 'flowbite';
+import "flowbite";
 
 import "./index.less";
 import {
@@ -29,4 +30,19 @@ onMounted(() => {
   const isDark = userTheme === "dark" || systemThemeDark;
   $("#darkModeToggle").html(THEME_ICONS[isDark ? "dark" : "light"]);
   isDark ? $("html").addClass("dark") : $("html").removeClass("dark");
+
+  /**
+   * 坤
+   */
+  $(window).on("mousemove", (e: MouseEvent) => {
+    $(".eye").each((_, eye) => {
+      const $eye = $(eye);
+      const rect = eye.getBoundingClientRect();
+      const x = rect.left + eye.clientWidth / 2;
+      const y = rect.top + eye.clientHeight / 2;
+      const rad = Math.atan2(e.pageY - y, e.pageX - x);
+      const rot = rad * (180 / Math.PI) * 1 + 270;
+      $eye.css("transform", `rotate(${rot}deg)`);
+    });
+  });
 });

@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        base: '14px', // 默认字体大小
+        base: '15px', // 默认字体大小
         lg: '16px',
         xl: '28px',
       },
@@ -25,7 +25,7 @@ module.exports = {
       },
       colors: {
         line: 'rgba(0,0,0,1)',
-        line2: 'rgba(0,0,0,.3)'
+        line2: 'rgba(0,0,0,.3)',
       },
     },
   },
@@ -35,7 +35,7 @@ module.exports = {
       addBase({
         ':root': {
           '--color-line': theme('colors.line'),
-          '--color-line-2': theme('colors.line2'),
+          '--color-line-2': theme('colors.line2')
         },
       });
     }),
