@@ -2,7 +2,7 @@
 <?php $this->need('header.php'); ?>
 
 
-<div class="mx-auto max-w-[560px] pb-4">
+<div class="mx-auto <?php $this->options->viewWidth() ?> pb-4">
     <!-- 作者 -->
     <div class="pt-3 flex justify-between items-center">
         <img class="w-[32px] h-[32px] rounded-lg flex-shrink-0" src="<?php echo getGravatar($this->author->mail); ?>" alt="<?php $this->author(); ?>" />
@@ -65,7 +65,8 @@
             </div>
 
             <!-- inject:css -->
-            <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/prism/atom-dark.css'); ?>" />
+            <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/markdown/' . $this->options->markdownTheme . '.css'); ?>" />
+            <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/prism/' . $this->options->prismTheme . '.css'); ?>" />
             <article class="markdown-body" itemprop="articleBody" id="markdown-content"><?php $this->content(); ?></article>
             <!-- inject:js -->
 

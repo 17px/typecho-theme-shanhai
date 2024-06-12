@@ -15,8 +15,8 @@ $this->need('header.php');
 
 <!-- inject:css -->
 
-<main class="mx-auto max-w-[560px]">
-
+<main class="mx-auto <?php $this->options->viewWidth() ?>">
+  
   <h3 class="text-center font-semibold text-black text-[30px] text-opacity-80 mt-6"><?php echo $this->author(); ?></h3>
   <div class="inline-flex items-center justify-center w-full">
     <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700">
@@ -34,12 +34,12 @@ $this->need('header.php');
   <div class="posts-in-category mt-12">
     <?php while ($this->next()) : ?>
       <article class="mb-8" itemscope itemtype="http://schema.org/BlogPosting">
-        <a class="block mb-8" itemprop="url" href="<?php $this->permalink() ?>">
+        <a class="block mb-8 hvr-shrink" itemprop="url" href="<?php $this->permalink() ?>">
           <h2 class="pb-3 font-bold text-black" itemprop="name headline">
             <img data-title="<?php $this->title() ?>" class="flex-shrink-0 w-[20px] bg-gray-100 p-1 h-[20px] inline-block rounded" />
             <span class="align-middle"><?php $this->title() ?></span>
           </h2>
-          <div class="tracking-wider w-full post-content hvr-forward bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">
+          <div class="tracking-wider w-full post-content bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">
             <?php echo mb_strlen($this->content) > 140 ? mb_substr(strip_tags($this->content), 0, 140, 'UTF-8') . '...' : strip_tags($this->content); ?>
           </div>
         </a>

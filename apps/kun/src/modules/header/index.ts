@@ -1,4 +1,4 @@
-import { onMounted } from "@shanhai/util";
+import { addKeyPress, onMounted } from "@shanhai/util";
 import "./index.less";
 import $ from "cash-dom";
 import "flowbite";
@@ -45,4 +45,16 @@ onMounted(() => {
       $eye.css("transform", `rotate(${rot}deg)`);
     });
   });
+
+  addKeyPress({
+    key: 'control+h',
+    handler: () => location.href = '/',
+    preventDefault: true
+  })
+
+  addKeyPress({
+    key: 'control+j',
+    handler: () => $("#mega-menu-full-dropdown-button").trigger('click'),
+    preventDefault: true
+  })
 });

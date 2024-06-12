@@ -51,13 +51,39 @@ function themeConfig($form)
         _t('font-family需要用到，推荐：LXGW WenKai，LXGW WenKai Light，Source Han Serif CN VF，Source Han Serif CN for Display')
     );
 
-    $prismTheme = new \Typecho\Widget\Helper\Form\Element\Text(
-        'prismTheme',
-        null,
-        "atom-dark",
-        _t('prism代码高亮主题'),
-        _t('目前支持的有：1,2,3,4')
+    $viewWidth = new \Typecho\Widget\Helper\Form\Element\Select(
+        'viewWidth',
+        array(
+            'max-w-screen-sm' => '640px',
+            'max-w-screen-md' => '768px',
+            'max-w-screen-lg' => "1024px"
+        ),
+        'max-w-screen-sm',
+        '中间核心视觉区域尺寸'
     );
+
+    $prismTheme = new \Typecho\Widget\Helper\Form\Element\Select(
+        'prismTheme',
+        array(
+            'atom-dark' => 'atom-dark',
+            'default' => 'default',
+            'tomorrow' => "tomorrow",
+            'one-light' => 'one-light'
+        ),
+        'atom-dark',
+        'prism代码高亮主题'
+    );
+
+    $markdownTheme = new \Typecho\Widget\Helper\Form\Element\Select(
+        'markdownTheme',
+        array(
+            'github-markdown-light' => 'github-markdown-light',
+            'github-markdown-dark' => 'github-markdown-dark',
+        ),
+        'github-markdown-dark',
+        'markdown主题'
+    );
+
 
 
 
@@ -67,7 +93,9 @@ function themeConfig($form)
     $form->addInput($hero);
     $form->addInput($fontCDN);
     $form->addInput($fontName);
+    $form->addInput($viewWidth);
     $form->addInput($prismTheme);
+    $form->addInput($markdownTheme);
 
 
     $moreConfig = new \Typecho\Widget\Helper\Form\Element\Checkbox(
