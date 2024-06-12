@@ -28,7 +28,7 @@
       <div class="comment-author flex items-center">
         <img class="w-[32px] h-[32px] rounded-lg flex-shrink-0" src="<?php echo getGravatar($comments->mail) ?>" />
         <div class="pl-3 flex-grow">
-          <span class="text-sm"><?php $comments->author(); ?> · <em class="text-xs"><?php $comments->mail() ?></em></span>
+          <span class="text-sm"><?php $comments->author(); ?> · <b class="text-xs"><?php $comments->mail() ?></b></span>
           <p class="text-xs text-gray-400 flex">
             <a href="<?php $comments->permalink(); ?>"><?php $comments->date('F j, Y H:i'); ?></a>
             <span class="pl-2"><?php $comments->reply(); ?></span>
