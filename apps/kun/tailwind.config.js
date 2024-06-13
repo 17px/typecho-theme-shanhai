@@ -9,24 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        base: '15px', // 默认字体大小
-        lg: '16px',
-        xl: '28px',
-      },
-      fontFamily: {
-        sans: ['Helvetica', 'Arial', 'sans-serif'], // 默认字体
-        serif: ['Georgia', 'serif'],
-        mono: ['Courier New', 'monospace'],
-      },
-      fontWeight: {
-        300: 300,
-        500: 500,
-        700: 700,
-      },
-      colors: {
-        line: 'rgba(0,0,0,1)',
-        line2: 'rgba(0,0,0,.3)',
-      },
+        base: '15px',
+      }
     },
   },
   plugins: [

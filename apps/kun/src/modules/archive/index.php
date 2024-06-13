@@ -1,15 +1,15 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 
-<div class="mx-auto <?php $this->options->viewWidth() ?>">
-    <h3 class="text-black text-opacity-80 mt-6 mb-2"><?php $this->archiveTitle([
+<div class="pt-20 mx-auto <?php $this->options->viewWidth() ?>">
+    <h3 class="text-black text-opacity-80 pb-2"><?php $this->archiveTitle([
                                                                         'category' => _t('分类 「%s」 下的文章'),
                                                                         'search'   => _t('包含关键字 「%s」 的文章'),
                                                                         'tag'      => _t('标签 「%s」 下的文章'),
                                                                         'author'   => _t('「%s」 发布的文章')
                                                                     ], '', ''); ?></h3>
 
-    <p class="break-all mb-12 text-sm text-gray-500"><?php echo $this->getDescription(); ?></p>
+    <p class="break-all pb-12 text-sm text-gray-500"><?php echo $this->getDescription(); ?></p>
 
     <?php if ($this->have()) : ?>
         <?php while ($this->next()) : ?>

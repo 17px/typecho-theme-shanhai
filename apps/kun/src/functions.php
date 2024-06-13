@@ -11,22 +11,6 @@ function themeConfig($form)
         _t('在这里填入一个图片 URL 地址, 以在网站标题前加上一个 LOGO')
     );
 
-    $blogName = new \Typecho\Widget\Helper\Form\Element\Text(
-        'blogName',
-        null,
-        "iKun",
-        _t('blogName'),
-        _t('左上角博客名称')
-    );
-
-    $userName = new \Typecho\Widget\Helper\Form\Element\Text(
-        'userName',
-        null,
-        "练习时长1坤年",
-        _t('userName'),
-        _t('博主名称')
-    );
-
     $hero = new \Typecho\Widget\Helper\Form\Element\Text(
         'hero',
         null,
@@ -80,22 +64,29 @@ function themeConfig($form)
             'github-markdown-light' => 'github-markdown-light',
             'github-markdown-dark' => 'github-markdown-dark',
         ),
-        'github-markdown-dark',
+        'github-markdown-light',
         'markdown主题'
     );
 
-
-
+    $mottoSelect = new \Typecho\Widget\Helper\Form\Element\Select(
+        'mottoSelect',
+        array(
+            'shici' => '今日诗词',
+            'description' => '个人资料',
+        ),
+        'shici',
+        '首页Banner区域',
+        '推荐 "今日诗词"，根据时间、地点、天气、事件智能推荐'
+    );
 
     $form->addInput($logoUrl);
-    $form->addInput($blogName);
-    $form->addInput($userName);
     $form->addInput($hero);
     $form->addInput($fontCDN);
     $form->addInput($fontName);
     $form->addInput($viewWidth);
     $form->addInput($prismTheme);
     $form->addInput($markdownTheme);
+    $form->addInput($mottoSelect);
 
 
     $moreConfig = new \Typecho\Widget\Helper\Form\Element\Checkbox(
@@ -186,4 +177,68 @@ function getPreviousArticles($context, $num = 1)
     }
 
     return $articles;
+}
+
+
+/**
+ * 文章阅读次数
+ */
+function get_post_view($archive)
+{
+    $cid = $archive->cid;
+    $db = Typecho_Db::get();
+    $prefix = $db->getPrefix();
+
+    // 检查并添加 'views' 字段
+    if (!array_key_exists('views', $db->fetchRow($db->select()->from('table.contents')))) {
+        $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
+        echo format_views(0);
+        return;
+    }
+
+    // 获取阅读次数
+    $row = $db->fetchRow($db->select('views')->from('table.contents')->where('cid = ?', $cid));
+
+    // 更新阅读次数
+    if ($archive->is('single')) {
+        $views = Typecho_Cookie::get('extend_contents_views');
+        if (empty($views)) {
+            $views = array();
+        } else {
+            $views = explode(',', $views);
+        }
+        if (!in_array($cid, $views)) {
+            $db->query($db->update('table.contents')->rows(array('views' => (int) $row['views'] + 1))->where('cid = ?', $cid));
+            array_push($views, $cid);
+            $views = implode(',', $views);
+            Typecho_Cookie::set('extend_contents_views', $views); //记录查看cookie
+        }
+    }
+
+    echo format_views($row['views']);
+}
+
+/**
+ *  辅助函数：将数字格式化为带 "k" 的格式
+ */
+function format_views($views)
+{
+    if ($views >= 1000) {
+        return round($views / 1000, 1) . 'k';
+    }
+    return $views;
+}
+
+
+/**
+ * 用户os
+ */
+function getPlatformKey()
+{
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+    if (stripos($userAgent, 'Macintosh') !== false || stripos($userAgent, 'Mac OS') !== false) {
+        return 'cmd';
+    } else {
+        return 'ctrl';
+    }
 }

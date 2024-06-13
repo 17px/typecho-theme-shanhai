@@ -1,4 +1,9 @@
-import { onMounted, str2Base64Image } from "@shanhai/util";
+import {
+  addKeyPress,
+  addListener,
+  onMounted,
+  str2Base64Image,
+} from "@shanhai/util";
 import "./index.less";
 import $ from "cash-dom";
 import Prism from "prismjs";
@@ -9,6 +14,7 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-rust";
 import "prismjs/components/prism-go";
 import "prismjs/components/prism-bash";
+import { useToc } from "./util";
 
 onMounted(async () => {
   const md = document.querySelector("#markdown-content");
@@ -22,4 +28,33 @@ onMounted(async () => {
     const title = $(img).data("title");
     if (title) $(img).attr("src", str2Base64Image(title));
   });
+
+  addKeyPress({
+    key: "control+k",
+    handler: () => $('a[href="#comments-hr"]').trigger("click"),
+    preventDefault: true,
+  });
+
+  const toggleToc = () => {
+    $(".toc").hasClass("invisible")
+      ? $(".toc").removeClass("invisible").addClass("show-toc")
+      : $(".toc")
+          .addClass("invisible")
+          .removeClass("show-toc")
+          .removeClass("hide-toc");
+  };
+
+  addListener({
+    selector: "#toggle-toc",
+    eventType: "click",
+    handler: toggleToc,
+  });
+
+  addKeyPress({
+    key: "]",
+    handler: toggleToc,
+    preventDefault: true,
+  });
+
+  useToc({ selector: ".markdown-body", levels: ["h1", "h2", "h3"] });
 });
