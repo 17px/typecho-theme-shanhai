@@ -10,6 +10,23 @@ module.exports = {
     extend: {
       fontSize: {
         base: '15px',
+      },
+      fontFamily: {
+        base: ["Punctuation SC",
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "PingFang SC",
+          "Noto Sans CJK SC",
+          "Noto Sans SC",
+          "Heiti SC",
+          "DengXian",
+          "Microsoft YaHei",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"]
       }
     },
   },

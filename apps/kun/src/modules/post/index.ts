@@ -14,7 +14,7 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-rust";
 import "prismjs/components/prism-go";
 import "prismjs/components/prism-bash";
-import { useToc } from "./util";
+import { useSmoothAnchor, useToc } from "./util";
 
 onMounted(async () => {
   const md = document.querySelector("#markdown-content");
@@ -39,9 +39,9 @@ onMounted(async () => {
     $(".toc").hasClass("invisible")
       ? $(".toc").removeClass("invisible").addClass("show-toc")
       : $(".toc")
-          .addClass("invisible")
-          .removeClass("show-toc")
-          .removeClass("hide-toc");
+        .addClass("invisible")
+        .removeClass("show-toc")
+        .removeClass("hide-toc");
   };
 
   addListener({
@@ -56,5 +56,6 @@ onMounted(async () => {
     preventDefault: true,
   });
 
-  useToc({ selector: ".markdown-body", levels: ["h1", "h2", "h3"] });
+  const tocExist = useToc({ selector: ".markdown-body", levels: ["h1", "h2", "h3"] });
+  if (tocExist) useSmoothAnchor()
 });
