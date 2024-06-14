@@ -19,25 +19,10 @@ function themeConfig($form)
         _t('介绍/座右铭')
     );
 
-    $fontCDN = new \Typecho\Widget\Helper\Form\Element\Text(
-        'fontCDN',
-        null,
-        "https://chinese-fonts-cdn.deno.dev/chinesefonts3/packages/lxgwwenkai/dist/LXGWWenKai-Bold/result.css",
-        _t('字体cdn'),
-        _t('可以在这里找到喜欢的字体：https://chinese-font.netlify.app/cdn/')
-    );
-
-    $fontName = new \Typecho\Widget\Helper\Form\Element\Text(
-        'fontName',
-        null,
-        "LXGW WenKai",
-        _t('字体名称'),
-        _t('font-family需要用到，推荐：LXGW WenKai，LXGW WenKai Light，Source Han Serif CN VF，Source Han Serif CN for Display')
-    );
-
     $viewWidth = new \Typecho\Widget\Helper\Form\Element\Select(
         'viewWidth',
         array(
+            'max-w-xl' => '576px',
             'max-w-screen-sm' => '640px',
             'max-w-screen-md' => '768px',
             'max-w-screen-lg' => "1024px"
@@ -79,10 +64,20 @@ function themeConfig($form)
         '推荐 "今日诗词"，根据时间、地点、天气、事件智能推荐'
     );
 
+    $fontFamily = new \Typecho\Widget\Helper\Form\Element\Select(
+        'fontFamily',
+        array(
+            'base' => '默认字体',
+            'LXGW WenKai' => '落霞孤鹜(文楷)',
+        ),
+        'base',
+        '全局字体',
+        '字体方案：<a href="https://chinese-fonts-cdn.deno.dev">中文网字计划</a>，先进的工程化确保极快的加载速度'
+    );
+
     $form->addInput($logoUrl);
     $form->addInput($hero);
-    $form->addInput($fontCDN);
-    $form->addInput($fontName);
+    $form->addInput($fontFamily);
     $form->addInput($viewWidth);
     $form->addInput($prismTheme);
     $form->addInput($markdownTheme);
@@ -241,4 +236,12 @@ function getPlatformKey()
     } else {
         return 'ctrl';
     }
+}
+
+function getFontCdn($key)
+{
+    $cdnMap = array(
+        'LXGW WenKai' => 'https://chinese-fonts-cdn.deno.dev/chinesefonts3/packages/lxgwwenkai/dist/LXGWWenKai-Bold/result.css',
+    );
+    return array_key_exists($key, $cdnMap) ?  $cdnMap[$key] : null;
 }

@@ -14,13 +14,17 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-rust";
 import "prismjs/components/prism-go";
 import "prismjs/components/prism-bash";
-import { useSmoothAnchor, useToc } from "./util";
+import { useAnchorLocate, useToc } from "./util";
+import mediumZoom from "medium-zoom";
 
 onMounted(async () => {
   const md = document.querySelector("#markdown-content");
   if (md) {
     Prism.highlightAll();
     useCodeHelper();
+    mediumZoom(".markdown-body img", {
+      margin: $("nav.sticky").height() as number,
+    });
   }
 
   $(`.posts-recommend img[data-title]`).each((index, element) => {
@@ -39,9 +43,9 @@ onMounted(async () => {
     $(".toc").hasClass("invisible")
       ? $(".toc").removeClass("invisible").addClass("show-toc")
       : $(".toc")
-        .addClass("invisible")
-        .removeClass("show-toc")
-        .removeClass("hide-toc");
+          .addClass("invisible")
+          .removeClass("show-toc")
+          .removeClass("hide-toc");
   };
 
   addListener({
@@ -56,6 +60,10 @@ onMounted(async () => {
     preventDefault: true,
   });
 
-  const tocExist = useToc({ selector: ".markdown-body", levels: ["h1", "h2", "h3"] });
-  if (tocExist) useSmoothAnchor()
+  const postWithToc = useToc({
+    selector: ".markdown-body",
+    levels: ["h1", "h2", "h3"],
+    syncContent: true,
+  });
+  if (postWithToc) useAnchorLocate();
 });

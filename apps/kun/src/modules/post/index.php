@@ -18,7 +18,7 @@
         </div>
         <ul class="flex-shrink-0 flex">
             <li>
-                <button id="toggle-toc" data-tooltip-target="tooltip-toc" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-gray-500 w-10 h-10 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1 invisible">
+                <button data-tooltip-target="tooltip-toc" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-gray-500 w-10 h-10 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1 invisible">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path d="M448 64c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32zm0 256c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32zM0 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
                     </svg>
@@ -120,7 +120,7 @@
                         <img data-title="<?php echo htmlspecialchars($article['title']); ?>" class="flex-shrink-0 w-[20px] bg-gray-100 p-1 h-[20px] inline-block rounded" />
                         <span class="align-middle"><?php echo htmlspecialchars($article['title']); ?></span>
                     </h2>
-                    <div class="tracking-wider w-full post-content hvr-forward bg-neutral-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">
+                    <div class="tracking-wider w-full post-content hvr-forward bg-neutral-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">
                         <?php
                         // 显示文章内容的摘要，最多 140 字符
                         $content = strip_tags($article['content']); // 去除 HTML 标签

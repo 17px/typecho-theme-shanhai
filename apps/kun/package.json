@@ -33,6 +33,7 @@
     "@types/identicon.js": "2.3.4",
     "object-hash": "3.0.0",
     "@types/object-hash": "3.0.6",
-    "simplebar": "6.2.6"
+    "simplebar": "6.2.6",
+    "medium-zoom": "1.1.0"
   }
 }

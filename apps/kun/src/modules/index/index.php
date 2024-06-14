@@ -72,8 +72,8 @@ $this->need('header.php');
             <img data-title="<?php $this->title() ?>" class="flex-shrink-0 w-[20px] bg-gray-100 p-1 h-[20px] inline-block rounded" />
             <span class="align-middle"><?php $this->title() ?></span>
           </h2>
-          <div class="tracking-wider w-full post-content bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl" itemprop="articleBody">
-            <p><?php echo mb_strlen($this->content) > 140 ? mb_substr(strip_tags($this->content), 0, 140, 'UTF-8') . '...' : strip_tags($this->content); ?></p>
+          <div class="tracking-wider w-full post-content bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">
+            <p class="text-sm text-zinc-700"><?php echo mb_strlen($this->content) > 140 ? mb_substr(strip_tags($this->content), 0, 140, 'UTF-8') . '...' : strip_tags($this->content); ?></p>
             <div class="pt-3 text-xs text-gray-500 flex items-center justify-between">
               <time class="mr-3" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date('F j, Y'); ?></time>
               <div>

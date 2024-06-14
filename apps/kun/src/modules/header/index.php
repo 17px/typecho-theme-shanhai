@@ -14,13 +14,18 @@
           ], '', ' - '); ?><?php $this->options->title(); ?></title>
 
   <!-- inject:css -->
-  <link rel="stylesheet" href="<?php $this->options->fontCDN() ?>" />
-  <style>
-    /* 全局设置字体，排除 .markdown-body 下的 code 和 span */
-    *:not(.markdown-body code):not(.markdown-body span) {
-      font-family: <?php $this->options->fontName() ?>, sans-serif;
-    }
-  </style>
+
+  <!-- 全局字体 -->
+  <?php if ($this->options->fontFamily != 'base') : ?>
+    <link rel="stylesheet" href="<?php echo getFontCdn($this->options->fontFamily) ?>" />
+    <style>
+      /* 全局设置字体，排除 .markdown-body 下的 code 和 span */
+      *:not(.markdown-body pre code):not(.markdown-body span) {
+        font-family: <?php $this->options->fontFamily() ?>, sans-serif;
+      }
+    </style>
+  <?php endif; ?>
+
   <!-- 通过自有函数输出HTML头部信息 -->
   <?php $this->header(); ?>
 </head>
@@ -44,7 +49,7 @@
       </button>
       <!-- 页面 -->
       <div id="mega-menu-full" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-        <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+        <ul class="flex items-center flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
           <li>
             <button data-tooltip-target="tooltip-home" data-tooltip-placement="bottom" class="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
               <a href="/">
@@ -72,6 +77,33 @@
               <a class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 <?php if ($this->is('page', $pages->slug)) : ?>current<?php endif; ?>" href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
             </li>
           <?php endwhile; ?>
+          <li>
+            <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+              <svg class="w-[.8rem] h-[.8rem]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+              </svg>
+            </button>
+
+            <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+              <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                </li>
+              </ul>
+              <?php if ($this->user->hasLogin()) : ?>
+                <div class="py-2">
+                  <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('退出'); ?></a>
+                </div>
+              <?php endif; ?>
+            </div>
+
+          </li>
         </ul>
       </div>
     </div>
