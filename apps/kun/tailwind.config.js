@@ -8,6 +8,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        zinc: {
+          900: '#0d0e11',
+          800: '#232429',
+          400: '#abadba'
+        }
+      },
       fontSize: {
         base: '15px',
       },
@@ -31,14 +38,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('flowbite/plugin'),
-    plugin(({ addBase, theme }) => {
-      addBase({
-        ':root': {
-          '--color-line': theme('colors.line'),
-          '--color-line-2': theme('colors.line2')
-        },
-      });
-    }),
+    require('flowbite/plugin')
   ],
 };

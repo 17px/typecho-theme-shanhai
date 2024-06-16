@@ -28,7 +28,7 @@ export const useCodeHelper = () => {
     btn.setAttribute("data-tooltip-target", `tooltip-copy-code-${index}`);
     btn.setAttribute("data-tooltip-placement", "bottom");
     btn.className =
-      "hidden sm:inline-flex items-center justify-center text-gray-500 w-10 h-10 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5";
+      "hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5";
     btn.innerHTML = copyIconSVG;
 
     btn.addEventListener("click", function () {
@@ -44,7 +44,7 @@ export const useCodeHelper = () => {
     const tooltip = document.createElement("div");
     tooltip.innerHTML = "<span>复制</span>";
     tooltip.className =
-      "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700";
+      "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-zinc-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-zinc-700";
     tooltip.setAttribute("id", `tooltip-copy-code-${index}`);
     tooltip.setAttribute("role", "tooltip");
 

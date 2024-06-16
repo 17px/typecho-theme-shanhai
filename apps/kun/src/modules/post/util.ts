@@ -42,12 +42,12 @@ export const useToc = (options: TOCOptions): boolean => {
   // 文章区域的宽度，用于定位
   const postWidth = $("#post-container").width() as number;
 
-  const cardClass = `max-w-sm bg-white border-gray-200 bl-1 br-1 dark:bg-gray-800 dark:border-gray-700`;
+  const cardClass = `max-w-sm bg-white border-zinc-200 bl-1 br-1 dark:bg-zinc-900 dark:border-zinc-700`;
   const template = `<aside class="toc py-20 pl-4 flex">
     <div data-simplebar class="flex-grow relative ${cardClass}">
-      <div class="sticky w-full" style="top:0;background-image:linear-gradient(#ffffff, transparent 70%);height:32px"></div>
-      <ul class="border-l border-gray-200"></ul>
-      <div class="sticky w-full" style="bottom:0;background-image:linear-gradient(transparent, #ffffff 70%);height:32px"></div>
+      <div class="sticky w-full" style="top:0;background-image:linear-gradient(var(--color-bg), transparent 100%);height:32px"></div>
+      <ul class="border-l border-zinc-200 dark:border-zinc-700"></ul>
+      <div class="sticky w-full" style="bottom:0;background-image:linear-gradient(transparent, var(--color-bg) 100%);height:32px"></div>
     </div>
   </aside>`;
   const toc = $(template);

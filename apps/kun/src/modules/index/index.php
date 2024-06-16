@@ -21,10 +21,10 @@ $this->need('header.php');
   <?php if ($this->options->mottoSelect == 'shici') : ?>
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 
-    <h3 class="text-center font-semibold text-black text-[30px] text-opacity-80">
+    <h3 class="text-center font-semibold text-black dark:text-zinc-200 text-[30px] text-opacity-80">
       <span id="one-sentence"></span>
     </h3>
-    <h3 class="text-center text-gray-800 text-opacity-80 pt-3">
+    <h3 class="text-center text-gray-800 dark:text-zinc-200 text-opacity-80 pt-3">
       <span id="one-sentence-meta"></span>
     </h3>
 
@@ -48,7 +48,7 @@ $this->need('header.php');
 
   <!-- 描述 -->
   <?php if ($this->options->mottoSelect == 'description') : ?>
-    <h3 class="text-center font-semibold text-black text-2xl text-opacity-80 mt-6"><?php echo $this->author(); ?></h3>
+    <h3 class="text-center font-semibold text-black dark:text-zinc-200 text-2xl text-opacity-80 mt-6"><?php echo $this->author(); ?></h3>
     <div class="inline-flex items-center justify-center w-full">
       <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700">
       <div class="absolute px-2 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900">
@@ -68,13 +68,13 @@ $this->need('header.php');
     <?php while ($this->next()) : ?>
       <article class="mb-8" itemscope itemtype="http://schema.org/BlogPosting">
         <a class="block mb-8 hvr-shrink" itemprop="url" href="<?php $this->permalink() ?>">
-          <h2 class="pb-3 font-bold text-black" itemprop="name headline">
+          <h2 class="pb-3 font-bold text-black dark:text-zinc-200" itemprop="name headline">
             <img data-title="<?php $this->title() ?>" class="flex-shrink-0 w-[20px] bg-gray-100 p-1 h-[20px] inline-block rounded" />
             <span class="align-middle"><?php $this->title() ?></span>
           </h2>
-          <div class="tracking-wider w-full post-content bg-gray-100 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">
-            <p class="text-sm text-zinc-700"><?php echo mb_strlen($this->content) > 140 ? mb_substr(strip_tags($this->content), 0, 140, 'UTF-8') . '...' : strip_tags($this->content); ?></p>
-            <div class="pt-3 text-xs text-gray-500 flex items-center justify-between">
+          <div class="tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">
+            <p class="text-sm text-zinc-700 dark:text-zinc-400"><?php echo mb_strlen($this->content) > 140 ? mb_substr(strip_tags($this->content), 0, 140, 'UTF-8') . '...' : strip_tags($this->content); ?></p>
+            <div class="pt-3 text-xs text-zinc-500 flex items-center justify-between">
               <time class="mr-3" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date('F j, Y'); ?></time>
               <div>
                 <span class="inline-flex items-center">

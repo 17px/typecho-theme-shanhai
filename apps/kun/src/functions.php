@@ -29,6 +29,17 @@ function themeConfig($form)
         _t('请遵守法定法规')
     );
 
+    $themeMode = new \Typecho\Widget\Helper\Form\Element\Select(
+        'themeMode',
+        array(
+            'light' => '白天模式',
+            'dark' => '黑夜模式',
+            'auto' => '自动',
+        ),
+        'light',
+        '全局主题色模式，自动模式会根据时间自动进行切换'
+    );
+
     $viewWidth = new \Typecho\Widget\Helper\Form\Element\Select(
         'viewWidth',
         array(
@@ -89,10 +100,12 @@ function themeConfig($form)
     $form->addInput($logoUrl);
     $form->addInput($icp);
     $form->addInput($fontFamily);
+    $form->addInput($themeMode);
     $form->addInput($viewWidth);
     $form->addInput($prismTheme);
     $form->addInput($markdownTheme);
     $form->addInput($mottoSelect);
+    
 }
 
 /**
