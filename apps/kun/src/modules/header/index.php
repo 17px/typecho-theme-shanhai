@@ -102,7 +102,6 @@
                 </div>
               <?php endif; ?>
             </div>
-
           </li>
         </ul>
       </div>

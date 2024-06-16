@@ -3,6 +3,16 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 function themeConfig($form)
 {
+    $moreConfig = new \Typecho\Widget\Helper\Form\Element\Checkbox(
+        'moreConfig',
+        [
+            'ShowICP' => _t('显示ICP备案号')
+        ],
+        ['ShowICP'],
+        _t('主题基本的配置')
+    );
+
+
     $logoUrl = new \Typecho\Widget\Helper\Form\Element\Text(
         'logoUrl',
         null,
@@ -11,12 +21,12 @@ function themeConfig($form)
         _t('在这里填入一个图片 URL 地址, 以在网站标题前加上一个 LOGO')
     );
 
-    $hero = new \Typecho\Widget\Helper\Form\Element\Text(
-        'hero',
+    $icp = new \Typecho\Widget\Helper\Form\Element\Text(
+        'icp',
         null,
-        "无与伦比的追求冰冷地敲打着我的灵魂",
-        _t('hero'),
-        _t('介绍/座右铭')
+        null,
+        _t('icp备案号'),
+        _t('请遵守法定法规')
     );
 
     $viewWidth = new \Typecho\Widget\Helper\Form\Element\Select(
@@ -75,25 +85,14 @@ function themeConfig($form)
         '字体方案：<a href="https://chinese-fonts-cdn.deno.dev">中文网字计划</a>，先进的工程化确保极快的加载速度'
     );
 
+    $form->addInput($moreConfig->multiMode());
     $form->addInput($logoUrl);
-    $form->addInput($hero);
+    $form->addInput($icp);
     $form->addInput($fontFamily);
     $form->addInput($viewWidth);
     $form->addInput($prismTheme);
     $form->addInput($markdownTheme);
     $form->addInput($mottoSelect);
-
-
-    $moreConfig = new \Typecho\Widget\Helper\Form\Element\Checkbox(
-        'moreConfig',
-        [
-            'ShowThemeAuthor' => _t('显示主题作者')
-        ],
-        ['ShowThemeAuthor'],
-        _t('主题基本的配置')
-    );
-
-    $form->addInput($moreConfig->multiMode());
 }
 
 /**

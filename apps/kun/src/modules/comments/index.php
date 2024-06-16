@@ -24,15 +24,20 @@
                                                         $comments->alt(' comment-odd', ' comment-even');
                                                         echo $commentClass;
                                                         ?>">
-    <div class="pb-2" id="<?php $comments->theId(); ?>">
+    <div class="pb-4" id="<?php $comments->theId(); ?>">
       <div class="comment-author flex items-center">
         <img class="w-[32px] h-[32px] rounded-lg flex-shrink-0" src="<?php echo getGravatar($comments->mail) ?>" />
         <div class="pl-3 flex-grow">
-          <span class="text-sm"><?php $comments->author(); ?> · <b class="text-xs"><?php $comments->mail() ?></b></span>
-          <p class="text-xs text-gray-400 flex">
-            <a href="<?php $comments->permalink(); ?>"><?php $comments->date('F j, Y H:i'); ?></a>
-            <span class="pl-2"><?php $comments->reply(); ?></span>
-          </p>
+          <span class="text-sm text-black"><?php $comments->author(); ?> ·
+            <?php if ($comments->user->uid == $comments->authorId) : ?>
+              <span class="bg-blue-100 text-blue-800 text-xs font-medium px-1 rounded dark:bg-blue-900 dark:text-blue-300">作者</span>
+            <?php else : ?>
+              <a class="text-xs text-gray-400"><?php echo $comments->mail(); ?></a>
+            <?php endif; ?>
+            <p class="text-xs text-gray-400 flex">
+              <a href="<?php $comments->permalink(); ?>"><?php $comments->date('F j, Y H:i'); ?></a>
+              <span class="pl-2"><?php $comments->reply(); ?></span>
+            </p>
         </div>
       </div>
       <div class="py-2">
