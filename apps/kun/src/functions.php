@@ -6,9 +6,10 @@ function themeConfig($form)
     $moreConfig = new \Typecho\Widget\Helper\Form\Element\Checkbox(
         'moreConfig',
         [
-            'ShowICP' => _t('显示ICP备案号')
+            'ShowICP' => _t('显示ICP备案号'),
+            'ShowFastBar' => _t('显示文章快捷操作栏')
         ],
-        ['ShowICP'],
+        ['ShowFastBar'],
         _t('主题基本的配置')
     );
 
@@ -105,7 +106,6 @@ function themeConfig($form)
     $form->addInput($prismTheme);
     $form->addInput($markdownTheme);
     $form->addInput($mottoSelect);
-    
 }
 
 /**
@@ -154,37 +154,35 @@ function getParentCommentAuthor($parentId)
 }
 
 /**
- * 获取前 n 篇内容的详细信息
- *
- * @access public
- * @param Widget_Abstract_Contents $context 当前内容上下文
- * @param int $num 数量
- * @return array 返回包含上 n 篇文章的数组，数组中的每个元素包含链接、标题和内容
+ * 获取前一篇文章
  */
-function getPreviousArticles($context, $num = 1)
+function getAdjacentArticle($widget, $direction = 'prev', $default = ['url' => '#', 'title' => '没有了'])
 {
     $db = Typecho_Db::get();
-    $contents = $db->fetchAll($context->select()
-        ->from('table.contents')
-        ->where('table.contents.created < ?', $context->created)
-        ->where('table.contents.status = ?', 'publish')
-        ->where('table.contents.type = ?', $context->type)
-        ->where("table.contents.password IS NULL OR table.contents.password = ''")
-        ->order('table.contents.created', Typecho_Db::SORT_DESC)
-        ->limit($num));
+    $operator = $direction === 'prev' ? '<' : '>';
+    $order = $direction === 'prev' ? Typecho_Db::SORT_DESC : Typecho_Db::SORT_ASC;
 
-    $articles = [];
-    foreach ($contents as $content) {
-        $filteredContent = $context->filter($content);
-        $articles[] = [
-            'title' => $filteredContent['title'],
-            'link' => $filteredContent['permalink'],
-            'content' => $filteredContent['text']
+    $sql = $db->select()->from('table.contents')
+        ->where('table.contents.created ' . $operator . '?', $widget->created)
+        ->where('table.contents.status = ?', 'publish')
+        ->where('table.contents.type = ?', $widget->type)
+        ->order('table.contents.created', $order)
+        ->limit(1);
+
+    $content = $db->fetchRow($sql);
+
+    if ($content) {
+        $content = $widget->filter($content);
+        return [
+            'url' => !empty($content['permalink']) ? $content['permalink'] : $default['url'],
+            'title' => !empty($content['title']) ? $content['title'] : $default['title']
         ];
     }
 
-    return $articles;
+    return $default;  // 如果没有相邻文章，则返回默认值
 }
+
+
 
 
 /**
@@ -244,7 +242,7 @@ function getPlatformKey()
 {
     $userAgent = $_SERVER['HTTP_USER_AGENT'];
     if (stripos($userAgent, 'Macintosh') !== false || stripos($userAgent, 'Mac OS') !== false) {
-        return 'cmd';
+        return '⌘';
     } else {
         return 'ctrl';
     }

@@ -28,8 +28,8 @@
       <div class="comment-author flex items-center">
         <img class="w-[32px] h-[32px] rounded-lg flex-shrink-0" src="<?php echo getGravatar($comments->mail) ?>" />
         <div class="pl-3 flex-grow">
-          <span class="text-sm text-black dark:text-zinc-100"><?php $comments->author(); ?> ·
-            <?php if ($comments->user->uid == $comments->authorId) : ?>
+          <span class="text-sm text-black dark:text-zinc-100"><?php $comments->author(); ?>
+            <?php if ($comments->authorId == $comments->ownerId) : ?>
               <span class="bg-blue-100 text-blue-800 text-xs font-medium px-1 rounded dark:bg-blue-900 dark:text-blue-300">作者</span>
             <?php else : ?>
               <a class="text-xs text-zinc-400"><?php echo $comments->mail(); ?></a>
@@ -80,22 +80,18 @@
 
           <div class="flex align-center gap-3 pb-3">
             <div class="flex-1">
-              <label for="author" class="block text-sm font-medium text-zinc-900 dark:text-white"><?php _e('称呼'); ?></label>
-              <input for="author" type="text" name="author" value="<?php $this->remember('author'); ?>" required class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input for="author" type="text" name="author" value="<?php $this->remember('author'); ?>" required placeholder="<?php _e('称呼'); ?>" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div class="flex-1">
-              <label for="mail" <?php if ($this->options->commentsRequireMail) : ?> class="block text-sm font-medium text-zinc-900 dark:text-white" <?php endif; ?>><?php _e('Email'); ?></label>
-              <input id="mail" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail) : ?> required<?php endif; ?> type="email" name="mail" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input id="mail" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail) : ?> required<?php endif; ?> placeholder="<?php _e('邮箱'); ?>" type="email" name="mail" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div class="flex-1">
-              <label for="url" class="block text-sm font-medium text-zinc-900 dark:text-white <?php if ($this->options->commentsRequireURL) : ?> required <?php endif; ?>"><?php _e('网站'); ?></label>
               <input type="url" id="url" name="url" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>" <?php if ($this->options->commentsRequireURL) : ?> required<?php endif; ?> class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
           </div>
         <?php endif; ?>
         <div class="w-full mb-4 border border-zinc-200 rounded-lg bg-zinc-50 dark:bg-zinc-700 dark:border-zinc-600">
           <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-800">
-            <label for="textarea" class="sr-only">Your comment</label>
             <textarea placeholder="发表你的观点..." rows="8" cols="50" name="text" id="textarea" class="w-full px-0 text-sm text-zinc-900 bg-white border-0 dark:bg-zinc-800 focus:ring-0 dark:text-white dark:placeholder-zinc-400" required><?php $this->remember('text'); ?></textarea>
           </div>
           <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-600">

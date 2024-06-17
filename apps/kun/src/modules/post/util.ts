@@ -1,29 +1,8 @@
-import { POST_MEMORY_KEY } from "@/constant";
 import $ from "cash-dom";
 import hash from "object-hash";
+import Draggabilly from "draggabilly";
 import "simplebar";
 
-export const saveScrollHeight = (selector: string) => {
-  const element = document.querySelector<HTMLElement>(selector);
-  if (element) {
-    const scrolledHeight = element.scrollTop;
-    localStorage.setItem(POST_MEMORY_KEY, String(scrolledHeight));
-  } else {
-    console.warn("Element not found for selector:", selector);
-  }
-};
-
-export const restoreScrollHeight = (selector: string) => {
-  const element = document.querySelector<HTMLElement>(selector);
-  if (element) {
-    const recordedHeight = localStorage.getItem(POST_MEMORY_KEY);
-    if (recordedHeight) {
-      element.scrollTop = Number(recordedHeight);
-    }
-  } else {
-    console.warn("Element not found for selector:", selector);
-  }
-};
 interface TOCOptions {
   selector: string;
   levels: string[];
@@ -110,6 +89,36 @@ export const useToc = (options: TOCOptions): boolean => {
   }
 
   return true;
+};
+
+/**
+ * 快捷操作条
+ */
+export const useFastBar = () => {
+  if ($(`#fast-bar`).length > 0) {
+    let cachePos = localStorage.getItem("fast_bar_pos");
+    $(`#fast-bar`)
+      .css({
+        position: "fixed",
+        zIndex: 1994,
+        top: cachePos
+          ? JSON.parse(cachePos).top
+          : $("nav.sticky").height() + 10,
+        transform: cachePos ? "auto" : "translateX(-50%)",
+        left: cachePos ? JSON.parse(cachePos).left : `50%`,
+      })
+      .removeClass("hidden")
+      .addClass("flex")
+      .insertAfter($(".markdown-body"));
+    // 可拖拽
+    const $drag = new Draggabilly("#fast-bar") as Draggabilly;
+    $drag.on("dragEnd", () => {
+      const element = document.querySelector("#fast-bar") as HTMLElement;
+      const { left, top } = element.getBoundingClientRect();
+      const pos = { left, top };
+      localStorage.setItem("fast_bar_pos", JSON.stringify(pos));
+    });
+  }
 };
 
 /**

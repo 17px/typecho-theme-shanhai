@@ -14,7 +14,7 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-rust";
 import "prismjs/components/prism-go";
 import "prismjs/components/prism-bash";
-import { useAnchorLocate, useToc } from "./util";
+import { useAnchorLocate, useFastBar, useToc } from "./util";
 import mediumZoom from "medium-zoom";
 
 onMounted(async () => {
@@ -25,6 +25,7 @@ onMounted(async () => {
     mediumZoom(".markdown-body img", {
       margin: $("nav.sticky").height() as number,
     });
+    useFastBar();
   }
 
   $(`.posts-recommend img[data-title]`).each((index, element) => {
@@ -33,8 +34,11 @@ onMounted(async () => {
     if (title) $(img).attr("src", str2Base64Image(title));
   });
 
+  /**
+   * 评论区
+   */
   addKeyPress({
-    key: "control+k",
+    key: "control+p",
     handler: () => $('a[href="#comments-hr"]').trigger("click"),
     preventDefault: true,
   });
@@ -55,6 +59,18 @@ onMounted(async () => {
   });
 
   addKeyPress({
+    key: "control+j",
+    handler: () => $('[data-tooltip-target="next-post"]').trigger("click"),
+    preventDefault: true,
+  });
+
+  addKeyPress({
+    key: "control+l",
+    handler: () => $('[data-tooltip-target="prev-post"]').trigger("click"),
+    preventDefault: true,
+  });
+
+  addKeyPress({
     key: "]",
     handler: toggleToc,
     preventDefault: true,
@@ -65,5 +81,9 @@ onMounted(async () => {
     levels: ["h1", "h2", "h3"],
     syncContent: true,
   });
-  if (postWithToc) useAnchorLocate();
+  if (postWithToc) {
+    useAnchorLocate();
+  } else {
+    $("#fast-bar #toggle-toc").attr("disabled");
+  }
 });

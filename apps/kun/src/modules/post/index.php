@@ -1,46 +1,23 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 
-<!-- pt-[52px] mt-[-52px] -->
 <div id="post-container" class="pt-20 mx-auto <?php $this->options->viewWidth() ?> pb-4">
-    <!-- 标题 -->
-    <h1 class="text-black dark:text-zinc-100 text-2xl"><?php $this->title() ?></h1>
 
     <!-- 作者 -->
-    <div class="pt-3 flex justify-between items-center">
-        <img class="w-[32px] h-[32px] rounded-lg flex-shrink-0" src="<?php echo getGravatar($this->author->mail); ?>" alt="<?php $this->author(); ?>" />
-        <div class="flex-grow pl-3">
+    <div class="pb-3 text-center">
+        <img class="w-[32px] h-[32px] rounded-lg inline-block" src="<?php echo getGravatar($this->author->mail); ?>" alt="<?php $this->author(); ?>" />
+        <div class="text-center">
             <p class="text-sm"><a href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></p>
             <p class="text-xs text-zinc-400">
                 <time class="mr-2" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date('F j, Y'); ?></time>
                 <span>阅读 <?php get_post_view($this) ?></span>
             </p>
         </div>
-        <ul class="flex-shrink-0 flex">
-            <li>
-                <button data-tooltip-target="tooltip-toc" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5 mr-1 invisible">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M448 64c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32zm0 256c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32zM0 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
-                    </svg>
-                </button>
-                <div id="tooltip-toc" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-zinc-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-zinc-700">
-                    <span class="mr-2">显示目录</span>
-                    <kbd class="px-2 py-1 text-xs font-semibold text-white bg-black border border-zinc-200 rounded-lg dark:bg-zinc-600 dark:text-zinc-100 dark:border-zinc-500">]</kbd>
-                </div>
-            </li>
-            <li>
-                <a href="#comments-hr" data-tooltip-target="tooltip-comment" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
-                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M168.2 384.9c-15-5.4-31.7-3.1-44.6 6.4c-8.2 6-22.3 14.8-39.4 22.7c5.6-14.7 9.9-31.3 11.3-49.4c1-12.9-3.3-25.7-11.8-35.5C60.4 302.8 48 272 48 240c0-79.5 83.3-160 208-160s208 80.5 208 160s-83.3 160-208 160c-31.6 0-61.3-5.5-87.8-15.1zM26.3 423.8c-1.6 2.7-3.3 5.4-5.1 8.1l-.3 .5c-1.6 2.3-3.2 4.6-4.8 6.9c-3.5 4.7-7.3 9.3-11.3 13.5c-4.6 4.6-5.9 11.4-3.4 17.4c2.5 6 8.3 9.9 14.8 9.9c5.1 0 10.2-.3 15.3-.8l.7-.1c4.4-.5 8.8-1.1 13.2-1.9c.8-.1 1.6-.3 2.4-.5c17.8-3.5 34.9-9.5 50.1-16.1c22.9-10 42.4-21.9 54.3-30.6c31.8 11.5 67 17.9 104.1 17.9c141.4 0 256-93.1 256-208S397.4 32 256 32S0 125.1 0 240c0 45.1 17.7 86.8 47.7 120.9c-1.9 24.5-11.4 46.3-21.4 62.9zM144 272a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm144-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm80 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"></path>
-                    </svg>
-                </a>
-                <div id="tooltip-comment" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-zinc-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-zinc-700">
-                    <span class="mr-2">看评论</span>
-                    <kbd class="px-2 py-1 text-xs font-semibold text-white bg-black border border-zinc-200 rounded-lg dark:bg-zinc-600 dark:text-zinc-100 dark:border-zinc-500"><?php echo getPlatformKey() ?></kbd> + <kbd class="px-2 py-1 text-xs font-semibold text-white bg-black border border-zinc-200 rounded-lg dark:bg-zinc-600 dark:text-zinc-100 dark:border-zinc-500">k</kbd>
-                </div>
-            </li>
-        </ul>
     </div>
+
+    <!-- 标题 -->
+    <h1 class="text-black dark:text-zinc-100 text-2xl text-center"><?php $this->title() ?></h1>
+
 
     <!-- 文章 -->
     <?php if ($this->hidden || $this->titleshow) : ?>
@@ -82,6 +59,65 @@
             <article class="markdown-body bg-white dark:bg-zinc-900" itemprop="articleBody" id="markdown-content"><?php $this->content(); ?></article>
             <!-- inject:js -->
 
+            <?php if (in_array('ShowFastBar', $this->options->moreConfig)) : ?>
+                <ul id="fast-bar" class="hidden border bg-white border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg">
+                    <li>
+                        <button id="toggle-toc" data-tooltip-target="tooltip-toc" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                                <path d="M18 17h2v.5h-1v1h1v.5h-2v1h3v-4h-3v1zm1-9h1V4h-2v1h1v3zm-1 3h1.8L18 13.1v.9h3v-1h-1.8l1.8-2.1V10h-3v1zM2 5h14v2H2V5zm0 12h14v2H2v-2zm0-6h14v2H2v-2z"></path>
+                            </svg>
+                        </button>
+                        <div id="tooltip-toc" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200 rounded-lg shadow-sm opacity-0 tooltip">
+                            <span class="mr-2">显示/隐藏 目录</span>
+                            <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">]</kbd>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#comments-hr" data-tooltip-target="tooltip-comment" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                                <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"></path>
+                            </svg>
+                        </a>
+                        <div id="tooltip-comment" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                            <span class="mr-2">看评论</span>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">P</kbd>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="<?php echo getAdjacentArticle($this, 'prev')['url'] ?>" data-tooltip-target="prev-post" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path d="m9 19 1.41-1.41L5.83 13H22v-2H5.83l4.59-4.59L9 5l-7 7 7 7z"></path>
+                            </svg>
+                        </a>
+                        <div id="prev-post" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                            <span class="mr-2">上一篇</span>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">J</kbd>
+                            <p class="pt-2 text-xs text-zinc-500"><?php echo getAdjacentArticle($this, 'prev')['title'] ?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="<?php echo getAdjacentArticle($this, 'next')['url'] ?>" data-tooltip-target="next-post" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path d="m15 5-1.41 1.41L18.17 11H2v2h16.17l-4.59 4.59L15 19l7-7-7-7z"></path>
+                            </svg>
+                        </a>
+                        <div id="next-post" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                            <span class="mr-2">下一篇</span>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">L</kbd>
+                            <p class="pt-2 text-xs text-zinc-500"><?php echo getAdjacentArticle($this, 'next')['title'] ?></p>
+                        </div>
+                    </li>
+                </ul>
+            <?php endif; ?>
+
+
             <!-- 标签 -->
             <div class="pt-6">
                 <?php
@@ -103,39 +139,7 @@
 
     <?php endif; ?>
 
-    <div class="inline-flex items-center justify-center w-full my-8">
-        <hr class="w-64 h-px my-8 bg-zinc-200 border-0 dark:bg-zinc-700">
-        <span class="absolute px-3 font-medium text-zinc-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-zinc-900">往昔笔砚</span>
-    </div>
-
-    <!-- recommend -->
-    <?php
-    $previousArticles = getPreviousArticles($this, 5);  // 获取前 5 篇文章
-    if (!empty($previousArticles)) {
-        foreach ($previousArticles as $article) {
-    ?>
-            <article class="posts-recommend mb-8" itemscope itemtype="http://schema.org/BlogPosting">
-                <a class="block mb-8 hvr-shrink" itemprop="url" href="<?php echo htmlspecialchars($article['link']); ?>">
-                    <h2 class="pb-3 font-bold text-black dark:text-zinc-200" itemprop="name headline">
-                        <img data-title="<?php echo htmlspecialchars($article['title']); ?>" class="flex-shrink-0 w-[20px] bg-zinc-100 p-1 h-[20px] inline-block rounded" />
-                        <span class="align-middle"><?php echo htmlspecialchars($article['title']); ?></span>
-                    </h2>
-                    <div class="tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">
-                        <p class="text-sm text-zinc-700 dark:text-zinc-400">
-                            <?php
-                            // 显示文章内容的摘要，最多 140 字符
-                            $content = strip_tags($article['content']); // 去除 HTML 标签
-                            echo mb_strlen($content) > 140 ? mb_substr($content, 0, 140, 'UTF-8') . '...' : $content;
-                            ?>
-                        </p>
-                    </div>
-
-                </a>
-            </article>
-    <?php
-        }
-    } else {
-        echo '<p class="text-center text-zinc-400">没有更早的文章了...</p>';
-    }
-    ?>
 </div>
+
+
+<?php $this->need('footer.php'); ?>

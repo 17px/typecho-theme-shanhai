@@ -34,6 +34,8 @@
     "object-hash": "3.0.0",
     "@types/object-hash": "3.0.6",
     "simplebar": "6.2.6",
-    "medium-zoom": "1.1.0"
+    "medium-zoom": "1.1.0",
+    "draggabilly": "3.0.0",
+    "@types/draggabilly": "2.1.6"
   }
 }

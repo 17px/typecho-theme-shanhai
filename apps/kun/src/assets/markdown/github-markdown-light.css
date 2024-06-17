@@ -125,10 +125,11 @@
   overflow: hidden;
   background: transparent;
   border-bottom: 1px solid hsla(210,18%,87%,1);
-  height: .25em;
+  height: .05em;
   padding: 0;
   margin: 24px 0;
-  background-color: #d0d7de;
+  background-color: #808080;
+  opacity: .2;
   border: 0;
 }
 
