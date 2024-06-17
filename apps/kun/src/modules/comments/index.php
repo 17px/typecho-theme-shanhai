@@ -10,8 +10,6 @@
       $commentClass .= ' comment-by-user';
     }
   }
-
-  $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
 ?>
 
   <li id="li-<?php $comments->theId(); ?>" class="pb-1 <?php
@@ -41,12 +39,23 @@
         </div>
       </div>
       <div class="py-2">
-        <?php
-        $parentAuthor = getParentCommentAuthor($comments->parent);
-        if (!empty($parentAuthor)) : ?>
-          <span class="mb-1 text-zinc-400 text-sm">@<?php echo htmlspecialchars($parentAuthor); ?></span>
+        <?php if ($comments->status === "waiting") : ?>
+          <em class="waiting">评论审核中...</em>
+        <?php else : ?>
+          <?php $comments->content(); ?>
+          <!-- @somebody -->
+          <?php $commentDetails = getCommentDetails($comments->parent); ?>
+          <?php if (!empty($commentDetails['author'])) : ?>
+            <p class="mt-1 p-1 text-zinc-400 text-sm w-full bg-zinc-100 rounded">
+              @<?php echo htmlspecialchars($commentDetails['author']); ?>:
+              <?php if ($comments->status === "waiting") : ?>
+                <em class="waiting">评论审核中...</em>
+              <?php else : ?>
+                <?php echo htmlspecialchars($commentDetails['text']); ?>
+              <?php endif; ?>
+            </p>
+          <?php endif; ?>
         <?php endif; ?>
-        <?php $comments->content(); ?>
       </div>
     </div>
     <?php if ($comments->children) { ?>
@@ -66,7 +75,23 @@
 
     <?php $comments->listComments(); ?>
 
-    <?php $comments->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
+    <?php
+    $comments->pageNav(
+      '<svg class="w-3.5 h-3.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/></svg>',
+      '<svg class="w-3.5 h-3.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>',
+      1,
+      '...',
+      array(
+        'wrapTag' => 'ul',
+        'wrapClass' => 'pagination',
+        'itemTag' => 'li',
+        'textTag' => 'a',
+        'currentClass' => 'active',
+        'prevClass' => 'prev',
+        'nextClass' => 'next'
+      )
+    );
+    ?>
 
   <?php endif; ?>
 
@@ -80,13 +105,13 @@
 
           <div class="flex align-center gap-3 pb-3">
             <div class="flex-1">
-              <input for="author" type="text" name="author" value="<?php $this->remember('author'); ?>" required placeholder="<?php _e('称呼'); ?>" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input for="author" autocomplete="off" type="text" name="author" value="<?php $this->remember('author'); ?>" required placeholder="<?php _e('称呼'); ?>" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div class="flex-1">
-              <input id="mail" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail) : ?> required<?php endif; ?> placeholder="<?php _e('邮箱'); ?>" type="email" name="mail" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input id="mail" autocomplete="off" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail) : ?> required<?php endif; ?> placeholder="<?php _e('邮箱'); ?>" type="email" name="mail" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div class="flex-1">
-              <input type="url" id="url" name="url" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>" <?php if ($this->options->commentsRequireURL) : ?> required<?php endif; ?> class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="url" id="url" name="url" autocomplete="off" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>" <?php if ($this->options->commentsRequireURL) : ?> required<?php endif; ?> class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
           </div>
         <?php endif; ?>

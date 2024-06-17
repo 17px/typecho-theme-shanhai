@@ -144,13 +144,14 @@ function get_reading_time($text)
     return $reading_time . ' min read';
 }
 
-// 辅助函数来获取父评论的作者名
-function getParentCommentAuthor($parentId)
+function getCommentDetails($parentId)
 {
     $db = Typecho_Db::get();
-    $query = $db->select('author')->from('table.comments')->where('coid = ?', $parentId);
+    // 选择作者和文本内容
+    $query = $db->select('author', 'text')->from('table.comments')->where('coid = ?', $parentId);
     $result = $db->fetchRow($query);
-    return $result ? $result['author'] : '';
+    // 检查是否获取到结果并返回
+    return $result ? $result : ['author' => '', 'text' => ''];
 }
 
 /**

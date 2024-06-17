@@ -5,7 +5,7 @@
 
     <!-- 作者 -->
     <div class="pb-3 text-center">
-        <img class="w-[32px] h-[32px] rounded-lg inline-block" src="<?php echo getGravatar($this->author->mail); ?>" alt="<?php $this->author(); ?>" />
+        <img class="w-[48px] h-[48px] rounded-full inline-block" src="<?php echo getGravatar($this->author->mail); ?>" alt="<?php $this->author(); ?>" />
         <div class="text-center">
             <p class="text-sm"><a href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></p>
             <p class="text-xs text-zinc-400">

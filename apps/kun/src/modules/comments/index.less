@@ -1,5 +1,27 @@
-// #comments {
-//   .comment-children {
-//     padding-left: 20px;
-//   }
-// }
+ul.pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+
+    li {
+        margin-right: 4px;
+
+        a {
+            line-height: 1;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            width: 24px;
+            height: 24px;
+            font-size: 1rem;
+        }
+
+        &.active a {
+            color: #fff;
+            background-color: rgb(26 86 219 / var(--tw-bg-opacity));
+        }
+
+    }
+}
