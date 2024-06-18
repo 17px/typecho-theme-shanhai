@@ -6,10 +6,11 @@ function themeConfig($form)
     $moreConfig = new \Typecho\Widget\Helper\Form\Element\Checkbox(
         'moreConfig',
         [
+            'ShowFastBar' => _t('显示文章快捷操作栏'),
+            'ShowCommentEmoji' => _t('启用评论emoji表情'),
             'ShowICP' => _t('显示ICP备案号'),
-            'ShowFastBar' => _t('显示文章快捷操作栏')
         ],
-        ['ShowFastBar'],
+        ['ShowFastBar', 'ShowCommentEmoji'],
         _t('主题基本的配置')
     );
 
@@ -148,10 +149,9 @@ function getCommentDetails($parentId)
 {
     $db = Typecho_Db::get();
     // 选择作者和文本内容
-    $query = $db->select('author', 'text')->from('table.comments')->where('coid = ?', $parentId);
+    $query = $db->select('author')->from('table.comments')->where('coid = ?', $parentId);
     $result = $db->fetchRow($query);
-    // 检查是否获取到结果并返回
-    return $result ? $result : ['author' => '', 'text' => ''];
+    return $result ? $result['author'] : '';
 }
 
 /**

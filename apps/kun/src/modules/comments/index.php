@@ -1,5 +1,8 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 
+<link rel="stylesheet" href="<?php $this->options->themeUrl('assets/markdown/' . $this->options->markdownTheme . '.css'); ?>" />
+<link rel="stylesheet" href="<?php $this->options->themeUrl('assets/prism/' . $this->options->prismTheme . '.css'); ?>" />
+
 <?php function threadedComments($comments, $options)
 {
   $commentClass = '';
@@ -14,7 +17,11 @@
 
   <li id="li-<?php $comments->theId(); ?>" class="pb-1 <?php
                                                         if ($comments->levels > 0) {
-                                                          echo ' comment-child';
+                                                          if ($comments->levels == 1) {
+                                                            echo ' comment-child pl-8';
+                                                          } else {
+                                                            echo ' comment-child';
+                                                          }
                                                           $comments->levelsAlt(' comment-level-odd', ' comment-level-even');
                                                         } else {
                                                           echo ' comment-parent';
@@ -24,37 +31,29 @@
                                                         ?>">
     <div class="pb-4" id="<?php $comments->theId(); ?>">
       <div class="comment-author flex items-center">
-        <img class="w-[32px] h-[32px] rounded-lg flex-shrink-0" src="<?php echo getGravatar($comments->mail) ?>" />
+        <img class="w-[48px] h-[48px] rounded-lg flex-shrink-0" src="<?php echo getGravatar($comments->mail) ?>" />
         <div class="pl-3 flex-grow">
-          <span class="text-sm text-black dark:text-zinc-100"><?php $comments->author(); ?>
+          <section class="text-sm text-blue-800 dark:text-blue-300"><?php $comments->author(); ?>
             <?php if ($comments->authorId == $comments->ownerId) : ?>
-              <span class="bg-blue-100 text-blue-800 text-xs font-medium px-1 rounded dark:bg-blue-900 dark:text-blue-300">作者</span>
-            <?php else : ?>
-              <a class="text-xs text-zinc-400"><?php echo $comments->mail(); ?></a>
+              <span class="bg-blue-100 text-blue-800 text-xs font-medium p-1 rounded dark:bg-blue-900 dark:text-blue-300">作者</span>
             <?php endif; ?>
-            <p class="text-xs text-zinc-400 flex">
+            <?php $author = getCommentDetails($comments->parent); ?>
+            <?php if (!empty($author)) : ?>
+              <span class="text-xs px-2 text-zinc-400">回复</span>
+              <span data-reply-id="comment-<?php echo $comments->parent ?>" class="cursor-pointer reply-user text-blue-800 dark:text-blue-300"><?php echo $author; ?></span>
+            <?php endif; ?>
+            <p class="text-xs pt-1 text-zinc-400 flex">
               <a href="<?php $comments->permalink(); ?>"><?php $comments->date('F j, Y H:i'); ?></a>
               <span class="pl-2"><?php $comments->reply(); ?></span>
             </p>
+          </section>
         </div>
       </div>
-      <div class="py-2">
+      <div class="pt-2">
         <?php if ($comments->status === "waiting") : ?>
           <em class="waiting">评论审核中...</em>
         <?php else : ?>
-          <?php $comments->content(); ?>
-          <!-- @somebody -->
-          <?php $commentDetails = getCommentDetails($comments->parent); ?>
-          <?php if (!empty($commentDetails['author'])) : ?>
-            <p class="mt-1 p-1 text-zinc-400 text-sm w-full bg-zinc-100 rounded">
-              @<?php echo htmlspecialchars($commentDetails['author']); ?>:
-              <?php if ($comments->status === "waiting") : ?>
-                <em class="waiting">评论审核中...</em>
-              <?php else : ?>
-                <?php echo htmlspecialchars($commentDetails['text']); ?>
-              <?php endif; ?>
-            </p>
-          <?php endif; ?>
+          <article id="comment-content" class="markdown-body"><?php $comments->content(); ?></article>
         <?php endif; ?>
       </div>
     </div>
@@ -117,19 +116,43 @@
         <?php endif; ?>
         <div class="w-full mb-4 border border-zinc-200 rounded-lg bg-zinc-50 dark:bg-zinc-700 dark:border-zinc-600">
           <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-800">
-            <textarea placeholder="发表你的观点..." rows="8" cols="50" name="text" id="textarea" class="w-full px-0 text-sm text-zinc-900 bg-white border-0 dark:bg-zinc-800 focus:ring-0 dark:text-white dark:placeholder-zinc-400" required><?php $this->remember('text'); ?></textarea>
+            <textarea placeholder="发表你的观点..." rows="8" cols="50" name="text" id="comment-textarea" class="w-full px-0 text-sm text-zinc-900 bg-white border-0 dark:bg-zinc-800 focus:ring-0 dark:text-white dark:placeholder-zinc-400" required><?php $this->remember('text'); ?></textarea>
           </div>
           <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-600">
             <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
               <?php _e('提交评论'); ?>
             </button>
+
             <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
-              <!-- <button type="button" class="inline-flex justify-center items-center p-2 text-zinc-500 rounded cursor-pointer hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-600">
-                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 20">
-                  <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
-                </svg>
-                <span class="sr-only">Attach file</span>
-              </button> -->
+              <!-- markdown评论 -->
+              <?php if (Helper::options()->commentsMarkdown && Helper::options()->commentsMarkdown == 1) : ?>
+                <button type="button" data-tooltip-target="tooltip-comment-markdown" data-tooltip-style="light" data-tooltip-placement="left" class="inline-flex justify-center items-center p-2 text-zinc-500 rounded cursor-pointer hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-600">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"></path>
+                    <path fill-rule="evenodd" d="M9.146 8.146a.5.5 0 0 1 .708 0L11.5 9.793l1.646-1.647a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 0-.708"></path>
+                    <path fill-rule="evenodd" d="M11.5 5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 1 .5-.5"></path>
+                    <path d="M3.56 11V7.01h.056l1.428 3.239h.774l1.42-3.24h.056V11h1.073V5.001h-1.2l-1.71 3.894h-.039l-1.71-3.894H2.5V11z"></path>
+                  </svg>
+                </button>
+                <div id="tooltip-comment-markdown" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                  <span class="mr-1">支持markdown语法</span>
+                </div>
+              <?php endif; ?>
+              <!-- emoji表情 -->
+              <?php if (in_array('ShowCommentEmoji', $this->options->moreConfig)) : ?>
+                <button data-popover-target="popover-click" data-popover-trigger="click" type="button" class="inline-flex justify-center items-center p-2 text-zinc-500 rounded cursor-pointer hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-600">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <circle cx="15.5" cy="9.5" r="1.5"></circle>
+                    <circle cx="8.5" cy="9.5" r="1.5"></circle>
+                    <path d="M12 18c2.28 0 4.22-1.66 5-4H7c.78 2.34 2.72 4 5 4z"></path>
+                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
+                  </svg>
+                </button>
+                <div data-popover id="popover-click" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white shadow-sm opacity-0 dark:text-gray-400 dark:bg-gray-800">
+                  <div id="emoji" class="flex"></div>
+                </div>
+              <?php endif; ?>
               <?php if ($this->user->hasLogin()) : ?>
                 <p>
                   <?php _e('用户: '); ?><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>

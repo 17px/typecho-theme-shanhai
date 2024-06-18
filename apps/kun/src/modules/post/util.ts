@@ -109,7 +109,7 @@ export const useFastBar = () => {
       })
       .removeClass("hidden")
       .addClass("flex")
-      .insertAfter($(".markdown-body"));
+      .appendTo($("body"));
     // 可拖拽
     const $drag = new Draggabilly("#fast-bar") as Draggabilly;
     $drag.on("dragEnd", () => {

@@ -25,14 +25,9 @@ onMounted(async () => {
     mediumZoom(".markdown-body img", {
       margin: $("nav.sticky").height() as number,
     });
-    useFastBar();
   }
 
-  $(`.posts-recommend img[data-title]`).each((index, element) => {
-    const img = element as HTMLImageElement;
-    const title = $(img).data("title");
-    if (title) $(img).attr("src", str2Base64Image(title));
-  });
+  useFastBar();
 
   /**
    * 评论区
@@ -84,6 +79,6 @@ onMounted(async () => {
   if (postWithToc) {
     useAnchorLocate();
   } else {
-    $("#fast-bar #toggle-toc").attr("disabled");
+    $("#toggle-toc").attr("disabled");
   }
 });
