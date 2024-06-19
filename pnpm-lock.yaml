@@ -101,6 +101,9 @@ importers:
       cash-dom:
         specifier: 8.1.5
         version: 8.1.5
+      chinese-lunar-calendar:
+        specifier: 1.0.1
+        version: 1.0.1
       draggabilly:
         specifier: 3.0.0
         version: 3.0.0
@@ -736,6 +739,9 @@ packages:
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
+
+  chinese-lunar-calendar@1.0.1:
+    resolution: {integrity: sha512-T5XjtA6ygOkxjwltYf8dEB1DLsPKewDKajf74fNeT6rH2g9EZPf2AHk6vAlK/SAImTYKXoUNQ3Q4JwN0BduqRA==}
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -3588,6 +3594,8 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  chinese-lunar-calendar@1.0.1: {}
 
   chokidar@3.6.0:
     dependencies:

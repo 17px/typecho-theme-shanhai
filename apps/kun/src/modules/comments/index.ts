@@ -1,14 +1,6 @@
 import { onMounted } from "@shanhai/util";
 import "./index.less";
 import $ from "cash-dom";
-import Prism from "prismjs";
-import mediumZoom from "medium-zoom";
-import "prismjs/components/prism-less";
-import "prismjs/components/prism-typescript";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-rust";
-import "prismjs/components/prism-go";
-import "prismjs/components/prism-bash";
 import { createPicker } from "picmo";
 
 const insertAtCursor = (textarea: HTMLTextAreaElement, text: string) => {
@@ -50,27 +42,15 @@ const useEmoji = () => {
 };
 
 onMounted(() => {
-  const md = document.querySelector("#comment-content");
-  if (md) {
-    Prism.highlightAll();
-    console.log("执行");
-    mediumZoom(".markdown-body img", {
-      margin: $("nav.sticky").height() as number,
-    });
-    useEmoji();
-  }
+  useEmoji();
 
   $("[data-reply-id]")
     .on("mouseenter", function () {
       //@ts-ignore
-      $(`#${$(this).attr("data-reply-id")} article`).addClass(
-        "rounded bg-zinc-100 dark:bg-zinc-800"
-      );
+      $(`#${$(this).attr("data-reply-id")}`).addClass("bg-blue-100");
     })
     .on("mouseleave", function () {
       //@ts-ignore
-      $(`#${$(this).attr("data-reply-id")} article`).removeClass(
-        "rounded bg-zinc-100 dark:bg-zinc-800"
-      );
+      $(`#${$(this).attr("data-reply-id")}`).removeClass("bg-blue-100");
     });
 });

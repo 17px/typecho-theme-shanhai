@@ -12,21 +12,10 @@
   h5,
   h6 {
     padding-bottom: 0;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+    font-weight: 500;
     border-bottom: 0;
     position: relative;
-
-    &::before {
-      position: absolute;
-      top: 50%;
-      width: .8rem;
-      transform: translateY(-50%);
-      // content: url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0idy00IGgtNCB0ZXh0LWdyYXktNzAwIGRhcms6dGV4dC1ncmF5LTMwMCIgYXJpYS1oaWRkZW49InRydWUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0iY3VycmVudENvbG9yIiB2aWV3Qm94PSIwIDAgMTggMTQiPgogICAgPHBhdGggZD0iTTYgMEgyYTIgMiAwIDAgMC0yIDJ2NGEyIDIgMCAwIDAgMiAyaDR2MWEzIDMgMCAwIDEtMyAzSDJhMSAxIDAgMCAwIDAgMmgxYTUuMDA2IDUuMDA2IDAgMCAwIDUtNVYyYTIgMiAwIDAgMC0yLTJabTEwIDBoLTRhMiAyIDAgMCAwLTIgMnY0YTIgMiAwIDAgMCAyIDJoNHYxYTMgMyAwIDAgMS0zIDNoLTFhMSAxIDAgMCAwIDAgMmgxYTUuMDA2IDUuMDA2IDAgMCAwIDUtNVYyYTIgMiAwIDAgMC0yLTJaIi8+CiAgPC9zdmc+");
-      content: "";
-      left: -1.5rem;
-      font-size: 1.1rem;
-      opacity: .2;
-    }
   }
 }
 
@@ -34,7 +23,6 @@
   background-color: transparent;
 }
 
-/* First animation: Right to Left with opacity from 0 to 1 */
 @keyframes rightToLeft {
   0% {
     transform: translateX(2rem);

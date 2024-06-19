@@ -1,9 +1,4 @@
-import {
-  addKeyPress,
-  addListener,
-  onMounted,
-  str2Base64Image,
-} from "@shanhai/util";
+import { addKeyPress, addListener, onMounted } from "@shanhai/util";
 import "./index.less";
 import $ from "cash-dom";
 import Prism from "prismjs";
@@ -14,20 +9,19 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-rust";
 import "prismjs/components/prism-go";
 import "prismjs/components/prism-bash";
-import { useAnchorLocate, useFastBar, useToc } from "./util";
+import { useAnchorLocate, useToc } from "./util";
 import mediumZoom from "medium-zoom";
+import { useFastBar } from "./fastbar";
 
 onMounted(async () => {
   const md = document.querySelector("#markdown-content");
   if (md) {
     Prism.highlightAll();
     useCodeHelper();
-    mediumZoom(".markdown-body img", {
-      margin: $("nav.sticky").height() as number,
-    });
+    mediumZoom(".markdown-body img", { margin: $("nav.sticky").height() });
   }
 
-  useFastBar();
+  const { syncTocStatus } = useFastBar({ selector: "#fast-bar" });
 
   /**
    * 评论区
@@ -39,12 +33,17 @@ onMounted(async () => {
   });
 
   const toggleToc = () => {
-    $(".toc").hasClass("invisible")
-      ? $(".toc").removeClass("invisible").addClass("show-toc")
-      : $(".toc")
-          .addClass("invisible")
-          .removeClass("show-toc")
-          .removeClass("hide-toc");
+    if ($(".toc").hasClass("invisible")) {
+      localStorage.setItem("toc_visible", "visible");
+      $(".toc").removeClass("invisible").addClass("show-toc");
+    } else {
+      localStorage.setItem("toc_visible", "invisible");
+      $(".toc")
+        .addClass("invisible")
+        .removeClass("show-toc")
+        .removeClass("hide-toc");
+    }
+    syncTocStatus();
   };
 
   addListener({
@@ -76,9 +75,5 @@ onMounted(async () => {
     levels: ["h1", "h2", "h3"],
     syncContent: true,
   });
-  if (postWithToc) {
-    useAnchorLocate();
-  } else {
-    $("#toggle-toc").attr("disabled");
-  }
+  if (postWithToc) useAnchorLocate();
 });

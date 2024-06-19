@@ -1,6 +1,6 @@
 import $ from "cash-dom";
 import hash from "object-hash";
-import Draggabilly from "draggabilly";
+
 import "simplebar";
 
 interface TOCOptions {
@@ -14,6 +14,7 @@ interface TOCOptions {
 
 export const useToc = (options: TOCOptions): boolean => {
   const { selector, levels, syncContent = false } = options;
+  const display = localStorage.getItem("toc_visible") ?? "visible";
   const container = $(selector);
   if (container.length === 0) return false;
   // 导航高度，用于定位
@@ -21,9 +22,8 @@ export const useToc = (options: TOCOptions): boolean => {
   // 文章区域的宽度，用于定位
   const postWidth = $("#post-container").width() as number;
 
-  const cardClass = `max-w-sm bg-white border-zinc-200 bl-1 br-1 dark:bg-zinc-900 dark:border-zinc-700`;
-  const template = `<aside class="toc py-20 pl-4 flex">
-    <div data-simplebar class="flex-grow relative ${cardClass}">
+  const template = `<aside class="toc py-20 pl-4 flex ${display}">
+    <div data-simplebar class="flex-grow relative">
       <div class="sticky w-full" style="top:0;background-image:linear-gradient(var(--color-bg), transparent 100%);height:32px"></div>
       <ul class="border-l border-zinc-200 dark:border-zinc-700"></ul>
       <div class="sticky w-full" style="bottom:0;background-image:linear-gradient(transparent, var(--color-bg) 100%);height:32px"></div>
@@ -56,17 +56,15 @@ export const useToc = (options: TOCOptions): boolean => {
 
     const itemIndentMap = {
       h1: "pl-4",
-      h2: "pl-8 text-gray-500",
-      h3: "pl-8 text-gray-500",
+      h2: "pl-8",
+      h3: "pl-8",
     };
     const li = $(
-      `<li class="truncate toc-${tagName}"><a class="border-l-2 text-sm border-transparent font-base leading-7 ${itemIndentMap[tagName]} " href="#${hashId}" >${text}</a></li>`
+      `<li class="truncate text-zinc-600 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-300 toc-${tagName}"><a class="border-l-2 text-sm border-transparent font-base leading-7 ${itemIndentMap[tagName]} " href="#${hashId}" >${text}</a></li>`
     );
     ul.append(li);
   });
   if (ul.children("li").length === 0) return false;
-  // 显示目录图标
-  $("#toggle-toc").removeClass("invisible");
   $("body").append(toc[0] as HTMLDivElement);
   // 如果开启了同步，处理同步的css效果
   if (syncContent) {
@@ -75,50 +73,21 @@ export const useToc = (options: TOCOptions): boolean => {
         (i) => i >= window.scrollY + navHeight
       );
       ul.children("li")
+        .addClass("text-zinc-600 dark:text-zinc-500")
+        .removeClass("text-blue-500 border-blue-500")
         .children("a")
-        .addClass("border-transparent")
-        .removeClass("border-blue-500")
-        .removeClass("text-blue-500");
+        .addClass("border-transparent");
       ul.children("li")
         .eq(currentIndex)
+        .removeClass("text-zinc-600 dark:text-zinc-500")
+        .addClass("text-blue-500")
         .children("a")
-        .addClass("border-blue-500")
         .removeClass("border-transparent")
-        .addClass("text-blue-500");
+        .addClass("border-blue-500");
     });
   }
 
   return true;
-};
-
-/**
- * 快捷操作条
- */
-export const useFastBar = () => {
-  if ($(`#fast-bar`).length > 0) {
-    let cachePos = localStorage.getItem("fast_bar_pos");
-    $(`#fast-bar`)
-      .css({
-        position: "fixed",
-        zIndex: 1994,
-        top: cachePos
-          ? JSON.parse(cachePos).top
-          : $("nav.sticky").height() + 10,
-        transform: cachePos ? "auto" : "translateX(-50%)",
-        left: cachePos ? JSON.parse(cachePos).left : `50%`,
-      })
-      .removeClass("hidden")
-      .addClass("flex")
-      .appendTo($("body"));
-    // 可拖拽
-    const $drag = new Draggabilly("#fast-bar") as Draggabilly;
-    $drag.on("dragEnd", () => {
-      const element = document.querySelector("#fast-bar") as HTMLElement;
-      const { left, top } = element.getBoundingClientRect();
-      const pos = { left, top };
-      localStorage.setItem("fast_bar_pos", JSON.stringify(pos));
-    });
-  }
 };
 
 /**

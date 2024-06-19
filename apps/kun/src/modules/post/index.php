@@ -4,19 +4,17 @@
 <div id="post-container" class="pt-20 mx-auto <?php $this->options->viewWidth() ?> pb-4">
 
     <!-- 作者 -->
-    <div class="pb-3 text-center">
-        <img class="w-[48px] h-[48px] rounded-full inline-block" src="<?php echo getGravatar($this->author->mail); ?>" alt="<?php $this->author(); ?>" />
+    <div class="pb-3 text-center animate-fade-in-up">
         <div class="text-center">
-            <p class="text-sm"><a href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></p>
             <p class="text-xs text-zinc-400">
-                <time class="mr-2" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date('F j, Y'); ?></time>
-                <span>阅读 <?php get_post_view($this) ?></span>
+                「<a href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a>」
+                <time class="mr-2" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date("F j, Y, g:i a"); ?></time>
             </p>
         </div>
     </div>
 
     <!-- 标题 -->
-    <h1 class="text-black dark:text-zinc-100 text-2xl text-center"><?php $this->title() ?></h1>
+    <h1 class="text-black dark:text-zinc-100 text-2xl text-center animate-fade-in-up"><?php $this->title() ?></h1>
 
 
     <!-- 文章 -->
@@ -56,7 +54,7 @@
             <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/markdown/' . $this->options->markdownTheme . '.css'); ?>" />
             <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/prism/' . $this->options->prismTheme . '.css'); ?>" />
             <!-- inject:css -->
-            <article class="markdown-body bg-white dark:bg-zinc-900" itemprop="articleBody" id="markdown-content"><?php $this->content(); ?></article>
+            <article class="markdown-body bg-white dark:bg-zinc-900 animate-fade-in-up" itemprop="articleBody" id="markdown-content"><?php $this->content(); ?></article>
             <!-- inject:js -->
 
             <?php if (in_array('ShowFastBar', $this->options->moreConfig)) : ?>
@@ -129,10 +127,6 @@
                 }
                 ?>
             </div>
-        </div>
-
-        <div id="comments-hr" class="pt-[52px] mt-[-52px]">
-            <hr class="w-48 h-1 mx-auto bg-zinc-100 border-0 rounded md:my-10 dark:bg-zinc-700">
         </div>
 
         <?php $this->need('comments.php'); ?>
