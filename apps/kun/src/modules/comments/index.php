@@ -16,7 +16,7 @@
           <?php endif; ?>
         </section>
       </div>
-      <div class="p-4 pt-2 pb-3 tracking-wider w-full bg-gray-100 dark:bg-zinc-800 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl">
+      <div class="p-4 py-3 tracking-wider w-full bg-gray-100 dark:bg-zinc-800 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl">
         <?php if ($comments->status === "waiting") : ?>
           <em class="waiting">评论审核中...</em>
         <?php elseif ($comments->status === "approved") : ?>
@@ -45,7 +45,7 @@
 <div id="comments">
 
   <div id="comments-hr" class="pt-[52px] mt-[-52px]">
-    <hr class="w-48 h-1 mx-auto bg-zinc-100 border-0 rounded md:my-10 dark:bg-zinc-700">
+    <hr class="w-48 my-16 h-1 mx-auto bg-zinc-100 border-0 rounded md:my-10 dark:bg-zinc-700">
   </div>
 
 
@@ -85,13 +85,13 @@
         <?php if (!$this->user->hasLogin()) : ?>
           <div class="flex align-center gap-3 pb-3">
             <div class="flex-1">
-              <input for="author" autocomplete="off" type="text" name="author" value="<?php $this->remember('author'); ?>" required placeholder="<?php _e('称呼'); ?>" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input for="author" autocomplete="off" type="text" name="author" value="<?php $this->remember('author'); ?>" required placeholder="<?php _e('称呼'); ?>" class="border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-transparent dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div class="flex-1">
-              <input id="mail" autocomplete="off" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail) : ?> required<?php endif; ?> placeholder="<?php _e('邮箱'); ?>" type="email" name="mail" class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input id="mail" autocomplete="off" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail) : ?> required<?php endif; ?> placeholder="<?php _e('邮箱'); ?>" type="email" name="mail" class="bg-transparent border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
             <div class="flex-1">
-              <input type="url" id="url" name="url" autocomplete="off" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>" <?php if ($this->options->commentsRequireURL) : ?> required<?php endif; ?> class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              <input type="url" id="url" name="url" autocomplete="off" placeholder="<?php _e('http://'); ?>" value="<?php $this->remember('url'); ?>" <?php if ($this->options->commentsRequireURL) : ?> required<?php endif; ?> class="bg-transparent border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
           </div>
         <?php endif; ?>
@@ -103,7 +103,6 @@
             <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
               <?php _e('提交评论'); ?>
             </button>
-
             <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
               <!-- emoji表情 -->
               <?php if (in_array('ShowCommentEmoji', $this->options->moreConfig)) : ?>

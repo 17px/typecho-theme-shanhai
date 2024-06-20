@@ -36,10 +36,9 @@ function themeConfig($form)
         array(
             'light' => '白天模式',
             'dark' => '黑夜模式',
-            'auto' => '自动',
         ),
         'light',
-        '全局主题色模式，自动模式会根据时间自动进行切换'
+        '全局主题色模式'
     );
 
     $viewWidth = new \Typecho\Widget\Helper\Form\Element\Select(
@@ -255,4 +254,79 @@ function getFontCdn($key)
         'LXGW WenKai' => 'https://chinese-fonts-cdn.deno.dev/chinesefonts3/packages/lxgwwenkai/dist/LXGWWenKai-Bold/result.css',
     );
     return array_key_exists($key, $cdnMap) ?  $cdnMap[$key] : null;
+}
+
+
+/**
+ * 获取所有文章的数据，包括日期、文章数量、文章标题和链接，并返回 JSON 格式的数据
+ *
+ * @return string JSON 格式的数据
+ */
+function getPostData()
+{
+    // 获取数据库对象
+    $db = Typecho_Db::get();
+    $prefix = $db->getPrefix();
+    $options = Helper::options(); // 获取Typecho的设置选项
+
+    // 查询所有文章
+    $rows = $db->fetchAll($db->select()->from($prefix . 'contents')->where('type = ?', 'post'));
+
+    $data = [];
+    foreach ($rows as $row) {
+        $timestamp = $row['created']; // 获取秒级 Unix 时间戳
+        $day = date('Y-m-d', $timestamp); // 标准化到每天的日期字符串
+
+        // 获取文章标题和链接
+        $title = $row['title'];
+        $slug = $row['slug'];
+        $cid = $row['cid'];
+        $permalink = Typecho_Router::url('post', array('cid' => $cid), $options->index);
+
+        if (isset($data[$day])) {
+            $data[$day]['postNum'] += 1;
+            $data[$day]['posts'][] = ['title' => $title, 'link' => $permalink];
+        } else {
+            $data[$day] = [
+                'postNum' => 1,
+                'posts' => [['title' => $title, 'link' => $permalink]]
+            ];
+        }
+    }
+
+    // 将数据转换为期望的数组格式
+    $result = [];
+    foreach ($data as $date => $info) {
+        $result[] = [
+            'date' => $date,
+            'postNum' => $info['postNum'],
+            'posts' => $info['posts']
+        ];
+    }
+
+    // 将结果转换为 JSON 格式
+    return json_encode($result);
+}
+
+function getAllTags()
+{
+    $db = Typecho_Db::get(); // 获取数据库对象
+    $options = Helper::options(); // 获取Typecho的设置选项
+    $prefix = $db->getPrefix();
+
+    // 查询所有标签
+    $sql = $db->select()->from($prefix . 'metas')
+        ->where('type = ?', 'tag')
+        ->order($prefix . 'metas.order', Typecho_Db::SORT_ASC);
+    $tags = $db->fetchAll($sql);
+
+    $result = [];
+    foreach ($tags as $tag) {
+        $result[] = [
+            'name' => $tag['name'],
+            'link' => Typecho_Router::url('tag', ['slug' => $tag['slug']], $options->index) // 构建正确的标签链接
+        ];
+    }
+
+    return $result;
 }

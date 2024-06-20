@@ -145,8 +145,36 @@
   </nav>
 
   <!-- 搜索框弹出层 -->
-  <div id="search-modal" tabindex="-1" style="background-image:linear-gradient(to bottom, var(--color-bg), transparent)" class="hidden backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full">
+  <div id="search-modal" tabindex="-1" class="hidden bg-white dark:bg-black backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
+      <!-- 标签跑马 -->
+      <div class="scroll-container mb-4 py-4 relative w-full overflow-hidden">
+        <div class="bg-gradient-to-r from-white to-transparent dark:from-black w-1/4 h-full absolute top-0 left-0 z-10"></div>
+        <div class="bg-gradient-to-l from-white to-transparent dark:from-black w-1/4 h-full absolute top-0 right-0 z-10"></div>
+        <?php
+        $tags = getAllTags();
+        $totalTags = count($tags);
+        $index = 0;
+
+        while ($index < $totalTags) :
+          $numTags = rand(4,6);
+          $rowTags = array_slice($tags, $index, $numTags);
+          if (empty($rowTags)) {
+            break;
+          }
+        ?>
+          <div class="scroll-row leading-10 py-2">
+            <?php foreach ($rowTags as $tag) : ?>
+              <a href="<?php echo $tag['link']; ?>" class="mr-8 border border-zinc-200/[.5] text-zinc-400 hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400 dark:border-zinc-600/[.5] hvr-grow inline-flex justify-between items-center py-1 px-2 text-sm rounded-xl">
+                <span><?php echo $tag['name']; ?></span>
+              </a>
+            <?php endforeach; ?>
+          </div>
+        <?php
+          $index += $numTags;
+        endwhile;
+        ?>
+      </div>
       <div class="relative bg-white rounded-lg shadow dark:bg-zinc-700">
         <form class="max-w-md mx-auto" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
           <label for="default-search" class="mb-2 text-sm font-medium text-zinc-900 sr-only dark:text-white"><?php _e('搜索关键字'); ?></label>

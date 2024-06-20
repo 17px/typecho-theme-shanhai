@@ -4,19 +4,6 @@ import "./index.less";
 import "flowbite";
 
 onMounted(() => {
-  /**
-   * 自动主题判断
-   */
-  const themeAutoChange = () => {
-    if ($("html").hasClass("auto")) {
-      const hour = new Date().getHours();
-      const mode = hour >= 6 && hour < 18 ? "light" : "dark";
-      $("html").removeClass("auto").addClass(mode);
-    }
-  };
-
-  themeAutoChange();
-
   const displaySearchDialog = () => {
     $('[data-modal-target="search-modal"]').trigger("click");
     setTimeout(() => {

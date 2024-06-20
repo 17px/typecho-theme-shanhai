@@ -16,3 +16,50 @@
     z-index: -1;
   }
 }
+
+
+.scroll-container {
+
+  .scroll-row {
+    display: flex;
+    white-space: nowrap;
+
+    &:nth-child(even) {
+      animation: scroll 20s linear infinite;
+      animation-duration: 25s;
+    }
+
+    &:nth-child(odd) {
+      animation: scroll-reverse 20s linear infinite;
+      animation-duration: 20s;
+    }
+
+    &:hover {
+      animation-play-state: paused;
+    }
+
+  }
+
+
+
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
