@@ -12,7 +12,7 @@ export const useCodeHelper = () => {
     const preElement = codeElement.parentNode as HTMLPreElement;
     if (!preElement) return;
     const wrapper = document.createElement("div");
-    wrapper.classList.add("mb-3");
+    wrapper.classList.add("mb-3", "relative");
     // 将 pre 标签的父节点设置为这个新的 div
     preElement.parentNode!.insertBefore(wrapper, preElement);
     // 移动 pre 标签到新的 div 中
@@ -20,7 +20,7 @@ export const useCodeHelper = () => {
 
     // 代码按钮组
     const btnsWrapper = document.createElement("section");
-    btnsWrapper.classList.add("flex", "justify-center", "items-center");
+    btnsWrapper.classList.add("inline-flex","whitespace-nowrap", "justify-center", "items-center", "absolute", "right-0", "top-0");
 
     // 复制按钮
     const item = document.createElement("div");
@@ -28,7 +28,7 @@ export const useCodeHelper = () => {
     btn.setAttribute("data-tooltip-target", `tooltip-copy-code-${index}`);
     btn.setAttribute("data-tooltip-placement", "bottom");
     btn.className =
-      "hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5";
+      "inline-flex items-center justify-center hover:text-blue-500 text-zinc-500 w-10 h-10 dark:text-zinc-400 rounded-lg text-sm p-2.5";
     btn.innerHTML = copyIconSVG;
 
     btn.addEventListener("click", function () {

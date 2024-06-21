@@ -73,7 +73,7 @@ importers:
         version: 5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2)
       webpack-dev-server:
         specifier: 4.15.1
-        version: 4.15.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))
+        version: 4.15.1(webpack-cli@5.1.4)(webpack@5.88.2)
       webpack-merge:
         specifier: 5.9.0
         version: 5.9.0
@@ -86,9 +86,6 @@ importers:
       '@types/draggabilly':
         specifier: 2.1.6
         version: 2.1.6
-      '@types/identicon.js':
-        specifier: 2.3.4
-        version: 2.3.4
       '@types/object-hash':
         specifier: 3.0.6
         version: 3.0.6
@@ -113,9 +110,6 @@ importers:
       hover.css:
         specifier: 2.3.2
         version: 2.3.2
-      identicon.js:
-        specifier: 2.3.3
-        version: 2.3.3
       marked:
         specifier: 12.0.2
         version: 12.0.2
@@ -143,6 +137,9 @@ importers:
 
   packages/util:
     dependencies:
+      '@download/blockies':
+        specifier: 1.0.3
+        version: 1.0.3
       identicon.js:
         specifier: 2.3.3
         version: 2.3.3
@@ -182,6 +179,9 @@ packages:
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
+
+  '@download/blockies@1.0.3':
+    resolution: {integrity: sha512-iGDh2M6pFuXg9kyW+U//963LKylSLFpLG5hZvUppCjhkiDwsYquQPyamxCQlLASYySS3gGKAki2eWG9qIHKCew==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3026,6 +3026,8 @@ snapshots:
 
   '@discoveryjs/json-ext@0.5.7': {}
 
+  '@download/blockies@1.0.3': {}
+
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
@@ -3293,7 +3295,7 @@ snapshots:
 
   '@types/webpack-dev-server@4.7.2(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))':
     dependencies:
-      webpack-dev-server: 4.15.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))
+      webpack-dev-server: 4.15.1(webpack-cli@5.1.4)(webpack@5.88.2)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -3398,12 +3400,12 @@ snapshots:
       webpack: 5.88.2(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack-dev-server@4.15.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4)))(webpack@5.88.2(webpack-cli@5.1.4))':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack-dev-server@4.15.1(webpack-cli@5.1.4)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.88.2(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2)
     optionalDependencies:
-      webpack-dev-server: 4.15.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))
+      webpack-dev-server: 4.15.1(webpack-cli@5.1.4)(webpack@5.88.2)
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -5777,7 +5779,7 @@ snapshots:
       '@discoveryjs/json-ext': 0.5.7
       '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))
       '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack-dev-server@4.15.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4)))(webpack@5.88.2(webpack-cli@5.1.4))
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack-dev-server@4.15.1(webpack-cli@5.1.4)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.3
@@ -5790,7 +5792,7 @@ snapshots:
       webpack-merge: 5.9.0
     optionalDependencies:
       webpack-bundle-analyzer: 4.9.1
-      webpack-dev-server: 4.15.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4))
+      webpack-dev-server: 4.15.1(webpack-cli@5.1.4)(webpack@5.88.2)
 
   webpack-dev-middleware@5.3.4(webpack@5.88.2(webpack-cli@5.1.4)):
     dependencies:
@@ -5801,7 +5803,7 @@ snapshots:
       schema-utils: 4.2.0
       webpack: 5.88.2(webpack-cli@5.1.4)
 
-  webpack-dev-server@4.15.1(webpack-cli@5.1.4(webpack-bundle-analyzer@4.9.1)(webpack-dev-server@4.15.1)(webpack@5.88.2))(webpack@5.88.2(webpack-cli@5.1.4)):
+  webpack-dev-server@4.15.1(webpack-cli@5.1.4)(webpack@5.88.2):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4

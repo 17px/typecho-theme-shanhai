@@ -5,4 +5,4 @@ export {
   addListenerOnce,
   addKeyPress,
 } from "./event";
-export { str2Base64Image } from "./misc";
+export { str2Base64Image, blockies } from "./misc";

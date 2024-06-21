@@ -108,14 +108,22 @@ function themeConfig($form)
     $form->addInput($mottoSelect);
 }
 
-/**
- * 获取文章图片(第一张)
- */
-function getFirstImageSrc($content)
+function analyzePostContent($content)
 {
-    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
-    return isset($matches[1][0]) ? $matches[1][0] : 'data:image/svg+xml;base64,PHN2ZyBzdHJva2U9ImN1cnJlbnRDb2xvciIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgaGVpZ2h0PSIxZW0iIHdpZHRoPSIxZW0iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIgM2g2YTQgNCAwIDAgMSA0IDR2MTRhMyAzIDAgMCAwLTMtM0gyeiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMiAzaC02YTQgNCAwIDAgMC00IDR2MTRhMyAzIDAgMCAxIDMtM2g3eiI+PC9wYXRoPjwvc3ZnPg==';
+    // 包含图片
+    if (strpos($content, '<img') !== false) {
+        preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
+        return '<img class="w-[20px] h-[20px] inline-block rounded" src="' . $matches[1][0] . '" />';
+    }
+    // 包含代码
+    if (strpos($content, '<code') !== false || strpos($content, '<pre') !== false) {
+        return '<svg height="1.5em" width="1.5em" class="inline-block" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"></path></svg>';
+    }
+
+    return '<svg height="1.5em" width="1.5em" class="inline-block" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M2.5 4v3h5v12h3V7h5V4h-13zm19 5h-9v3h3v7h3v-7h3V9z"></path></svg>';
 }
+
+
 
 /**
  * 获取博主gravatar头像
@@ -156,7 +164,7 @@ function getCommentDetails($parentId)
 /**
  * 获取前一篇文章
  */
-function getAdjacentArticle($widget, $direction = 'prev', $default = ['url' => '#', 'title' => '没有了'])
+function getAdjacentArticle($widget, $direction = 'prev', $default = ['url' => 'javascript:void(0);', 'title' => '没有了'])
 {
     $db = Typecho_Db::get();
     $operator = $direction === 'prev' ? '<' : '>';

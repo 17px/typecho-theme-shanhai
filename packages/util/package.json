@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "identicon.js": "2.3.3",
-    "object-hash": "3.0.0"
+    "object-hash": "3.0.0",
+    "@download/blockies": "1.0.3"
   },
   "devDependencies": {
     "@types/object-hash": "3.0.6",

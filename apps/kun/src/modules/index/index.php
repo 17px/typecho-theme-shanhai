@@ -69,7 +69,7 @@ $this->need('header.php');
       <article class="mb-8" itemscope itemtype="http://schema.org/BlogPosting">
         <a class="block mb-8 hvr-shrink" itemprop="url" href="<?php $this->permalink() ?>">
           <h2 class="pb-3 font-bold" itemprop="name headline">
-            <img data-title="<?php $this->title() ?>" class="flex-shrink-0 w-[20px] bg-gray-100 p-1 h-[20px] inline-block rounded" />
+            <span><?php echo analyzePostContent($this->content) ?></span>
             <span class="align-middle"><?php $this->title() ?></span>
           </h2>
           <div class="tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">

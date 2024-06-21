@@ -26,6 +26,11 @@ export const useFastBar = (props: FastBarProps): any => {
   const { selector = "#fast-bar", toc = true } = props;
   if ($(selector).length !== 1) return;
 
+  // 目录是否存在
   if (!toc) $('[data-dropdown-toggle="toc-dropdown"]').parent("li").remove();
-  $(selector).removeClass("hidden").addClass("flex").appendTo($("body"));
+  // 评论是否存在
+  const hasComment = $("#comments").length > 0
+  if (!hasComment) $('[data-tooltip-target="tooltip-comment"]').parent('li').remove()
+  // 调整位置
+    $(selector).removeClass("hidden").addClass("inline-flex animate-fade-in-up").appendTo($("body"));
 };
