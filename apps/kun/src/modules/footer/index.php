@@ -1,11 +1,11 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 
-<footer class="mx-auto <?php $this->options->viewWidth() ?>" role="contentinfo">
-    <div class="w-full mx-auto max-w-screen-xl p-2 md:flex md:items-center md:justify-between">
-        <div class="flex items-center text-xs sm:text-center text-zinc-700 dark:text-zinc-400">© <?php echo date('Y'); ?>
-            <a href="<?php $this->options->siteUrl(); ?>" class="text-xs  hover:underline pl-2"><?php $this->options->title(); ?></a>
+<footer class="mx-auto pt-20 <?php $this->options->viewWidth() ?>" role="contentinfo">
+    <div class="w-full mx-auto max-w-screen-xl px-4 flex justify-between items-center">
+        <div class="flex items-center text-xs text-zinc-700 dark:text-zinc-400">© <?php echo date('Y'); ?>
+            <a href="<?php $this->options->siteUrl(); ?>" class="pl-2"><?php $this->options->title(); ?></a>
         </div>
-        <ul class="flex flex-wrap gap-2 items-center mt-3 font-medium text-zinc-700 dark:text-zinc-400 sm:mt-0">
+        <ul class="flex flex-wrap gap-2 items-center">
             <li>
                 <a href="mailto:<?php echo $this->author('mail'); ?>" class="hidden sm:inline-flex items-center justify-center w-10 h-10 text-zinc-700 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm">
                     <svg class="w-[1rem] h-[1rem]" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@
             </li>
             <?php if ($this->options->icp && in_array('ShowICP', $this->options->moreConfig)) : ?>
                 <li>
-                    <a href="https://beian.miit.gov.cn" target="_blank" class="text-xs hover:underline"><?php $this->options->icp() ?></a>
+                    <a href="https://beian.miit.gov.cn" target="_blank" class="flex items-center text-xs text-zinc-700 dark:text-zinc-400"><?php $this->options->icp() ?></a>
                 </li>
             <?php endif; ?>
         </ul>

@@ -42,10 +42,10 @@
 
 
 <!-- inject:css -->
-<div id="comments">
+<div id="comments" class="pb-20">
 
-  <div id="comments-hr" class="pt-[52px] mt-[-52px]">
-    <hr class="w-48 my-16 h-1 mx-auto bg-zinc-100 border-0 rounded md:my-10 dark:bg-zinc-700">
+  <div id="comments-hr"  >
+    <hr class="w-48 m-10 h-1 mx-auto bg-zinc-100 border-0 rounded dark:bg-zinc-700">
   </div>
 
 

@@ -1,7 +1,7 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 
-<div id="post-container" class="pt-20 mx-auto <?php $this->options->viewWidth() ?> pb-4">
+<div id="post-container" class="pt-20 px-5 mx-auto <?php $this->options->viewWidth() ?> pb-4">
 
     <!-- 作者 -->
     <div class="pb-3 text-center animate-fade-in-up">
@@ -15,7 +15,6 @@
 
     <!-- 标题 -->
     <h1 class="text-black dark:text-zinc-100 text-2xl text-center animate-fade-in-up"><?php $this->title() ?></h1>
-
 
     <!-- 文章 -->
     <?php if ($this->hidden || $this->titleshow) : ?>
@@ -39,17 +38,7 @@
         </form>
     <?php else : ?>
         <!-- unlock post content -->
-        <div class="mb-8" itemscope itemtype="http://schema.org/BlogPosting">
-
-            <!-- 分割线 -->
-            <div class="inline-flex items-center justify-center w-full">
-                <hr class="w-64 h-1 my-16 bg-zinc-200 border-0 rounded dark:bg-zinc-700">
-                <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-zinc-900">
-                    <svg class="w-4 h-4 text-zinc-700 dark:text-zinc-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
-                        <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
-                    </svg>
-                </div>
-            </div>
+        <div class="mb-8 pt-10" itemscope itemtype="http://schema.org/BlogPosting">
 
             <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/markdown/' . $this->options->markdownTheme . '.css'); ?>" />
             <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/prism/' . $this->options->prismTheme . '.css'); ?>" />
@@ -58,75 +47,78 @@
             <!-- inject:js -->
 
             <?php if (in_array('ShowFastBar', $this->options->moreConfig)) : ?>
-                <ul id="fast-bar" class="hidden border bg-white border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg">
+                <ul id="fast-bar" class="fixed bottom-2 z-[1994] border bg-white/90 backdrop-blur-sm inline-block rounded-full left-1/2 -translate-x-1/2 justify-center dark:bg-zinc-800/90 dark:border-zinc-700">
                     <li>
-                        <button id="toggle-toc" data-tooltip-target="tooltip-toc" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
+                        <a href="<?php echo getAdjacentArticle($this, 'prev')['url'] ?>" data-tooltip-target="prev-post" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
+                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path d="m9 19 1.41-1.41L5.83 13H22v-2H5.83l4.59-4.59L9 5l-7 7 7 7z"></path>
+                            </svg>
+                        </a>
+                        <div id="prev-post" role="tooltip" class="whitespace-nowrap  absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                            <span class="mr-2">上一篇</span>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">←</kbd>
+                            <p class="pt-2 text-xs text-zinc-500"><?php echo getAdjacentArticle($this, 'prev')['title'] ?></p>
+                        </div>
+                    </li>
+                    <li>
+                        <button data-dropdown-toggle="toc-dropdown" data-tooltip-target="tooltip-toc" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="none" d="M0 0h24v24H0V0z"></path>
                                 <path d="M18 17h2v.5h-1v1h1v.5h-2v1h3v-4h-3v1zm1-9h1V4h-2v1h1v3zm-1 3h1.8L18 13.1v.9h3v-1h-1.8l1.8-2.1V10h-3v1zM2 5h14v2H2V5zm0 12h14v2H2v-2zm0-6h14v2H2v-2z"></path>
                             </svg>
                         </button>
-                        <div id="tooltip-toc" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200 rounded-lg shadow-sm opacity-0 tooltip">
-                            <span class="mr-2">显示/隐藏 目录</span>
+                        <div id="tooltip-toc" role="tooltip" class="whitespace-nowrap absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200 rounded-lg shadow-sm opacity-0 tooltip">
+                            <span class="mr-2">显示目录</span>
                             <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">]</kbd>
                         </div>
+                        <!-- 目录 -->
+                        <div id="toc-dropdown" class="z-10 hidden bg-white/95 backdrop-blur-sm rounded-lg border w-52 dark:bg-zinc-800/95 dark:border-zinc-700"></div>
                     </li>
                     <li>
-                        <a href="#comments-hr" data-tooltip-target="tooltip-comment" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
+                        <a href="#comments-hr" data-tooltip-target="tooltip-comment" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="none" d="M0 0h24v24H0V0z"></path>
                                 <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"></path>
                             </svg>
                         </a>
-                        <div id="tooltip-comment" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                        <div id="tooltip-comment" role="tooltip" class="whitespace-nowrap absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
                             <span class="mr-2">看评论</span>
                             <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
                             <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">P</kbd>
                         </div>
                     </li>
                     <li>
-                        <a href="<?php echo getAdjacentArticle($this, 'prev')['url'] ?>" data-tooltip-target="prev-post" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
-                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="none" d="M0 0h24v24H0z"></path>
-                                <path d="m9 19 1.41-1.41L5.83 13H22v-2H5.83l4.59-4.59L9 5l-7 7 7 7z"></path>
-                            </svg>
-                        </a>
-                        <div id="prev-post" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
-                            <span class="mr-2">上一篇</span>
-                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
-                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">J</kbd>
-                            <p class="pt-2 text-xs text-zinc-500"><?php echo getAdjacentArticle($this, 'prev')['title'] ?></p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="<?php echo getAdjacentArticle($this, 'next')['url'] ?>" data-tooltip-target="next-post" data-tooltip-placement="bottom" class="hidden sm:inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-lg text-sm p-2.5">
+                        <a href="<?php echo getAdjacentArticle($this, 'next')['url'] ?>" data-tooltip-target="next-post" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="none" d="M0 0h24v24H0z"></path>
                                 <path d="m15 5-1.41 1.41L18.17 11H2v2h16.17l-4.59 4.59L15 19l7-7-7-7z"></path>
                             </svg>
                         </a>
-                        <div id="next-post" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                        <div id="next-post" role="tooltip" class="whitespace-nowrap absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
                             <span class="mr-2">下一篇</span>
                             <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
-                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">L</kbd>
+                            <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">→</kbd>
                             <p class="pt-2 text-xs text-zinc-500"><?php echo getAdjacentArticle($this, 'next')['title'] ?></p>
                         </div>
                     </li>
                 </ul>
             <?php endif; ?>
 
-
             <!-- 标签 -->
-            <div class="pt-6">
+            <div class="pt-6 flex flex-wrap gap-2">
                 <?php
                 $tags = $this->tags;
                 if ($tags) {
                     foreach ($tags as $tag) {
-                        echo '<a class="mr-3 py-2 px-3 md:p-0 text-black hover:text-zinc-700 dark:text-white dark:hover:text-zinc-200" href="' . $tag['permalink'] . '">' . '#' . $tag['name'] . '</a>';
+                        echo '<a class="text-xs bg-zinc-100 rounded-full px-2 py-0.5" href="' . $tag['permalink'] . '">' . '#' . $tag['name'] . '</a>';
                     }
                 }
                 ?>
             </div>
+
+            <!-- 目录 -->
         </div>
 
         <?php $this->need('comments.php'); ?>
@@ -134,6 +126,3 @@
     <?php endif; ?>
 
 </div>
-
-
-<?php $this->need('footer.php'); ?>

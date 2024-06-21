@@ -15,13 +15,13 @@ $this->need('header.php');
 
 <!-- inject:css -->
 
-<main class="pt-20 mx-auto <?php $this->options->viewWidth() ?>">
+<main class="pt-20 px-4 mx-auto <?php $this->options->viewWidth() ?>">
 
   <!-- 今日诗词 -->
   <?php if ($this->options->mottoSelect == 'shici') : ?>
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 
-    <h3 class="text-center font-semibold text-black dark:text-zinc-200 text-[30px] text-opacity-80">
+    <h3 class="text-center font-semibold text-[30px] text-opacity-80">
       <span id="one-sentence"></span>
     </h3>
     <h3 class="text-center text-gray-800 dark:text-zinc-200 text-opacity-80 pt-3">
@@ -68,7 +68,7 @@ $this->need('header.php');
     <?php while ($this->next()) : ?>
       <article class="mb-8" itemscope itemtype="http://schema.org/BlogPosting">
         <a class="block mb-8 hvr-shrink" itemprop="url" href="<?php $this->permalink() ?>">
-          <h2 class="pb-3 font-bold text-black dark:text-zinc-200" itemprop="name headline">
+          <h2 class="pb-3 font-bold" itemprop="name headline">
             <img data-title="<?php $this->title() ?>" class="flex-shrink-0 w-[20px] bg-gray-100 p-1 h-[20px] inline-block rounded" />
             <span class="align-middle"><?php $this->title() ?></span>
           </h2>

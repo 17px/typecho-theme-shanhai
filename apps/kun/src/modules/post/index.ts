@@ -9,9 +9,9 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-rust";
 import "prismjs/components/prism-go";
 import "prismjs/components/prism-bash";
-import { useAnchorLocate, useToc } from "./util";
 import mediumZoom from "medium-zoom";
 import { useFastBar } from "./fastbar";
+import { useToc } from "./toc";
 
 onMounted(async () => {
   const md = document.querySelector("#markdown-content");
@@ -21,7 +21,8 @@ onMounted(async () => {
     mediumZoom(".markdown-body img", { margin: $("nav.sticky").height() });
   }
 
-  const { syncTocStatus } = useFastBar({ selector: "#fast-bar" });
+  const hasToc = useToc({ selector: ".markdown-body" });
+  useFastBar({ selector: "#fast-bar", toc: hasToc });
 
   /**
    * 评论区
@@ -32,48 +33,21 @@ onMounted(async () => {
     preventDefault: true,
   });
 
-  const toggleToc = () => {
-    if ($(".toc").hasClass("invisible")) {
-      localStorage.setItem("toc_visible", "visible");
-      $(".toc").removeClass("invisible").addClass("show-toc");
-    } else {
-      localStorage.setItem("toc_visible", "invisible");
-      $(".toc")
-        .addClass("invisible")
-        .removeClass("show-toc")
-        .removeClass("hide-toc");
-    }
-    syncTocStatus();
-  };
-
-  addListener({
-    selector: "#toggle-toc",
-    eventType: "click",
-    handler: toggleToc,
-  });
-
   addKeyPress({
-    key: "control+j",
+    key: "control+ArrowRight",
     handler: () => $('[data-tooltip-target="next-post"]').trigger("click"),
     preventDefault: true,
   });
 
   addKeyPress({
-    key: "control+l",
+    key: "control+ArrowLeft",
     handler: () => $('[data-tooltip-target="prev-post"]').trigger("click"),
     preventDefault: true,
   });
 
   addKeyPress({
     key: "]",
-    handler: toggleToc,
+    handler: () => $('[data-dropdown-toggle="toc-dropdown"]').trigger("click"),
     preventDefault: true,
   });
-
-  const postWithToc = useToc({
-    selector: ".markdown-body",
-    levels: ["h1", "h2", "h3"],
-    syncContent: true,
-  });
-  if (postWithToc) useAnchorLocate();
 });

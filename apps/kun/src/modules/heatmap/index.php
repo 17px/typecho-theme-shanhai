@@ -31,7 +31,7 @@ $this->need('header.php');
         </button>
     </div>
     <!-- 文章列表 -->
-    <h4 id="title" class="text-center mt-8">最新作品 <span></span></h4>
+    <h4 id="title" class="text-center mt-8">归档 <span></span></h4>
     <div id="articles" class="px-4 pt-8"></div>
 </div>
 
@@ -69,7 +69,7 @@ $this->need('header.php');
 
     const renderArticles = (item) => {
         if (item) {
-            document.querySelector("#title span").textContent = new Date(item.date).toLocaleDateString()
+            document.querySelector("#title span").textContent = new Date(item.date).toISOString().split('T')[0]
             const articles = document.querySelector("#articles")
             articles.innerHTML = ''
             item.posts.forEach(post => {
