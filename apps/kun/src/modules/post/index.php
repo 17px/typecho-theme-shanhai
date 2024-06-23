@@ -65,6 +65,17 @@
     <?php if (in_array('ShowFastBar', $this->options->moreConfig)) : ?>
         <ul id="fast-bar" class="fixed bottom-2 z-[1994] border bg-white/90 backdrop-blur-sm hidden rounded-full left-1/2 -translate-x-1/2 justify-center dark:bg-zinc-800/90 dark:border-zinc-700">
             <li>
+                <button data-tooltip-target="drag" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                    </svg>
+                </button>
+                <div id="drag" role="tooltip" class="whitespace-nowrap absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+                    <span>拖动</span>
+                </div>
+            </li>
+            <li>
                 <a href="<?php echo getAdjacentArticle($this, 'prev')['url'] ?>" data-tooltip-target="prev-post" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path fill="none" d="M0 0h24v24H0z"></path>

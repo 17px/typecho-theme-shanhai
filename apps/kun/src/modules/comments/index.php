@@ -3,7 +3,7 @@
 <?php function threadedComments($comments, $options)
 { ?>
   <li id="<?php $comments->theId(); ?>">
-    <div class="mb-8" id="<?php $comments->theId(); ?>">
+    <div class="mb-8">
       <div class="pb-3 comment-author flex items-center">
         <section class="text-sm text-blue-800 dark:text-blue-300"><?php $comments->author(); ?>
           <?php if ($comments->authorId == $comments->ownerId) : ?>
@@ -12,7 +12,7 @@
           <?php $author = getCommentDetails($comments->parent); ?>
           <?php if (!empty($author)) : ?>
             <span class="text-xs px-2 text-zinc-400">回复了</span>
-            <span data-reply-id="comment-<?php echo $comments->parent ?>" class="cursor-pointer reply-user text-blue-800 dark:text-blue-300"><?php echo $author; ?></span>
+            <span data-reply-id="comment-<?php echo $comments->parent ?>" class="reply-user text-blue-800 dark:text-blue-300"><?php echo $author; ?></span>
           <?php endif; ?>
         </section>
       </div>
@@ -20,12 +20,10 @@
         <?php if ($comments->status === "waiting") : ?>
           <em class="waiting">评论审核中...</em>
         <?php elseif ($comments->status === "approved") : ?>
-          <article id="comment-content"><?php $comments->content(); ?></article>
+          <article><?php $comments->content(); ?></article>
           <div class="pt-3 text-xs text-zinc-500 flex items-center justify-between">
             <time class="mr-3" datetime="2024-06-11T09:20:00+00:00" itemprop="datePublished"><?php $comments->date('F j, Y H:i'); ?></time>
-            <div>
-              <span class="inline-flex items-center"><?php $comments->reply(); ?></span>
-            </div>
+            <span class="inline-flex items-center"><?php $comments->reply(); ?></span>
           </div>
         <?php else : ?>
           <em class="waiting">垃圾评论 or 被删除</em>
@@ -44,7 +42,7 @@
 <!-- inject:css -->
 <div id="comments" class="pb-20">
 
-  <div id="comments-hr"  >
+  <div id="comments-hr">
     <hr class="w-48 m-10 h-1 mx-auto bg-zinc-100 border-0 rounded dark:bg-zinc-700">
   </div>
 

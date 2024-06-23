@@ -43,14 +43,4 @@ const useEmoji = () => {
 
 onMounted(() => {
   useEmoji();
-
-  $("[data-reply-id]")
-    .on("mouseenter", function () {
-      //@ts-ignore
-      $(`#${$(this).attr("data-reply-id")}`).addClass("bg-blue-100");
-    })
-    .on("mouseleave", function () {
-      //@ts-ignore
-      $(`#${$(this).attr("data-reply-id")}`).removeClass("bg-blue-100");
-    });
 });

@@ -1,4 +1,5 @@
 import $ from "cash-dom";
+import Draggabilly from 'draggabilly';
 
 export const fastbar_pos = "fast_bar_pos";
 export const toc_visible = "toc_visible";
@@ -32,5 +33,12 @@ export const useFastBar = (props: FastBarProps): any => {
   const hasComment = $("#comments").length > 0
   if (!hasComment) $('[data-tooltip-target="tooltip-comment"]').parent('li').remove()
   // 调整位置
-    $(selector).removeClass("hidden").addClass("inline-flex animate-fade-in-up").appendTo($("body"));
+  $(selector).removeClass("hidden").addClass("inline-flex animate-fade-in-up").appendTo($("body"));
+  // 拖动注册
+  const elem = document.querySelector('#fast-bar') as HTMLElement;
+  new Draggabilly(elem, {
+    handle: '[data-tooltip-target="drag"]'
+  }).on("dragStart", () => {
+    $('#fast-bar').removeClass('bottom-2 -translate-x-1/2')
+  })
 };
