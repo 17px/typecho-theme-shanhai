@@ -338,3 +338,65 @@ function getAllTags()
 
     return $result;
 }
+
+
+// 定义函数，用于获取RSS内容并返回JSON对象
+function fetchRssFeeds($rssUrls)
+{
+    // 初始化返回结果数组
+    $result = [];
+
+    // 遍历每个RSS URL
+    foreach ($rssUrls as $url) {
+        // 使用 cURL 获取RSS内容
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        $rssContent = curl_exec($ch);
+        $curlError = curl_error($ch);
+        curl_close($ch);
+
+        // 检查是否有错误
+        if ($rssContent === false) {
+            $result[$url] = ['error' => $curlError];
+            continue;
+        }
+
+        // 解析RSS内容
+        $rss = simplexml_load_string($rssContent);
+        if ($rss === false) {
+            $errors = libxml_get_errors();
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->message;
+            }
+            $result[$url] = ['error' => $errorMessages];
+            libxml_clear_errors();
+            continue;
+        }
+
+        // 提取RSS项
+        $items = [];
+        foreach ($rss->channel->item as $item) {
+            $namespaces = $item->getNamespaces(true);
+            $content = $item->children($namespaces['content']);
+            $encodedContent = (string)$content->encoded;
+
+            $items[] = [
+                'title' => (string)$item->title,
+                'link' => (string)$item->link,
+                'description' => mb_substr(strip_tags($encodedContent), 0, 150) . '...',
+                'pubDate' => strtotime((string)$item->pubDate),
+            ];
+        }
+
+        // 添加到结果数组
+        $result[$url] = ['items' => $items];
+    }
+
+    // 返回JSON对象
+    return json_encode($result);
+}
