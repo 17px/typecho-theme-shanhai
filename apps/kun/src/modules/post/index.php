@@ -42,8 +42,11 @@
 
             <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/markdown/' . $this->options->markdownTheme . '.css'); ?>" />
             <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/prism/' . $this->options->prismTheme . '.css'); ?>" />
+            <?php if (in_array('UseKatex', $this->options->moreConfig)) : ?>
+                <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/katex/katex.min.css'); ?>" />
+            <?php endif; ?>
             <!-- inject:css -->
-            <article class="markdown-body bg-white dark:bg-zinc-900 animate-fade-in-up" itemprop="articleBody" id="markdown-content"><?php $this->content(); ?></article>
+            <article class="markdown-body bg-white dark:bg-zinc-900 animate-fade-in-up" itemprop="articleBody" id="markdown-content"><?php $this->content(); ?></article>            
 
             <!-- 标签 -->
             <div class="pt-6 flex flex-wrap gap-2">
@@ -134,5 +137,10 @@
     <?php endif; ?>
 
     <!-- inject:js -->
+
+    <?php if (in_array('UseKatex', $this->options->moreConfig)) : ?>
+        <script defer src="<?php $this->options->themeUrl('assets/katex/katex.min.js'); ?>" ></script>
+        <script defer src="<?php $this->options->themeUrl('assets/katex/auto.render.min.js'); ?>" onload="renderMathInElement(document.querySelector('.markdown-body'))"></script>
+    <?php endif; ?>
 
 </div>

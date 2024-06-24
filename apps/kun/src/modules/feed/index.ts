@@ -1,6 +1,5 @@
 import { onMounted } from "@shanhai/util";
 
-onMounted(() => {
-    
+onMounted(async () => {
 
-})
+});

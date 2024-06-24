@@ -20,7 +20,7 @@
         <?php if ($comments->status === "waiting") : ?>
           <em class="waiting">评论审核中...</em>
         <?php elseif ($comments->status === "approved") : ?>
-          <article><?php $comments->content(); ?></article>
+          <article class="break-all"><?php $comments->content(); ?></article>
           <div class="pt-3 text-xs text-zinc-500 flex items-center justify-between">
             <time class="mr-3" datetime="2024-06-11T09:20:00+00:00" itemprop="datePublished"><?php $comments->date('F j, Y H:i'); ?></time>
             <span class="inline-flex items-center"><?php $comments->reply(); ?></span>

@@ -12,12 +12,14 @@ import "prismjs/components/prism-bash";
 import mediumZoom from "medium-zoom";
 import { useFastBar } from "./fastbar";
 import { useToc } from "./toc";
+import { useAttachHelper } from "./attach.helper";
 
 onMounted(async () => {
   const md = document.querySelector("#markdown-content");
   if (md) {
     Prism.highlightAll();
     useCodeHelper();
+    useAttachHelper();
     mediumZoom(".markdown-body img", { margin: $("nav.sticky").height() });
   }
 

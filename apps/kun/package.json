@@ -35,7 +35,6 @@
     "medium-zoom": "1.1.0",
     "draggabilly": "3.0.0",
     "@types/draggabilly": "2.1.6",
-    "picmo": "5.8.5",
-    "chinese-lunar-calendar": "1.0.1"
+    "picmo": "5.8.5"
   }
 }

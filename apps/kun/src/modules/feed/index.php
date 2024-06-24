@@ -12,7 +12,13 @@ $this->need('header.php');
 
 <div class="pt-20 mx-auto <?php $this->options->viewWidth() ?>">
     <div class="row">
-
+        <ul>
+            <?php
+            foreach ($this->fields as $name => $value) {
+                echo "<li>" . htmlspecialchars($name) . ": " . htmlspecialchars($value) . "</li>";
+            }
+            ?>
+        </ul>
     </div>
 </div>
 
@@ -20,14 +26,12 @@ $this->need('header.php');
     <?php
 
     // 示例用法
-    $rssUrls = [
-        'http://localhost/feed',
-        'https://demo.ghost.io/author/lewis/rss/',
-    ];
-
+    $rssUrls = ["http://localhost/feed", "https://demo.ghost.io/author/lewis/rss/"];
+    // $rssUrls = array_filter(array_map('trim', preg_split('/\r?\n/', $this->content)));
     $jsonResult = fetchRssFeeds($rssUrls);
 
     ?>
+
     console.log(<?php echo $jsonResult ?>)
 </script>
 
