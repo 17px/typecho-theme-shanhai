@@ -15,8 +15,7 @@ import { useToc } from "./toc";
 import { useAttachHelper } from "./attach.helper";
 
 onMounted(async () => {
-  const md = document.querySelector("#markdown-content");
-  if (md) {
+  if ($('#markdown-content').length > 0) {
     Prism.highlightAll();
     useCodeHelper();
     useAttachHelper();

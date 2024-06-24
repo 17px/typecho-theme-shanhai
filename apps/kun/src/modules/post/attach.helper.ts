@@ -54,74 +54,150 @@ export const useAttachHelper = () => {
     const match = pathname.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);
     const ext = match ? match[1] : "unknown";
     const svg = iconMap[ext];
-    link.style.textDecoration = "none";
-    link.setAttribute("target", "_blank");
     const text =
       link.getAttribute("title") ??
       link.getAttribute("alt") ??
-      link.textContent;
-    let html = "";
-    if (["img", "pdf", "jpeg", "png", "jpg"].includes(ext)) {
-      html = `<div class="flex items-start my-2.5 hvr-forward bg-gray-100 dark:bg-zinc-800 cursor-pointer py-2 px-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl">
-                <div class="flex-1 truncate">
-                  <div class="flex items-center gap-2 text-sm text-zinc-700 dark:text-white">${svg}<div class="flex-grow pr-4 truncate">${text}</div></div>
-                  <span class="block text-xs font-normal truncate text-gray-500 dark:text-zinc-400 gap-2 pr-8">${link.href}</span>
-                </div>
-                <div class="inline-flex self-center items-center text-zinc-700 dark:text-white flex-shrink-0">${downloadIcon}</div>
-              </div>`;
+      link.textContent ?? ''
+    const parent = link.parentNode
+    if (["img", "pdf", "jpeg", "png", "jpg", 'txt'].includes(ext)) {
+      const newLink = createLink(svg, text, link.href, downloadIcon)
+      parent?.appendChild(newLink)
     } else if (["mp4"].includes(ext)) {
-      html = `<video class="w-full h-auto max-w-full border border-gray-200 rounded-lg dark:border-gray-700" muted autoplay controls>
-                <source src="${link.href}" type="video/mp4">
-                  Your browser does not support the video tag.
-              </video>`;
+      const video = createVideoPlayerElement(link.href)
+      parent?.appendChild(video)
     } else if (["mp3"].includes(ext)) {
-      html = `<div class="bg-white p-4 rounded-lg shadow-lg flex items-center">
-                <button id="playBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                  Play
-                </button>
-                <div class="flex-1 mx-4">
-                  <div class="w-full bg-gray-300 rounded-full h-1.5">
-                    <div class="bg-blue-500 h-1.5 rounded-full" style="width: 30%;"></div>
-                  </div>
-                </div>
-                <span id="currentTime">00:00</span>
-              </div>
-              <audio class="hidden" id="audioPlayer">
-                <source src="${link.href}" type="audio/mpeg">
-                您的浏览器不支持 audio 元素。
-              </audio>
-              `;
-      link.removeAttribute("href");
+      const audio = createAudioPlayerElement(link.href)
+      parent?.appendChild(audio)
     }
-    link.innerHTML = html;
+    parent?.removeChild(link)
+  });
+};
+
+
+// 创建并返回一个自定义元素
+const createLink = (svg: string, text: string, linkHref: string, downloadIcon: string): HTMLElement => {
+  // 创建容器
+  const container = document.createElement('a');
+  container.setAttribute('href', linkHref)
+  container.setAttribute('target', "_blank")
+  container.setAttribute('download', "")
+  container.style.textDecoration = 'none'
+
+  const div = document.createElement('div')
+  div.className = 'flex underline-none items-start my-2.5 hvr-forward bg-gray-100 dark:bg-zinc-800 cursor-pointer py-2 px-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl';
+  container.appendChild(div)
+
+  // 创建 flex-1 容器
+  const flexContainer = document.createElement('div');
+  flexContainer.className = 'flex-1 truncate';
+  div.appendChild(flexContainer);
+
+  // 创建内部 flex 容器
+  const innerFlexContainer = document.createElement('div');
+  innerFlexContainer.className = 'flex items-center gap-2 text-sm text-zinc-700 dark:text-white';
+  innerFlexContainer.innerHTML = `${svg}<div class="flex-grow pr-4 truncate">${text}</div>`;
+  flexContainer.appendChild(innerFlexContainer);
+
+  // 创建链接元素
+  const linkElement = document.createElement('span');
+  linkElement.className = 'block text-xs font-normal truncate text-gray-500 dark:text-zinc-400 gap-2 pr-8';
+  linkElement.textContent = linkHref;
+  flexContainer.appendChild(linkElement);
+
+  // 创建下载图标容器
+  const downloadIconContainer = document.createElement('div');
+  downloadIconContainer.className = 'inline-flex self-center items-center text-zinc-700 dark:text-white flex-shrink-0';
+  downloadIconContainer.innerHTML = downloadIcon;
+  div.appendChild(downloadIconContainer);
+
+  return container;
+};
+
+const createVideoPlayerElement = (videoSrc: string): HTMLElement => {
+  // 创建视频元素
+  const video = document.createElement('video');
+  video.className = 'w-full h-auto max-w-full border border-gray-200 rounded-lg dark:border-gray-700';
+  video.muted = true;
+  video.autoplay = true;
+  video.controls = true;
+
+  // 创建 source 元素
+  const source = document.createElement('source');
+  source.src = videoSrc;
+  source.type = 'video/mp4';
+  video.appendChild(source);
+
+  // 创建不支持视频标签时的提示
+  const fallbackText = document.createTextNode('Your browser does not support the video tag.');
+  video.appendChild(fallbackText);
+
+  return video;
+};
+
+/**
+ * 创建并返回一个包含音频播放器的元素
+ */
+const createAudioPlayerElement = (audioSrc: string): HTMLDivElement => {
+  // 创建容器
+  const container = document.createElement('div') as HTMLDivElement
+  container.className = 'bg-white p-4 rounded-lg shadow-lg flex items-center';
+
+  // 创建播放按钮
+  const playButton = document.createElement('button');
+  playButton.id = 'playBtn';
+  playButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full';
+  playButton.textContent = 'Play';
+  container.appendChild(playButton);
+
+  // 创建进度条容器
+  const progressContainer = document.createElement('div');
+  progressContainer.className = 'flex-1 mx-4';
+  container.appendChild(progressContainer);
+
+  // 创建进度条背景
+  const progressBarBackground = document.createElement('div');
+  progressBarBackground.className = 'w-full bg-gray-300 rounded-full h-1.5';
+  progressContainer.appendChild(progressBarBackground);
+
+  // 创建进度条前景
+  const progressBarForeground = document.createElement('div');
+  progressBarForeground.className = 'bg-blue-500 h-1.5 rounded-full';
+  progressBarForeground.style.width = '30%';
+  progressBarBackground.appendChild(progressBarForeground);
+
+  // 创建当前时间显示
+  const currentTime = document.createElement('span');
+  currentTime.id = 'currentTime';
+  currentTime.textContent = '00:00';
+  container.appendChild(currentTime);
+
+  // 创建音频元素
+  const audio = document.createElement('audio');
+  audio.className = 'hidden';
+  audio.id = 'audioPlayer';
+  const source = document.createElement('source');
+  source.src = audioSrc;
+  source.type = 'audio/mpeg';
+  audio.appendChild(source);
+  container.appendChild(audio);
+
+  // 注册播放按钮点击事件
+  playButton.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      playButton.textContent = 'Pause';
+    } else {
+      audio.pause();
+      playButton.textContent = 'Play';
+    }
   });
 
-  const audio = document.getElementById("audioPlayer") as HTMLAudioElement;
-  const playBtn = document.getElementById("playBtn");
-  const currentTimeElement = document.getElementById("currentTime");
+  // 更新进度条和时间
+  audio.addEventListener('timeupdate', () => {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progressBarForeground.style.width = `${percent}%`;
+    currentTime.textContent = new Date(audio.currentTime * 1000).toISOString().substr(14, 5);
+  });
 
-  if (audio && playBtn && currentTimeElement) {
-    playBtn.addEventListener("click", function () {
-      if (audio.paused) {
-        audio.play();
-        playBtn.textContent = "Pause";
-      } else {
-        audio.pause();
-        playBtn.textContent = "Play";
-      }
-    });
-
-    audio.addEventListener("timeupdate", function () {
-      let currentTime = formatTime(audio.currentTime);
-      currentTimeElement.textContent = currentTime;
-    });
-  }
-
-  function formatTime(seconds: number) {
-    let minutes = Math.floor(seconds / 60);
-    minutes = minutes >= 10 ? minutes : 0 + minutes;
-    seconds = Math.floor(seconds % 60);
-    seconds = seconds >= 10 ? seconds : 0 + seconds;
-    return minutes + ":" + seconds;
-  }
+  return container;
 };
