@@ -40,7 +40,7 @@ export const useToc = (options: TOCOptions): boolean => {
       h3: "pl-8",
     };
     const li = $(
-      `<li class="truncate text-zinc-600 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-300 toc-${tagName}"></li>`
+      `<li class="truncate text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-300 toc-${tagName}"></li>`
     );
     const a = $(
       `<a class="border-l-2 text-sm border-transparent font-base leading-7 ${itemIndentMap[tagName]} " href="#${hashId}" >${text}</a>`

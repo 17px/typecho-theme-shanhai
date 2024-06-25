@@ -1,7 +1,7 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 
-<div id="post-container" class="pt-20 px-5 mx-auto <?php $this->options->viewWidth() ?> pb-4">
+<div id="post-container" class="pt-10 px-5 mx-auto <?php $this->options->viewWidth() ?> pb-4">
 
     <!-- 作者 -->
     <div class="pb-3 text-center animate-fade-in-up">
@@ -54,7 +54,7 @@
                 $tags = $this->tags;
                 if ($tags) {
                     foreach ($tags as $tag) {
-                        echo '<a class="text-xs bg-zinc-100 rounded-full px-2 py-0.5" href="' . $tag['permalink'] . '">' . '#' . $tag['name'] . '</a>';
+                        echo '<a class="text-xs bg-zinc-100 dark:bg-zinc-800 hover:text-zinc-900 hover:dark:text-zinc-100 rounded-full px-2 py-0.5" href="' . $tag['permalink'] . '">' . '#' . $tag['name'] . '</a>';
                     }
                 }
                 ?>

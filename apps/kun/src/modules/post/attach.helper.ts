@@ -1,7 +1,7 @@
 /**
  * mp3 播放器 diy
  * mp4、rmb 播放
- * 
+ *
  */
 
 const iconMap = {
@@ -16,6 +16,7 @@ const iconMap = {
   webp: '<svg class="w-5 h-5 flex-shrink-0" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M8.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"></path><path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v8l-2.083-2.083a.5.5 0 0 0-.76.063L8 11 5.835 9.7a.5.5 0 0 0-.611.076L3 12z"></path></svg>',
   avif: '<svg class="w-5 h-5 flex-shrink-0" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M8.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"></path><path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v8l-2.083-2.083a.5.5 0 0 0-.76.063L8 11 5.835 9.7a.5.5 0 0 0-.611.076L3 12z"></path></svg>',
   mp3: '<svg class="w-5 h-5 flex-shrink-0" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zm-4.911 9.67h-.443v-.609h.422a.7.7 0 0 0 .322-.073.56.56 0 0 0 .22-.2.5.5 0 0 0 .076-.284.49.49 0 0 0-.176-.392.65.65 0 0 0-.442-.15.7.7 0 0 0-.252.041.6.6 0 0 0-.193.112.5.5 0 0 0-.179.349H7.71q.009-.235.102-.437.094-.202.27-.352.176-.152.428-.237.255-.085.583-.088.418-.003.723.132.304.135.472.372a.9.9 0 0 1 .173.539.83.83 0 0 1-.12.478.96.96 0 0 1-.619.439v.041a1 1 0 0 1 .718.434.9.9 0 0 1 .144.521q.003.285-.117.507a1.1 1.1 0 0 1-.329.378q-.21.152-.486.234-.273.08-.583.08-.451 0-.77-.153a1.2 1.2 0 0 1-.487-.41 1.1 1.1 0 0 1-.178-.563h.726a.46.46 0 0 0 .106.258.7.7 0 0 0 .249.179 1 1 0 0 0 .357.067.9.9 0 0 0 .384-.076.6.6 0 0 0 .252-.217.56.56 0 0 0 .088-.319.56.56 0 0 0-.334-.522.8.8 0 0 0-.372-.079ZM.706 15.925v-2.66h.038l.952 2.16h.516l.946-2.16h.038v2.66h.715v-3.999h-.8l-1.14 2.596h-.026l-1.14-2.596H0v4zm5.458-3.999h-1.6v4h.792v-1.342h.803q.43 0 .732-.173.304-.177.463-.475a1.4 1.4 0 0 0 .161-.677q0-.374-.158-.677a1.2 1.2 0 0 0-.46-.477 1.4 1.4 0 0 0-.733-.179m.545 1.333a.8.8 0 0 1-.085.381.57.57 0 0 1-.237.24.8.8 0 0 1-.375.082h-.66v-1.406h.66q.328 0 .513.182.184.181.184.521"></path></svg>',
+  wav: '<svg class="w-5 h-5 flex-shrink-0" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.784 15.849l.741-2.789h.033l.74 2.789h.73l1.055-3.999h-.858l-.595 2.903h-.041l-.706-2.903H2.2l-.706 2.903h-.038l-.6-2.903H0l1.055 3.999zm3.715 0 .314-1.028h1.336l.313 1.028h.841L6.967 11.85h-.926L4.7 15.849h.8Zm1.002-3.234.49 1.617H5.977l.49-1.617H6.5Zm3.604 3.234h-.952L7.814 11.85h.917l.897 3.138h.038l.888-3.138h.879z"></path></svg>',
   mp4: '<svg class="w-5 h-5 flex-shrink-0" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM.706 15.849v-2.66h.038l.952 2.16h.516l.946-2.16h.038v2.66h.715V11.85h-.8l-1.14 2.596h-.026L.805 11.85H0v3.999zm5.278-3.999h-1.6v3.999h.792v-1.342h.803q.43 0 .732-.173.304-.175.463-.474a1.4 1.4 0 0 0 .161-.677q0-.375-.158-.677a1.2 1.2 0 0 0-.46-.477 1.4 1.4 0 0 0-.733-.179m.545 1.333a.8.8 0 0 1-.085.38.57.57 0 0 1-.237.241.8.8 0 0 1-.375.082h-.66V12.48h.66q.329 0 .513.181.184.183.184.522m1.505-.032q.4-.65.791-1.301h1.14v2.62h.49v.638h-.49v.741h-.741v-.741H7.287v-.648q.353-.66.747-1.31Zm-.029 1.298v.02h1.219v-2.021h-.041q-.302.477-.607.984-.3.507-.571 1.017"></path></svg>',
   mov: '<svg class="w-5 h-5 flex-shrink-0" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zm-6.914 9.166v.522q0 .384-.117.641a.86.86 0 0 1-.323.387.9.9 0 0 1-.468.126.9.9 0 0 1-.472-.126.87.87 0 0 1-.32-.386 1.55 1.55 0 0 1-.117-.642v-.522q0-.386.118-.641a.87.87 0 0 1 .319-.387.87.87 0 0 1 .472-.129q.263 0 .468.13a.86.86 0 0 1 .323.386q.117.255.117.641m.802.519v-.513q0-.565-.205-.972a1.46 1.46 0 0 0-.588-.63q-.381-.22-.917-.22-.534 0-.92.22a1.44 1.44 0 0 0-.59.627q-.204.406-.204.975v.513q0 .563.205.973.205.406.589.627.386.216.92.216.536 0 .917-.216.383-.22.588-.627.205-.41.205-.973m-7.182 1.74v-2.66h.038l.952 2.16h.516l.946-2.16h.038v2.66h.715v-3.999h-.8l-1.14 2.596h-.026l-1.14-2.596H0v4zm9.54 0h-.952l-1.34-3.999h.918l.896 3.138h.038l.888-3.138h.879z"></path></svg>',
   wmv: '<svg class="w-5 h-5 flex-shrink-0" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M6 6.883v4.234a.5.5 0 0 0 .757.429l3.528-2.117a.5.5 0 0 0 0-.858L6.757 6.454a.5.5 0 0 0-.757.43z"></path><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"></path></svg>',
@@ -40,6 +41,9 @@ const iconMap = {
 } as Record<any, any>;
 
 const downloadIcon = `<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
+const playIcon = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z"></path></svg>`;
+const pauseIcon = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M17 4h-10a3 3 0 0 0 -3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3 -3v-10a3 3 0 0 0 -3 -3z"></path></svg>`;
+const audioIcon = `<svg class="mr-2 inline-block" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5m-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5m12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5"></path></svg>`;
 
 export const useAttachHelper = () => {
   const extensions = Object.keys(iconMap);
@@ -57,146 +61,247 @@ export const useAttachHelper = () => {
     const text =
       link.getAttribute("title") ??
       link.getAttribute("alt") ??
-      link.textContent ?? ''
-    const parent = link.parentNode
-    if (["img", "pdf", "jpeg", "png", "jpg", 'txt'].includes(ext)) {
-      const newLink = createLink(svg, text, link.href, downloadIcon)
-      parent?.appendChild(newLink)
+      link.textContent ??
+      "";
+    const parent = link.parentNode;
+    if (["img", "pdf", "jpeg", "png", "jpg", "txt"].includes(ext)) {
+      const newLink = createLink(svg, text, link.href, downloadIcon);
+      parent?.appendChild(newLink);
     } else if (["mp4"].includes(ext)) {
-      const video = createVideoPlayerElement(link.href)
-      parent?.appendChild(video)
-    } else if (["mp3"].includes(ext)) {
-      const audio = createAudioPlayerElement(link.href)
-      parent?.appendChild(audio)
+      const video = createVideoPlayerElement(link.href);
+      parent?.appendChild(video);
+    } else if (["mp3", "wav"].includes(ext)) {
+      const audio = createAudioPlayerElement(link.href, text);
+      parent?.appendChild(audio);
     }
-    parent?.removeChild(link)
+    parent?.removeChild(link);
   });
 };
 
-
 // 创建并返回一个自定义元素
-const createLink = (svg: string, text: string, linkHref: string, downloadIcon: string): HTMLElement => {
+const createLink = (
+  svg: string,
+  text: string,
+  linkHref: string,
+  downloadIcon: string
+): HTMLElement => {
   // 创建容器
-  const container = document.createElement('a');
-  container.setAttribute('href', linkHref)
-  container.setAttribute('target', "_blank")
-  container.setAttribute('download', "")
-  container.style.textDecoration = 'none'
+  const container = document.createElement("a");
+  container.setAttribute("href", linkHref);
+  container.setAttribute("target", "_blank");
+  container.setAttribute("download", "");
+  container.style.textDecoration = "none";
 
-  const div = document.createElement('div')
-  div.className = 'flex underline-none items-start my-2.5 hvr-forward bg-gray-100 dark:bg-zinc-800 cursor-pointer py-2 px-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl';
-  container.appendChild(div)
+  const div = document.createElement("div");
+  div.className =
+    "flex underline-none items-start my-2.5 hvr-forward bg-gray-100 dark:bg-zinc-800 cursor-pointer py-2 px-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl";
+  container.appendChild(div);
 
   // 创建 flex-1 容器
-  const flexContainer = document.createElement('div');
-  flexContainer.className = 'flex-1 truncate';
+  const flexContainer = document.createElement("div");
+  flexContainer.className = "flex-1 truncate";
   div.appendChild(flexContainer);
 
   // 创建内部 flex 容器
-  const innerFlexContainer = document.createElement('div');
-  innerFlexContainer.className = 'flex items-center gap-2 text-sm text-zinc-700 dark:text-white';
+  const innerFlexContainer = document.createElement("div");
+  innerFlexContainer.className =
+    "flex items-center gap-2 text-sm text-zinc-700 dark:text-white";
   innerFlexContainer.innerHTML = `${svg}<div class="flex-grow pr-4 truncate">${text}</div>`;
   flexContainer.appendChild(innerFlexContainer);
 
   // 创建链接元素
-  const linkElement = document.createElement('span');
-  linkElement.className = 'block text-xs font-normal truncate text-gray-500 dark:text-zinc-400 gap-2 pr-8';
+  const linkElement = document.createElement("span");
+  linkElement.className =
+    "block text-xs font-normal truncate text-gray-500 dark:text-zinc-400 gap-2 pr-8";
   linkElement.textContent = linkHref;
   flexContainer.appendChild(linkElement);
 
   // 创建下载图标容器
-  const downloadIconContainer = document.createElement('div');
-  downloadIconContainer.className = 'inline-flex self-center items-center text-zinc-700 dark:text-white flex-shrink-0';
+  const downloadIconContainer = document.createElement("div");
+  downloadIconContainer.className =
+    "inline-flex self-center items-center text-zinc-700 dark:text-white flex-shrink-0";
   downloadIconContainer.innerHTML = downloadIcon;
   div.appendChild(downloadIconContainer);
 
   return container;
 };
 
+/**
+ * 视频播放
+ */
 const createVideoPlayerElement = (videoSrc: string): HTMLElement => {
   // 创建视频元素
-  const video = document.createElement('video');
-  video.className = 'w-full h-auto max-w-full border border-gray-200 rounded-lg dark:border-gray-700';
+  const video = document.createElement("video");
+  video.className =
+    "w-full h-auto max-w-full border border-gray-200 rounded-lg dark:border-gray-700";
   video.muted = true;
   video.autoplay = true;
   video.controls = true;
 
   // 创建 source 元素
-  const source = document.createElement('source');
+  const source = document.createElement("source");
   source.src = videoSrc;
-  source.type = 'video/mp4';
+  source.type = "video/mp4";
   video.appendChild(source);
 
   // 创建不支持视频标签时的提示
-  const fallbackText = document.createTextNode('Your browser does not support the video tag.');
+  const fallbackText = document.createTextNode(
+    "Your browser does not support the video tag."
+  );
   video.appendChild(fallbackText);
 
   return video;
 };
 
 /**
- * 创建并返回一个包含音频播放器的元素
+ * 创建音频播放器
  */
-const createAudioPlayerElement = (audioSrc: string): HTMLDivElement => {
+const createAudioPlayerElement = (
+  audioSrc: string,
+  title: string
+): HTMLDivElement => {
   // 创建容器
-  const container = document.createElement('div') as HTMLDivElement
-  container.className = 'bg-white p-4 rounded-lg shadow-lg flex items-center';
+  const container = document.createElement("div");
+  container.className =
+    "relative my-2.5 bg-gray-100 dark:bg-zinc-800 py-2 px-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl";
+  container.setAttribute("data-player", "audioPlayer");
+
+  // 创建标题容器
+  const titleContainer = document.createElement("div");
+  titleContainer.className = "flex items-center justify-between pb-1";
+  container.appendChild(titleContainer);
+
+  // 歌曲标题
+  const div = document.createElement("div");
+  div.className = "truncate flex-1 pr-8 items-center";
+  div.innerHTML = `${audioIcon}<span class="align-middle">${title}</span>`;
+  titleContainer.appendChild(div);
 
   // 创建播放按钮
-  const playButton = document.createElement('button');
-  playButton.id = 'playBtn';
-  playButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full';
-  playButton.textContent = 'Play';
-  container.appendChild(playButton);
+  const playButton = document.createElement("button");
+  playButton.className =
+    "bg-zinc-200 text-zinc-600 hover:bg-blue-500 hover:text-white p-1.5 rounded-full cursor-pointer dark:bg-zinc-700 dark:text-white hover:dark:bg-blue-500 hover:dark:text-white";
+  playButton.innerHTML = playIcon;
+  titleContainer.appendChild(playButton);
 
   // 创建进度条容器
-  const progressContainer = document.createElement('div');
-  progressContainer.className = 'flex-1 mx-4';
+  const progressContainer = document.createElement("div");
+  progressContainer.style.lineHeight = "1";
   container.appendChild(progressContainer);
 
-  // 创建进度条背景
-  const progressBarBackground = document.createElement('div');
-  progressBarBackground.className = 'w-full bg-gray-300 rounded-full h-1.5';
-  progressContainer.appendChild(progressBarBackground);
+  // 创建进度条
+  const progressBar = document.createElement("input");
+  progressBar.type = "range";
+  progressBar.className =
+    "w-full h-1 bg-zinc-200 rounded-full appearance-none cursor-pointer dark:bg-zinc-700 range-sm";
+  progressBar.value = "0"; // 初始进度为0
+  progressContainer.appendChild(progressBar);
 
-  // 创建进度条前景
-  const progressBarForeground = document.createElement('div');
-  progressBarForeground.className = 'bg-blue-500 h-1.5 rounded-full';
-  progressBarForeground.style.width = '30%';
-  progressBarBackground.appendChild(progressBarForeground);
+  // 创建播放时间容器
+  const timeContainer = document.createElement("div");
+  timeContainer.className =
+    "flex justify-between text-zinc-500 dark:text-zinc-300 text-xs";
+  progressContainer.appendChild(timeContainer);
 
   // 创建当前时间显示
-  const currentTime = document.createElement('span');
-  currentTime.id = 'currentTime';
-  currentTime.textContent = '00:00';
-  container.appendChild(currentTime);
+  const currentTime = document.createElement("span");
+  currentTime.textContent = "00:00";
+  timeContainer.appendChild(currentTime);
+
+  // 创建总时间显示
+  const totalTime = document.createElement("span");
+  totalTime.textContent = "00:00"; // 初始总时间
+  timeContainer.appendChild(totalTime);
 
   // 创建音频元素
-  const audio = document.createElement('audio');
-  audio.className = 'hidden';
-  audio.id = 'audioPlayer';
-  const source = document.createElement('source');
+  const audio = document.createElement("audio");
+  audio.className = "hidden";
+  const source = document.createElement("source");
   source.src = audioSrc;
-  source.type = 'audio/mpeg';
+  source.type = "audio/mpeg";
   audio.appendChild(source);
   container.appendChild(audio);
 
-  // 注册播放按钮点击事件
-  playButton.addEventListener('click', () => {
-    if (audio.paused) {
-      audio.play();
-      playButton.textContent = 'Pause';
-    } else {
+  // 标记变量，用于检测是否因拖动而暂停
+  let wasPlaying = false;
+  let firstDrag = true; // 标记是否是第一次拖动
+
+  // 鼠标按下时处理
+  progressBar.addEventListener("mousedown", () => {
+    if (!audio.paused) {
       audio.pause();
-      playButton.textContent = 'Play';
+      wasPlaying = true; // 记录音频是暂停前正在播放
     }
   });
 
-  // 更新进度条和时间
-  audio.addEventListener('timeupdate', () => {
+  // 鼠标放开时处理
+  progressBar.addEventListener("mouseup", () => {
+    if (wasPlaying || firstDrag) {
+      audio.play();
+      wasPlaying = false; // 重置标记
+      firstDrag = false; // 第一次拖动结束后将标记设置为false
+      playButton.innerHTML = pauseIcon;
+    }
+  });
+
+  // 同步进度条拖动和音频播放
+  progressBar.addEventListener("input", () => {
+    const seekTime = (progressBar.valueAsNumber / 100) * audio.duration;
+    audio.currentTime = seekTime;
+    // 如果是第一次拖动，不自动播放
+    if (firstDrag) {
+      audio.pause();
+    }
+  });
+
+  // 注册播放按钮点击事件
+  playButton.addEventListener("click", () => {
+    // 控制当前播放器
+    if (audio.paused) {
+      audio.play();
+      playButton.innerHTML = pauseIcon;
+      // 暂停其他所有播放器
+      const allPlayers = document.querySelectorAll(
+        "[data-player='audioPlayer']"
+      );
+      allPlayers.forEach((player) => {
+        const otherAudio = player.querySelector("audio") as HTMLAudioElement;
+        const otherPlayButton = player.querySelector(
+          "button"
+        ) as HTMLButtonElement;
+        if (otherAudio !== audio && !otherAudio.paused) {
+          otherAudio.pause();
+          otherPlayButton.innerHTML = playIcon;
+        }
+      });
+    } else {
+      audio.pause();
+      playButton.innerHTML = playIcon;
+    }
+  });
+
+  // 音频加载完成后更新总时间
+  audio.addEventListener("loadedmetadata", () => {
+    totalTime.textContent = new Date(audio.duration * 1000)
+      .toISOString()
+      .substr(14, 5);
+  });
+
+  // 更新进度条和时间显示
+  audio.addEventListener("timeupdate", () => {
     const percent = (audio.currentTime / audio.duration) * 100;
-    progressBarForeground.style.width = `${percent}%`;
-    currentTime.textContent = new Date(audio.currentTime * 1000).toISOString().substr(14, 5);
+    progressBar.value = percent.toString();
+    currentTime.textContent = new Date(audio.currentTime * 1000)
+      .toISOString()
+      .substr(14, 5);
+  });
+
+  // 播放结束时重置播放按钮
+  audio.addEventListener("ended", () => {
+    playButton.innerHTML = playIcon;
+    progressBar.value = "0";
+    currentTime.textContent = "00:00";
+    firstDrag = true; // 重置第一次拖动标记
   });
 
   return container;

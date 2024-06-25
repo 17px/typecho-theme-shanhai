@@ -1,10 +1,7 @@
 import "simplebar";
 
-const copyIconSVG =
-  '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path><rect x="9" y="3" width="6" height="4" rx="2"></rect></g></svg>';
-const copySuccessIconSVG = `<svg class="w-3.5 h-3.5 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-</svg>`;
+const copyIconSVG = `<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>`;
+const copySuccessIconSVG = `<svg class="text-blue-700 dark:text-blue-500" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m12 15 2 2 4-4"></path><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>`;
 
 export const useCodeHelper = () => {
   const pres = document.querySelectorAll("#markdown-content pre > code");
@@ -20,7 +17,15 @@ export const useCodeHelper = () => {
 
     // 代码按钮组
     const btnsWrapper = document.createElement("section");
-    btnsWrapper.classList.add("inline-flex","whitespace-nowrap", "justify-center", "items-center", "absolute", "right-0", "top-0");
+    btnsWrapper.classList.add(
+      "inline-flex",
+      "whitespace-nowrap",
+      "justify-center",
+      "items-center",
+      "absolute",
+      "right-1",
+      "top-0"
+    );
 
     // 复制按钮
     const item = document.createElement("div");
@@ -28,7 +33,7 @@ export const useCodeHelper = () => {
     btn.setAttribute("data-tooltip-target", `tooltip-copy-code-${index}`);
     btn.setAttribute("data-tooltip-placement", "bottom");
     btn.className =
-      "inline-flex items-center justify-center hover:text-blue-500 text-zinc-500 w-10 h-10 dark:text-zinc-400 rounded-lg text-sm p-2.5";
+      "inline-flex items-center justify-center hover:text-blue-500 text-zinc-500 w-4 h-4 dark:text-zinc-400 rounded-lg text-sm";
     btn.innerHTML = copyIconSVG;
 
     btn.addEventListener("click", function () {
@@ -44,7 +49,7 @@ export const useCodeHelper = () => {
     const tooltip = document.createElement("div");
     tooltip.innerHTML = "<span>复制</span>";
     tooltip.className =
-      "absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-zinc-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-zinc-700";
+      "absolute z-10 inline-block px-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200 rounded-lg tooltip opacity-0 invisible";
     tooltip.setAttribute("id", `tooltip-copy-code-${index}`);
     tooltip.setAttribute("role", "tooltip");
 

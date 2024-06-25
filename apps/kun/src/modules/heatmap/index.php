@@ -14,7 +14,7 @@ $this->need('header.php');
 
 <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/heatmap/cal-heatmap.css'); ?>" />
 
-<div class="pt-20 mx-auto <?php $this->options->viewWidth() ?>">
+<div class="pt-10 mx-auto <?php $this->options->viewWidth() ?>">
     <div id="cal-heatmap" class="flex-grow flex justify-center"></div>
     <div class="text-center pt-4">
         <button id="prev-month" type="button" class="items-center justify-center text-gray-500 w-10 h-10 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
@@ -75,7 +75,7 @@ $this->need('header.php');
             item.posts.forEach(post => {
                 const div = document.createElement('div')
                 div.classList.add('mb-4', "hvr-shrink")
-                div.innerHTML = `<a href="${post.link}" class="block tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody"><p class="break-all text-sm text-zinc-700 dark:text-zinc-400">${post.title}</p></a>`
+                div.innerHTML = `<a href="${post.link}" class="block tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody"><p class="break-all text-sm">${post.title}</p></a>`
                 articles.append(div)
             })
         }

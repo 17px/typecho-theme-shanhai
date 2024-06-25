@@ -10,10 +10,24 @@
     --color-border: #E5E7EB;
 }
 
+
 .dark {
     --color-bg: #0d0e11;
     --color-text: #fff;
     --color-border: #52525b;
+}
+
+.markdown-body * {
+    line-height: 2;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4px !important;
+    height: 12px !important;
+    background: var(--color-text);
+    cursor: pointer;
 }
 
 ul.pagination {

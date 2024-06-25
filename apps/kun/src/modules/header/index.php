@@ -30,7 +30,7 @@
   <?php $this->header(); ?>
 </head>
 
-<body class="bg-white  text-zinc-700 text-base dark:text-white dark:bg-zinc-900 transition-colors duration-300">
+<body class="bg-white  text-zinc-700 text-base dark:text-zinc-400 dark:bg-zinc-900 transition-colors duration-300">
   <nav class="bg-white/90 backdrop-blur-sm dark:bg-zinc-900/90 sticky top-0 z-50 w-full">
     <ul class="flex items-center justify-center py-1 gap-4 font-medium rtl:space-x-reverse">
       <li>
@@ -40,7 +40,7 @@
             <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
           </svg>
         </button>
-        <div id="tooltip-search" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+        <div id="tooltip-search" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg opacity-0 tooltip">
           <span class="mr-1">快捷查询</span>
           <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
           <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">K</kbd>
@@ -50,7 +50,7 @@
         <a href="/" data-tooltip-target="tooltip-index" data-tooltip-style="light" class="flex items-center justify-between w-full py-2 px-3 font-medium text-zinc-900 dark:text-white hover:text-blue-500">
           首页
         </a>
-        <div id="tooltip-index" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+        <div id="tooltip-index" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg opacity-0 tooltip">
           <span class="mr-1">回到首页</span>
           <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
           <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">/</kbd>
@@ -61,7 +61,7 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
           </svg>
         </button>
-        <div id="tooltip-category" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg shadow-sm opacity-0 tooltip">
+        <div id="tooltip-category" role="tooltip" class="absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200  rounded-lg opacity-0 tooltip">
           <span class="mr-1">显示/隐藏 分类</span>
           <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">[</kbd>
         </div>
@@ -69,17 +69,17 @@
       <?php \Widget\Contents\Page\Rows::alloc()->to($pages); ?>
       <?php if ($pages->length > 0) : ?>
         <li>
-          <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-zinc-900 rounded-lg hover:bg-zinc-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-900 dark:focus:ring-zinc-600" type="button">
+          <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdown-custom-pages" class="inline-flex items-center p-2 text-sm font-medium text-center text-zinc-900 rounded-lg hover:bg-zinc-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-zinc-600" type="button">
             <svg class="w-[.8rem] h-[.8rem]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
               <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
             </svg>
           </button>
 
-          <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-zinc-100 rounded-lg shadow w-44 dark:bg-zinc-700 dark:divide-zinc-600">
+          <div id="dropdown-custom-pages" class="z-10 hidden bg-white divide-y divide-zinc-100 rounded-lg shadow w-44 dark:bg-zinc-800 dark:divide-zinc-700">
             <ul class="py-2 text-sm text-zinc-900 dark:text-white" aria-labelledby="dropdownMenuIconButton">
               <?php while ($pages->next()) : ?>
                 <li>
-                  <a class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white <?php if ($this->is('page', $pages->slug)) : ?>current<?php endif; ?>" href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
+                  <a class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:hover:text-white <?php if ($this->is('page', $pages->slug)) : ?>current<?php endif; ?>" href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
                 </li>
               <?php endwhile; ?>
               <li>
@@ -137,7 +137,7 @@
   <!-- 搜索框弹出层 -->
   <div id="search-modal" tabindex="-1" class="hidden px-4 bg-white dark:bg-black backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed top-0 bottom-0 right-0 left-0 z-[19940121] justify-center items-center w-full max-h-full">
     <div class="relative w-full max-w-md max-h-full">
-      <div class="relative bg-white rounded-lg shadow dark:bg-zinc-700 mb-4">
+      <div class="relative bg-white rounded-lg dark:bg-zinc-700 mb-4">
         <form class="max-w-md mx-auto" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
           <label for="default-search" class="mb-2 text-sm font-medium text-zinc-900 sr-only dark:text-white"><?php _e('搜索关键字'); ?></label>
           <div class="relative">

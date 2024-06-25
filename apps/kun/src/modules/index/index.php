@@ -15,7 +15,7 @@ $this->need('header.php');
 
 <!-- inject:css -->
 
-<main class="pt-20 px-4 mx-auto <?php $this->options->viewWidth() ?>">
+<main class="pt-10 px-4 mx-auto <?php $this->options->viewWidth() ?>">
 
   <!-- 今日诗词 -->
   <?php if ($this->options->mottoSelect == 'shici') : ?>

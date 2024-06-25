@@ -1,7 +1,7 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 
-<div class="pt-20 px-4 mx-auto <?php $this->options->viewWidth() ?>">
+<div class="pt-10 px-4 mx-auto <?php $this->options->viewWidth() ?>">
     <h3 class="text-black dark:text-zinc-200 text-opacity-80 pb-2"><?php $this->archiveTitle([
                                                                         'category' => _t('分类 「%s」 下的文章'),
                                                                         'search'   => _t('包含关键字 「%s」 的文章'),
