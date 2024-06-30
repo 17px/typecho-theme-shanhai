@@ -19,7 +19,7 @@ onMounted(async () => {
     Prism.highlightAll();
     useCodeHelper();
     useAttachHelper();
-    mediumZoom(".markdown-body img", { margin: $("nav.sticky").height() });
+    mediumZoom(".markdown-body img", { margin: $("nav.sticky").height() * 1.5 });
   }
 
   const hasToc = useToc({ selector: ".markdown-body" });

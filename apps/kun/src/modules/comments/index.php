@@ -75,7 +75,7 @@
   <?php endif; ?>
 
   <?php if ($this->allow('comment')) : ?>
-    <div id="<?php $this->respondId(); ?>" class="pt-8">
+    <div id="<?php $this->respondId(); ?>" class="py-4">
       <div class="cancel-comment-reply">
         <?php $comments->cancelReply('<button type="button" class="py-1.5 px-3 me-2 mb-2 text-sm font-medium text-zinc-900 focus:outline-none bg-white rounded-lg border border-zinc-200 hover:bg-zinc-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-zinc-100 dark:focus:ring-zinc-700 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-600 dark:hover:text-white dark:hover:bg-zinc-700">取消回复</button>'); ?>
       </div>

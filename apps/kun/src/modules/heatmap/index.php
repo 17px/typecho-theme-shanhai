@@ -74,8 +74,8 @@ $this->need('header.php');
             articles.innerHTML = ''
             item.posts.forEach(post => {
                 const div = document.createElement('div')
-                div.classList.add('mb-4', "hvr-shrink")
-                div.innerHTML = `<a href="${post.link}" class="block tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody"><p class="break-all text-sm">${post.title}</p></a>`
+                div.classList.add('mb-4',  'block')
+                div.innerHTML = `<a href="${post.link}" class="hvr-shrink inline-block tracking-wider post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">${post.title}</a>`
                 articles.append(div)
             })
         }
