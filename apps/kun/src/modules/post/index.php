@@ -107,6 +107,42 @@
                 <div id="toc-dropdown" class="z-10 hidden bg-white/95 backdrop-blur-sm rounded-lg border w-52 dark:bg-zinc-800/95 dark:border-zinc-700"></div>
             </li>
             <li>
+                <button data-dropdown-toggle="reading-dropdown" data-tooltip-target="tooltip-reading" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479z"></path>
+                    </svg>
+                </button>
+                <div id="tooltip-reading" role="tooltip" class="whitespace-nowrap absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200 rounded-lg shadow-sm opacity-0 tooltip">
+                    <span class="mr-2">阅读设置</span>
+                    <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">1</kbd>
+                </div>
+                <!-- 阅读设置选项 -->
+                <div id="reading-dropdown" class="z-10 hidden bg-white/95 backdrop-blur-sm rounded-lg border w-52 dark:bg-zinc-800/95 dark:border-zinc-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                        <li>
+                            <form class="max-w-xs mx-auto px-2">
+                                <div class="relative flex items-center">
+                                    <div class="flex-grow">
+                                        <button type="button" id="de-fontsize" data-input-counter-decrement="fontsize-input" class="flex-shrink-0 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                            <svg class="w-2.5 h-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                            </svg>
+                                        </button>
+                                        <input type="text" id="fontsize-input" data-input-counter class="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center" placeholder="" required />
+                                        <button type="button" id="in-fontsize" data-input-counter-increment="fontsize-input" class="flex-shrink-0 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                            <svg class="w-2.5 h-2.5 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <label class="flex-shrink-0 text-xs dark:text-zinc-500 text-zinc-300" for="counter-input">字体大小</label>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
                 <a href="#comments-hr" data-tooltip-target="tooltip-comment" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path fill="none" d="M0 0h24v24H0V0z"></path>

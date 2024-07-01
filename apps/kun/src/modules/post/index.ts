@@ -15,11 +15,13 @@ import { useToc } from "./toc";
 import { useAttachHelper } from "./attach.helper";
 
 onMounted(async () => {
-  if ($('#markdown-content').length > 0) {
+  if ($("#markdown-content").length > 0) {
     Prism.highlightAll();
     useCodeHelper();
     useAttachHelper();
-    mediumZoom(".markdown-body img", { margin: $("nav.sticky").height() * 1.5 });
+    mediumZoom(".markdown-body img", {
+      margin: $("nav.sticky").height() * 1.5,
+    });
   }
 
   const hasToc = useToc({ selector: ".markdown-body" });
@@ -49,6 +51,12 @@ onMounted(async () => {
   addKeyPress({
     key: "]",
     handler: () => $('[data-dropdown-toggle="toc-dropdown"]').trigger("click"),
+    preventDefault: true,
+  });
+
+  addKeyPress({
+    key: "control+1",
+    handler: () => $('[data-tooltip-target="tooltip-reading"]').trigger("click"),
     preventDefault: true,
   });
 });

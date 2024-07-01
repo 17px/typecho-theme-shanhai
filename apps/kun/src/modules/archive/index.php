@@ -20,7 +20,7 @@
                         <span class="align-middle"><?php $this->title() ?></span>
                     </h2>
                     <div class="tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">
-                        <p class="break-all text-sm text-zinc-700 dark:text-zinc-400"><?php $this->excerpt(80, '...') ?></p>
+                        <p class="break-all text-sm text-zinc-700 leading-6 dark:text-zinc-400"><?php $this->excerpt(80, '...') ?></p>
                         <div class="pt-3 text-xs text-zinc-500 flex items-center justify-between">
                             <time class="mr-3" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date('F j, Y'); ?></time>
                             <div>

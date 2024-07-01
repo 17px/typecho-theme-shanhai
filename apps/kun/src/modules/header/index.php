@@ -23,6 +23,10 @@
       *:not(.markdown-body pre code):not(.markdown-body span) {
         font-family: <?php $this->options->fontFamily() ?>, sans-serif;
       }
+
+      .markdown-body p code {
+        margin: 0 .2rem;
+      }
     </style>
   <?php endif; ?>
 
