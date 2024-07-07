@@ -114,6 +114,7 @@
                 </button>
                 <div id="tooltip-reading" role="tooltip" class="whitespace-nowrap absolute z-10 invisible inline-block px-2 py-2 text-sm font-medium text-zinc-900 bg-white border border-zinc-200 rounded-lg shadow-sm opacity-0 tooltip">
                     <span class="mr-2">阅读设置</span>
+                    <kbd class="px-2 py-1 text-sm text-zinc-800 bg-zinc-100 border border-zinc-200 rounded"><?php echo getPlatformKey() ?></kbd>
                     <kbd class="px-2 py-1 text-sm  text-zinc-800 bg-zinc-100 border border-zinc-200 rounded">1</kbd>
                 </div>
                 <!-- 阅读设置选项 -->

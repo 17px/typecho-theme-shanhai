@@ -47,20 +47,25 @@ export const useFastBar = (props: FastBarProps): any => {
   });
 
   // 字体大小设置
-  if ($("#fontsize-input").length > 0) {
-    const md_fontsize = localStorage.getItem("md_fontsize");
-    const md = document.querySelector(".markdown-body") as HTMLAreaElement;
+  const md_fontsize = localStorage.getItem("md_fontsize");
+  const md = document.querySelector(".markdown-body") as HTMLAreaElement;
+  if (md) {
     const initSize = md_fontsize
       ? +md_fontsize + "px"
       : window.getComputedStyle(md).fontSize;
-    $("#fontsize-input").val(initSize);
+    md.style.fontSize = initSize
+    if ($("#fontsize-input").length > 0) {
+      $("#fontsize-input").val(initSize);
+      const fontAdaptation = () => {
+        const current = $("#fontsize-input").val();
+        localStorage.setItem("md_fontsize", String(current));
+        md.style.fontSize = `${current}px`;
+      };
 
-    const fontAdaptation = () => {
-      const current = $("#fontsize-input").val();
-      localStorage.setItem("md_fontsize", String(current));
-      md.style.fontSize = `${current}px`;
-    };
-
-    $(document).on("click", "#de-fontsize, #in-fontsize", fontAdaptation);
+      $(document).on("click", "#de-fontsize, #in-fontsize", fontAdaptation);
+    }
   }
+
+
+
 };

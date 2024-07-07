@@ -14,7 +14,7 @@
     <?php if ($this->have()) : ?>
         <?php while ($this->next()) : ?>
             <article class="posts-in-category mb-8" itemscope itemtype="http://schema.org/BlogPosting">
-                <a class="block mb-8 hvr-shrink" itemprop="url" href="<?php $this->permalink() ?>">
+                <a class="block mb-8 hvr-forward" itemprop="url" href="<?php $this->permalink() ?>">
                     <h2 class="pb-3 font-bold text-black dark:text-zinc-200" itemprop="name headline">
                         <span><?php echo analyzePostContent($this->content) ?></span>
                         <span class="align-middle"><?php $this->title() ?></span>
