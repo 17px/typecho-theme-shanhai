@@ -129,7 +129,7 @@
       </form>
     </div>
   <?php else : ?>
-    <h3 class="text-center"><?php _e('评论已关闭'); ?></h3>
+    <h3 class="text-center mt-20"><?php _e('评论已关闭'); ?></h3>
   <?php endif; ?>
 </div>
 

@@ -23,7 +23,7 @@ $this->need('header.php');
 
     <div class="leading-6 w-full pb-20 text-center">
       <h2 id="shici-title" class="text-3xl text-opacity-80 dark:text-zinc-200"></h2>
-      <p id="shici-content" class="text-start py-2 text-lg text-opacity-80 dark:text-zinc-400 max-h-52"></p>
+      <p id="shici-content" class="py-4 text-lg text-opacity-80 dark:text-zinc-400 max-h-52 text-center px-20"></p>
       <span id="shici-meta" class="rounded text-white p-1 bg-red-600 mr-4 text-sm"></span>
     </div>
 
@@ -59,7 +59,7 @@ $this->need('header.php');
           <div class="tracking-wider w-full post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">
             <p class="break-all text-sm text-zinc-700 leading-6 dark:text-zinc-400"><?php $this->excerpt(120, '...') ?></p>
             <div class="pt-3 text-xs text-zinc-500 flex items-center justify-between">
-              <time class="mr-3" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date('F j, Y'); ?></time>
+              <time class="mr-3" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
               <div>
                 <span class="inline-flex items-center">
                   阅读 <?php get_post_view($this) ?>

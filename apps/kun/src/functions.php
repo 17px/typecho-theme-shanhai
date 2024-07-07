@@ -35,11 +35,12 @@ function themeConfig($form)
     $themeMode = new \Typecho\Widget\Helper\Form\Element\Select(
         'themeMode',
         array(
+            'auto' => '自动',
             'light' => '白天模式',
             'dark' => '黑夜模式',
         ),
         'light',
-        '全局主题色模式'
+        '全局主题色模式，自动模式: 日落自动切换为黑夜模式'
     );
 
     $viewWidth = new \Typecho\Widget\Helper\Form\Element\Select(
@@ -344,4 +345,50 @@ function getAllTags()
     }
 
     return $result;
+}
+
+
+/**
+ * 获取当前主题模式
+ * 根据用户选择的 light, dark 或 auto 自动判断并应用主题模式
+ * auto 模式根据当前时间决定使用 light 或 dark
+ * @return string 'light' 或 'dark'
+ */
+function getThemeMode()
+{
+    // 获取 Typecho 的主题选项
+    $options = Helper::options();
+    $themeMode = $options->themeMode;
+
+    // 当主题模式设置为 auto 时，根据时间判断
+    if ($themeMode === 'auto') {
+        $hour = date('G');  // 获取当前时间的小时部分（24小时制）
+        if ($hour >= 18 || $hour < 6) {
+            return 'dark';  // 晚上18:00至早上6:00使用 dark 模式
+        } else {
+            return 'light';  // 早上6:00至晚上18:00使用 light 模式
+        }
+    }
+    // 如果不是 auto 模式，直接返回用户设置的模式
+    return $themeMode;
+}
+
+
+function handle_comment_attachment()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['comment_file']['name'])) {
+        $file = $_FILES['comment_file'];
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            $upload_dir = Typecho_Common::url('usr/uploads', __TYPECHO_ROOT_DIR__);
+            $file_path = $upload_dir . '/' . $file['name'];
+            if (move_uploaded_file($file['tmp_name'], $file_path)) {
+                // 保存文件路径到某处，或者进行其他操作
+                echo '文件上传成功';
+            } else {
+                echo '文件无法保存';
+            }
+        } else {
+            echo '上传错误';
+        }
+    }
 }

@@ -5,12 +5,9 @@
 
     <!-- 作者 -->
     <div class="pb-3 text-center animate-fade-in-up">
-        <div class="text-center">
-            <p class="text-xs text-zinc-400">
-                「<a href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a>」
-                <time class="mr-2" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date("F j, Y, g:i a"); ?></time>
-            </p>
-        </div>
+        <p class="text-xs text-zinc-400 text-center">
+            撰于 <time class="mr-2" datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
+        </p>
     </div>
 
     <!-- 标题 -->

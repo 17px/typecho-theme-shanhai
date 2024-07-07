@@ -1,6 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 
-<footer class="mx-auto pt-20 <?php $this->options->viewWidth() ?>" role="contentinfo">
+<footer class="mx-auto pt-20 pb-2 <?php $this->options->viewWidth() ?>" role="contentinfo">
     <div class="w-full mx-auto max-w-screen-xl px-4 flex justify-between items-center">
         <div class="flex items-center text-xs text-zinc-700 dark:text-zinc-400">© <?php echo date('Y'); ?>
             <a href="<?php $this->options->siteUrl(); ?>" class="pl-2"><?php $this->options->title(); ?></a>

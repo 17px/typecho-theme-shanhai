@@ -1,6 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <!DOCTYPE HTML>
-<html class="<?php $this->options->themeMode(); ?>">
+<html class="<?php echo getThemeMode(); ?>">
 
 <head>
   <meta charset="<?php $this->options->charset(); ?>">
