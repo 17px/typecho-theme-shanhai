@@ -1,6 +1,8 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <!DOCTYPE HTML>
-<html class="<?php echo getThemeMode(); ?>">
+
+<?php date_default_timezone_set('Asia/Shanghai'); ?>
+<html data-tz="<?php echo date('H') ?>" class="<?php echo date('H') >= 6 && date('H') < 18 ? 'light' : 'dark' ?>">
 
 <head>
   <meta charset="<?php $this->options->charset(); ?>">
@@ -35,6 +37,8 @@
   <!-- 通过自有函数输出HTML头部信息 -->
   <?php $this->header(); ?>
 </head>
+
+
 
 <body class="bg-white  text-zinc-700 text-base dark:text-zinc-400 dark:bg-zinc-900 transition-colors duration-300">
   <nav class="bg-white/90 backdrop-blur-sm dark:bg-zinc-900/90 sticky top-0 z-50 w-full">

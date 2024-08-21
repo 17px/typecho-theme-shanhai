@@ -15,6 +15,9 @@ $this->need('header.php');
 <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/heatmap/cal-heatmap.css'); ?>" />
 
 <div class="pt-10 mx-auto <?php $this->options->viewWidth() ?>">
+    <article class="markdown-body mb-4">
+        <?php $this->content() ?>
+    </article>
     <div id="cal-heatmap" class="flex-grow flex justify-center"></div>
     <div class="text-center pt-4">
         <button id="prev-month" type="button" class="items-center justify-center text-gray-500 w-10 h-10 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
@@ -30,9 +33,6 @@ $this->need('header.php');
             </svg>
         </button>
     </div>
-    <!-- 文章列表 -->
-    <h4 id="title" class="text-center mt-8">归档 <span></span></h4>
-    <div id="articles" class="px-4 pt-8"></div>
 </div>
 
 <script type="text/javascript" src="<?php $this->options->themeUrl('assets/heatmap/popperjs.min.js'); ?>"></script>
@@ -64,20 +64,6 @@ $this->need('header.php');
             start,
             cellsize,
             gutter
-        }
-    }
-
-    const renderArticles = (item) => {
-        if (item) {
-            document.querySelector("#title span").textContent = new Date(item.date).toISOString().split('T')[0]
-            const articles = document.querySelector("#articles")
-            articles.innerHTML = ''
-            item.posts.forEach(post => {
-                const div = document.createElement('div')
-                div.classList.add('mb-4',  'block')
-                div.innerHTML = `<a href="${post.link}" class="hvr-shrink inline-block tracking-wider post-content bg-gray-100 dark:bg-zinc-800 cursor-pointer p-4 rounded-tl-lg rounded-tr-2xl rounded-br-2xl rounded-bl-2xl" itemprop="articleBody">${post.title}</a>`
-                articles.append(div)
-            })
         }
     }
 
@@ -137,15 +123,8 @@ $this->need('header.php');
                 },
             ],
         ])
-        cal.on('click', (event, timestamp, value) => {
-            const item = date_key_ts.find(i => i.date === timestamp)
-            renderArticles(item)
-        });
         document.querySelector("#prev-month").addEventListener('click', () => cal.previous(range))
         document.querySelector("#next-month").addEventListener('click', () => cal.next(range))
-        // 默认显示最新文章
-        const newest = data.reduce((max, c) => c.date > max.date ? c : max, data[0]);
-        renderArticles(newest)
     }
 
     window.onload = () => renderHeatMap({
@@ -157,4 +136,6 @@ $this->need('header.php');
         startMonth: new Date().getMonth() + 1
     })
 </script>
+
+
 <!-- inject:js -->

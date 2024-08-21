@@ -347,33 +347,6 @@ function getAllTags()
     return $result;
 }
 
-
-/**
- * 获取当前主题模式
- * 根据用户选择的 light, dark 或 auto 自动判断并应用主题模式
- * auto 模式根据当前时间决定使用 light 或 dark
- * @return string 'light' 或 'dark'
- */
-function getThemeMode()
-{
-    // 获取 Typecho 的主题选项
-    $options = Helper::options();
-    $themeMode = $options->themeMode;
-
-    // 当主题模式设置为 auto 时，根据时间判断
-    if ($themeMode === 'auto') {
-        $hour = date('G');  // 获取当前时间的小时部分（24小时制）
-        if ($hour >= 18 || $hour < 6) {
-            return 'dark';  // 晚上18:00至早上6:00使用 dark 模式
-        } else {
-            return 'light';  // 早上6:00至晚上18:00使用 light 模式
-        }
-    }
-    // 如果不是 auto 模式，直接返回用户设置的模式
-    return $themeMode;
-}
-
-
 function handle_comment_attachment()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_FILES['comment_file']['name'])) {
