@@ -3,6 +3,7 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import common, { modules, rootPath } from "./webpack.common";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 import { theme, version } from "../package.json";
 import TerserPlugin from "terser-webpack-plugin";
 import PhpInjectPlugin from "./PhpInjectPlugin";
@@ -14,7 +15,7 @@ import path from "path";
 const { name } = theme;
 
 // 生产阶段 webpack 构建静态资源的目录
-const outputPath = path.resolve(`./build/${name}@${version}`);
+const outputPath = path.resolve(`./build/${name}`);
 
 export default merge(common, {
   mode: "production",
@@ -54,12 +55,29 @@ export default merge(common, {
     new MiniCssExtractPlugin({
       filename: `[contenthash:8]_v${version}.css`, // 抽离css的输出目录和名称
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(rootPath, `src/assets`),
+          to: path.resolve(`${outputPath}/assets`),
+        },
+        {
+          from: path.resolve(rootPath, `src/functions.php`),
+          to: path.resolve(`${outputPath}/functions.php`),
+        },
+        {
+          from: path.resolve(rootPath, `src/screenshot.png`),
+          to: path.resolve(`${outputPath}/screenshot.png`),
+        },
+      ],
+    }),
     ...modules.map((name) => {
       return new PhpInjectPlugin({
         template: path.resolve(rootPath, `src/modules/${name}/index.php`),
         filename: path.resolve(rootPath, `${outputPath}/${name}.php`),
       });
     }),
+
     new BundleAnalyzerPlugin(),
   ],
 }) as Configuration;

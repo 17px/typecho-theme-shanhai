@@ -6,6 +6,8 @@
   <meta charset="<?php $this->options->charset(); ?>">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="icon" href="<?php $this->options->logoUrl() ?>" />
+
   <title><?php $this->archiveTitle([
             'category' => _t('分类 %s 下的文章'),
             'search'   => _t('包含关键字 %s 的文章'),
