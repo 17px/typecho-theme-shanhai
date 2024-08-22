@@ -1,7 +1,7 @@
 import { addKeyPress, addListener, onMounted } from "@shanhai/util";
 import $ from "cash-dom";
+import 'flowbite';
 import "./index.less";
-import "flowbite";
 
 onMounted(() => {
   const displaySearchDialog = () => {
