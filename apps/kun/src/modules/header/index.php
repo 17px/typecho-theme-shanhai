@@ -84,7 +84,6 @@
               <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
             </svg>
           </button>
-
           <div id="dropdown-custom-pages" class="z-10 hidden bg-white divide-y divide-zinc-100 rounded-lg shadow w-44 dark:bg-zinc-800 dark:divide-zinc-700">
             <ul class="py-2 text-sm text-zinc-900 dark:text-white" aria-labelledby="dropdownMenuIconButton">
               <?php while ($pages->next()) : ?>

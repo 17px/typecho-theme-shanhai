@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin');
 module.exports = {
   darkMode: "class",
   content: [
-    './src/**/*.{ts,php,css,less,js,html}', // 根据你的项目结构调整路径
+    './src/**/*.{ts,php}', // 根据你的项目结构调整路径
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {

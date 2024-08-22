@@ -169,30 +169,31 @@ function getCommentDetails($parentId)
 /**
  * 获取前一篇文章
  */
-function getAdjacentArticle($widget, $direction = 'prev', $default = ['url' => 'javascript:void(0);', 'title' => '没有了'])
+function getAdjacentArticle($widget, $direction = 'prev')
 {
     $db = Typecho_Db::get();
     $operator = $direction === 'prev' ? '<' : '>';
     $order = $direction === 'prev' ? Typecho_Db::SORT_DESC : Typecho_Db::SORT_ASC;
 
-    $sql = $db->select()->from('table.contents')
+    $content = $db->fetchRow($widget->select()->from('table.contents')
         ->where('table.contents.created ' . $operator . '?', $widget->created)
         ->where('table.contents.status = ?', 'publish')
         ->where('table.contents.type = ?', $widget->type)
+        ->where("table.contents.password IS NULL OR table.contents.password = ''")
         ->order('table.contents.created', $order)
-        ->limit(1);
-
-    $content = $db->fetchRow($sql);
+        ->limit(1));
 
     if ($content) {
-        $content = $widget->filter($content);
-        return [
-            'url' => !empty($content['permalink']) ? $content['permalink'] : $default['url'],
-            'title' => !empty($content['title']) ? $content['title'] : $default['title']
-        ];
-    }
+        // 使用 Typecho_Router 来生成 permalink
+        $content['permalink'] = Typecho_Router::url('post', array(
+            'cid' => $content['cid'],
+            'slug' => $content['slug']
+        ), Typecho_Common::url($widget->options->index, $widget->options->siteUrl));
 
-    return $default;  // 如果没有相邻文章，则返回默认值
+        return ['url' => $content['permalink'], 'title' => $content['title']];
+    } else {
+        return ['url' => 'javascript:void(0);', 'title' => '没有了'];
+    }
 }
 
 
