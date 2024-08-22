@@ -77,7 +77,7 @@
         </div>
       </li>
       <?php \Widget\Contents\Page\Rows::alloc()->to($pages); ?>
-      <?php if ($pages->length > 0) : ?>
+      <?php if ($pages->have()): ?>
         <li>
           <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdown-custom-pages" class="inline-flex items-center p-2 text-sm font-medium text-center text-zinc-900 rounded-lg hover:bg-zinc-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-zinc-600" type="button">
             <svg class="w-[.8rem] h-[.8rem]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
@@ -88,16 +88,18 @@
             <ul class="py-2 text-sm text-zinc-900 dark:text-white" aria-labelledby="dropdownMenuIconButton">
               <?php while ($pages->next()) : ?>
                 <li>
-                  <a class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:hover:text-white <?php if ($this->is('page', $pages->slug)) : ?>current<?php endif; ?>" href="<?php $pages->permalink(); ?>" title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
+                  <a class="block px-4 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 dark:hover:text-white"
+                    href="<?php $pages->permalink(); ?>"
+                    title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
                 </li>
               <?php endwhile; ?>
-              <li>
-                <?php if ($this->user->hasLogin()) : ?>
+              <?php if ($this->user->hasLogin()) : ?>
+                <li>
                   <div class="py-2">
                     <a class="block px-4 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:text-zinc-200 dark:hover:text-white" href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('退出'); ?></a>
                   </div>
-                <?php endif; ?>
-              </li>
+                </li>
+              <?php endif; ?>
             </ul>
           </div>
         </li>
