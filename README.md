@@ -1,6 +1,9 @@
 # typecho theme - 山海
 
 一款不怎么花哨的主题，带点情怀，愿天下骚客，“重拾写作的乐趣”
+
+[下载最新 Release](https://github.com/17px/typecho-theme-shanhai/releases/latest)
+
 ## Preview
 
 ![pc preview](screenshot.png)
