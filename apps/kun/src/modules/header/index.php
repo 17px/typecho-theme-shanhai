@@ -2,7 +2,12 @@
 <!DOCTYPE HTML>
 
 <?php date_default_timezone_set('Asia/Shanghai'); ?>
-<html data-tz="<?php echo date('H') ?>" class="<?php echo date('H') >= 6 && date('H') < 18 ? 'light' : 'dark' ?>">
+<?php
+// 获取用户选择的主题模式
+$themeMode = $this->options->themeMode;
+$themeClass =  $themeMode == 'auto' ?  (date('H') >= 6 && date('H') < 18 ? 'light' : 'dark') : $themeMode
+?>
+<html data-tz="<?php echo date('H') ?>" class="<?php echo $themeClass ?>">
 
 <head>
   <meta charset="<?php $this->options->charset(); ?>">

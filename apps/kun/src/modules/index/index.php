@@ -1,12 +1,12 @@
 <?php
 
 /**
- * typecho-theme-kun for Typecho
+ * 重拾写作的乐趣
  *
- * @package Typecho Shanhai Theme
- * @author Typecho Fan
+ * @package Typecho Shanhai Theme - 山海
+ * @author 17px
  * @version 1.0
- * @link http://maxshader.com
+ * @link https://github.com/17px/typecho-theme-shanhai
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
