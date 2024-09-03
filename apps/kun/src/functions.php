@@ -204,37 +204,26 @@ function getAdjacentArticle($widget, $direction = 'prev')
  */
 function get_post_view($archive)
 {
-    $cid = $archive->cid;
     $db = Typecho_Db::get();
-    $prefix = $db->getPrefix();
-
-    // 检查并添加 'views' 字段
+    $cid = $archive->cid;
     if (!array_key_exists('views', $db->fetchRow($db->select()->from('table.contents')))) {
-        $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
-        echo format_views(0);
-        return;
+        $db->query('ALTER TABLE `' . $db->getPrefix() . 'contents` ADD `views` INT(10) DEFAULT 0;');
     }
-
-    // 获取阅读次数
-    $row = $db->fetchRow($db->select('views')->from('table.contents')->where('cid = ?', $cid));
-
-    // 更新阅读次数
+    $exist = $db->fetchRow($db->select('views')->from('table.contents')->where('cid = ?', $cid))['views'];
     if ($archive->is('single')) {
-        $views = Typecho_Cookie::get('extend_contents_views');
-        if (empty($views)) {
-            $views = array();
-        } else {
-            $views = explode(',', $views);
-        }
-        if (!in_array($cid, $views)) {
-            $db->query($db->update('table.contents')->rows(array('views' => (int) $row['views'] + 1))->where('cid = ?', $cid));
-            array_push($views, $cid);
-            $views = implode(',', $views);
-            Typecho_Cookie::set('extend_contents_views', $views); //记录查看cookie
+        $cookie = Typecho_Cookie::get('contents_views');
+        $cookie = $cookie ? explode(',', $cookie) : array();
+        if (!in_array($cid, $cookie)) {
+            $db->query($db->update('table.contents')
+                ->rows(array('views' => (int)$exist + 1))
+                ->where('cid = ?', $cid));
+            $exist = (int)$exist + 1;
+            array_push($cookie, $cid);
+            $cookie = implode(',', $cookie);
+            Typecho_Cookie::set('contents_views', $cookie);
         }
     }
-
-    echo format_views($row['views']);
+    echo $exist;
 }
 
 /**

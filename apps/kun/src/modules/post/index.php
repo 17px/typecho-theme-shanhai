@@ -2,7 +2,7 @@
 <?php $this->need('header.php'); ?>
 
 <div id="post-container" class="pt-10 px-5 mx-auto <?php $this->options->viewWidth() ?> pb-4">
-
+    <?php get_post_view($this); ?>
     <!-- 作者 -->
     <div class="pb-3 text-center animate-fade-in-up">
         <p class="text-xs text-zinc-400 text-center">
