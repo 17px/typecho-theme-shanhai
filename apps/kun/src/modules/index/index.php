@@ -23,7 +23,7 @@ $this->need('header.php');
 
     <div id="shici-container" class="leading-6 w-full pb-20 text-center hidden">
       <h2 id="shici-title" class="text-3xl text-opacity-80 dark:text-zinc-200"></h2>
-      <p id="shici-content" class="py-4 text-lg text-opacity-80 dark:text-zinc-400 max-h-52 text-center px-20"></p>
+      <p id="shici-content" class="py-4 text-lg text-opacity-80 dark:text-zinc-400 text-center px-20"></p>
       <span id="shici-meta" class="rounded text-white p-1 bg-red-600 mr-4 text-sm"></span>
     </div>
 
