@@ -63,7 +63,7 @@
     <?php endif; ?>
 
     <?php if (in_array('ShowFastBar', $this->options->moreConfig)) : ?>
-        <ul id="fast-bar" class="fixed bottom-2 z-[1994] border bg-white/90 backdrop-blur-sm hidden rounded-full left-1/2 -translate-x-1/2 justify-center dark:bg-zinc-800/90 dark:border-zinc-700">
+        <ul id="fast-bar" class="fixed bottom-4 z-[1994] border bg-white/90 backdrop-blur-sm hidden rounded-full left-1/2 -translate-x-1/2 justify-center dark:bg-zinc-800/90 dark:border-zinc-700">
             <li>
                 <button data-tooltip-target="drag" data-tooltip-placement="bottom" class=" inline-flex items-center justify-center text-zinc-500 w-10 h-10 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-full text-sm p-2.5">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">

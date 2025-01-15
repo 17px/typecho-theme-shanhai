@@ -43,7 +43,7 @@ export const useFastBar = (props: FastBarProps): any => {
   new Draggabilly(elem, {
     handle: '[data-tooltip-target="drag"]',
   }).on("dragStart", () => {
-    $("#fast-bar").removeClass("bottom-2 -translate-x-1/2");
+    $("#fast-bar").removeClass("bottom-4 -translate-x-1/2");
   });
 
   // 字体大小设置
